@@ -65,6 +65,14 @@ def picture_func(manager, picture_path):
     return picture
 
 
+def pop_up_window_func(manager):
+    pop_up_window_rect = pygame.Rect(0, 0, 400, 200)
+    pop_up_window = pygame_gui.elements.UIWindow(rect=pop_up_window_rect,
+                                                 window_display_title="Incoming ticket...",
+                                                 manager=manager)
+    return pop_up_window
+
+
 def all_scenario_ids():
     cursor.execute('SELECT id FROM tickets')
     all_ids = [row[0] for row in  cursor.fetchall()]
@@ -129,14 +137,13 @@ while running:
                 picture.kill()
                 profile_label.kill()
                 has_scenario = False
+                scenario_timer = 0
                 if selected_threat == answer:
                     print("Correct!")
                     total_score += 1
 
-                
                 else:
                     print("Wrong")
-                    profile_label.kill()
                     has_scenario = False
                     
         if scenario_timer >= time_to_show_scenario and not has_scenario:
@@ -145,6 +152,7 @@ while running:
                 print("The Game Has Ended")
                 running = False
             else:
+                pop_up_window = pop_up_window_func(manager)
                 selected_id = random.choice(remaining_ids)
                 cursor.execute('SELECT entry, answer, caller, picture_path FROM tickets WHERE id=?',[selected_id])
                 current_scenario, answer, caller, path = cursor.fetchone()
@@ -154,7 +162,6 @@ while running:
                 picture = picture_func(manager, path) 
                 profile_label = profile_label_func(manager, caller)
                 has_scenario = True
-                scenario_timer = 0
                 remaining_ids.remove(selected_id)
 
 
