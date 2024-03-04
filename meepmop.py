@@ -65,13 +65,32 @@ def picture_func(manager, picture_path):
     return picture
 
 
-def pop_up_window_func(manager):
+def pop_up_window_func(manager, countdown_duration):
     pop_up_window_rect = pygame.Rect(0, 0, 400, 200)
     pop_up_window = pygame_gui.elements.UIWindow(rect=pop_up_window_rect,
-                                                 window_display_title="Incoming ticket...",
+                                                 window_display_title="New Window",
                                                  manager=manager)
-    return pop_up_window
+    pop_up_window_content_rect = pygame.Rect(15, -60, 300, 200)
+    pop_up_window_content = pygame_gui.elements.UILabel(relative_rect=pop_up_window_content_rect, 
+                                                        text="INCOMING CALLER...", 
+                                                        manager=manager,
+                                                        container=pop_up_window)
 
+    pop_up_window_countdown_rect = pygame.Rect(0, 0, 100, 60)
+    pop_up_window_countdown_rect.bottomright = (-50, -5)
+    pop_up_window_countdown = pygame_gui.elements.UILabel(relative_rect=pop_up_window_countdown_rect, 
+                                                        text="SLA: {:.1f}".format(countdown_duration), 
+                                                        manager=manager,
+                                                        container=pop_up_window,
+                                                        anchors={'right':'right', 'bottom':'bottom'})
+    
+    answer_button_layout_rect = pygame.Rect(0, 0, 200, 40)
+    answer_button_layout_rect.bottomleft = (15, -10)
+    answer_button = pygame_gui.elements.UIButton(relative_rect=answer_button_layout_rect,
+                                                 text="ANSWER", manager=manager,
+                                                 container=pop_up_window,
+                                                 anchors={'left':'left', 'bottom':'bottom'})
+    return pop_up_window, answer_button, pop_up_window_countdown
 
 def all_scenario_ids():
     cursor.execute('SELECT id FROM tickets')
@@ -116,62 +135,86 @@ total_score = 0
 
 running = True
 
+pop_up_window = None
+popup_button_clicked = False
+pop_up_close_timer = 0
+countdown_duration = 15
+
 while running:
-    time_delta = clock.tick(60)/1000.0
+    time_delta = clock.tick(60) / 1000.0
     scenario_timer += time_delta
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        
+
         if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
             if event.ui_element == threat_entry_selection_list:
                 selected_threat = event.text
                 print(selected_threat)
-                cursor.execute('SELECT description, impact, mitigation FROM threats WHERE name=?',[selected_threat])
+                cursor.execute('SELECT description, impact, mitigation FROM threats WHERE name=?', [selected_threat])
                 selected_threat_desc, impact, mitigation = cursor.fetchone()
                 threat_desc_label.set_text(f'<b>{selected_threat.upper()}</b>\n<b>Description</b>:\n{selected_threat_desc}\n<b>Impact:\n</b>{impact}\n<b>Mitigation:</b>\n{mitigation}')
 
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
-            if event.ui_element == submit_button:
+            if event.ui_element == submit_button and has_scenario == True:
                 scenario_label.kill()
                 picture.kill()
                 profile_label.kill()
                 has_scenario = False
                 scenario_timer = 0
+
                 if selected_threat == answer:
                     print("Correct!")
                     total_score += 1
-
                 else:
                     print("Wrong")
-                    has_scenario = False
-                    
-        if scenario_timer >= time_to_show_scenario and not has_scenario:
+                has_scenario = False
 
-            if not remaining_ids and not has_scenario:
-                print("The Game Has Ended")
-                running = False
-            else:
-                pop_up_window = pop_up_window_func(manager)
-                selected_id = random.choice(remaining_ids)
-                cursor.execute('SELECT entry, answer, caller, picture_path FROM tickets WHERE id=?',[selected_id])
-                current_scenario, answer, caller, path = cursor.fetchone()
-                selected_threat = None
-
-                scenario_label = scenario_label_func(manager, current_scenario)
-                picture = picture_func(manager, path) 
-                profile_label = profile_label_func(manager, caller)
-                has_scenario = True
-                remaining_ids.remove(selected_id)
-
-
-        
         manager.process_events(event)
-    
+
     manager.update(time_delta)
 
-    window_surface.blit(background, (0,0))
-    manager.draw_ui(window_surface)
+    window_surface.blit(background, (0, 0))
+    
+    if scenario_timer >= time_to_show_scenario and not has_scenario and pop_up_window is None:
+        pop_up_window, accept_button, pop_up_window_countdown = pop_up_window_func(manager, countdown_duration)
+        pop_up_close_timer = 0
+
+    if pop_up_window:
+        pop_up_window.show()  
+        manager.draw_ui(window_surface)
+        countdown_time_left = countdown_duration - pop_up_close_timer
+        pop_up_window_countdown.set_text("SLA: {:.1f}".format(max(0, countdown_time_left)))
+        pop_up_close_timer += time_delta
+
+        if countdown_time_left <= 0:
+            pop_up_window.hide()
+            pop_up_window = None
+            selected_id = random.choice(remaining_ids)
+            remaining_ids.remove(selected_id)
+            scenario_timer = 0
+
+        for event in pygame.event.get():
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == accept_button:
+                    selected_id = random.choice(remaining_ids)
+                    cursor.execute('SELECT entry, answer, caller, picture_path FROM tickets WHERE id=?', [selected_id])
+                    current_scenario, answer, caller, path = cursor.fetchone()
+                    selected_threat = None
+
+                    scenario_label = scenario_label_func(manager, current_scenario)
+                    picture = picture_func(manager, path)
+                    profile_label = profile_label_func(manager, caller)
+                    has_scenario = True
+                    remaining_ids.remove(selected_id)
+
+                    # Dismiss the pop-up window
+                    pop_up_window.hide()
+                    pop_up_window = None
+
+    else:
+        manager.draw_ui(window_surface)
 
     pygame.display.update()
 
