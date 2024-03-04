@@ -1,0 +1,83 @@
+{
+    "defaults":
+    {
+        "colors":
+        {
+            "normal_bg":"#000000",
+            "hovered_bg":"#35393e",
+            "disabled_bg":"#25292e",
+            "selected_bg":"#193754",
+            "dark_bg":"#15191e",
+            "normal_text":"#00b217",
+            "hovered_text":"#FFFFFF",
+            "selected_text":"#FFFFFF",
+            "disabled_text":"#6d736f",
+            "link_text": "#0000EE",
+            "link_hover": "#2020FF",
+            "link_selected": "#551A8B",
+            "text_shadow": "#777777",
+            "normal_border": "#DDDDDD",
+            "hovered_border": "#B0B0B0",
+            "disabled_border": "#808080",
+            "selected_border": "#8080B0",
+            "active_border": "#8080B0",
+            "filled_bar":"#f4251b",
+            "unfilled_bar":"#CCCCCC"
+        }
+    },
+    "button":
+    {
+        "colours":
+        {
+            "normal_bg": "#000000",
+            "hovered_bg": "#35393e",
+            "disabled_bg": "#25292e",
+            "selected_bg": "#25292e",
+            "active_bg": "#000000",
+            "normal_text": "#00b217",
+            "hovered_text": "#FFFFFF",
+            "selected_text": "#FFFFFF",
+            "disabled_text": "#6d736f",
+            "active_text": "#6d736f",
+            "normal_border": "#AAAAAA",
+            "hovered_border": "#B0B0B0",
+            "disabled_border": "#808080",
+            "selected_border": "#8080B0",
+            "active_border": "#8080B0",
+            "normal_text_shadow": "#10101070",
+            "hovered_text_shadow": "#10101070",
+            "disabled_text_shadow": "#10101070",
+            "selected_text_shadow": "#10101070",
+            "active_text_shadow": "#10101070"
+        }
+    },
+    "text_box":
+    {
+        "colours":
+        {
+            "dark_bg":"#000000",
+            "normal_border": "#999999",
+            "link_text": "#FF0000",
+            "link_hover": "#FFFF00",
+            "link_selected": "#FFFFFF",
+            "normal_text":"#00b217"
+        }
+    },
+    "text_box.vertical_scroll_bar":
+    {
+        "colours":
+        {
+           "dark_bg": "#505068"
+        }
+    },
+    "text_box.vertical_scroll_bar.#sliding_button":
+    {
+        "misc":
+        {
+           "border_width": "1"
+        }
+    }
+}
+
+
+
