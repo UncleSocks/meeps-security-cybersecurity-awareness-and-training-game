@@ -71,18 +71,43 @@ def threat_description_label_func(manager):
 
     threat_description_label_rect = pygame.Rect(0, 0, 460, 350)
     threat_description_label_rect.bottomright = (-15, -10)
-    threat_description_label = pygame_gui.elements.UILabel(relative_rect=threat_description_label_rect,
-                                                           text="SELECT A THREAT", manager=manager,
+    threat_description_label = pygame_gui.elements.UITextBox(relative_rect=threat_description_label_rect,
+                                                           html_text="SELECT A THREAT", manager=manager,
                                                            anchors={'right':'right', 'bottom':'bottom'})
     return threat_description_label
 
 
-def caller_popup_window_func(manager):
+def ticket_entry_label_func(manager, current_ticket):
 
+    ticket_entry_label_rect = pygame.Rect(325, 15, 460, 220)
+    ticket_entry_label = pygame_gui.elements.UITextBox(relative_rect=ticket_entry_label_rect, 
+                                                       html_text=current_ticket, manager=manager)
+    return ticket_entry_label
+
+
+def caller_popup_window_func(manager):
+    
     caller_popup_window_rect = pygame.Rect(0, 0, 400, 200)
     caller_popup_window = pygame_gui.elements.UIWindow(rect=caller_popup_window_rect,
-                                                       window_display_title="MEEPS SECURITY: New Caller",
-                                                       manager=manager)
+                                                 window_display_title="MEEPS Security: New Caller",
+                                                 manager=manager)
+    
+    caller_popup_window_label_rect = pygame.Rect(15, -60, 300, 200)
+    caller_popup_window_label = pygame_gui.elements.UILabel(relative_rect=caller_popup_window_label_rect, 
+                                                            text="INCOMING CALLER...", 
+                                                            manager=manager,
+                                                            container=caller_popup_window)
 
-    caller_popup_window_label_rect = pygame.Rect = (15, -60, 300, 200)
-    caller_popup_window_label = pygame_gui.elements.UILabel(rel)
+    caller_popup_window_sla_timer_label_rect = pygame.Rect(0, 0, 100, 60)
+    caller_popup_window_sla_timer_label_rect.bottomright = (-30, -5)
+    caller_popup_window_sla_timer_label = pygame_gui.elements.UILabel(relative_rect=caller_popup_window_sla_timer_label_rect, 
+                                                                      text="SLA: ", manager=manager,container=caller_popup_window,
+                                                                      anchors={'right':'right', 'bottom':'bottom'})
+    
+    caller_popup_window_answer_button_rect = pygame.Rect(0, 0, 200, 40)
+    caller_popup_window_answer_button_rect.bottomleft = (15, -10)
+    caller_popup_window_answer_button = pygame_gui.elements.UIButton(relative_rect=caller_popup_window_answer_button_rect, 
+                                                                     text="ANSWER", manager=manager,container=caller_popup_window,
+                                                                     anchors={'left':'left', 'bottom':'bottom'})
+    
+    return caller_popup_window, caller_popup_window_answer_button, caller_popup_window_sla_timer_label
