@@ -5,9 +5,18 @@ import sqlite3
 
 
 def title_label_func(manager):
-    title_rect = pygame.Rect(18, 10, 300, 200)
+    title_rect = pygame.Rect(10, 5, 150, 100)
     title = pygame_gui.elements.UILabel(relative_rect=title_rect, text="MEEPS SECURITY", manager=manager)
     return title
+
+
+def sla_main_func(manager, countdown_duration):
+    sla_main_label_rect = pygame.Rect(210, 95, 100, 60)
+    sla_main_label = pygame_gui.elements.UILabel(relative_rect=sla_main_label_rect, 
+                                                        text="SLA: ".format(countdown_duration), 
+                                                        manager=manager)
+    return sla_main_label    
+
 
 def submit_button_func(manager):
     submit_button_layout_rect = pygame.Rect(0, 0, 300, 40)
@@ -132,12 +141,13 @@ has_scenario = False
 total_score = 0
 
 
-
 running = True
 
 pop_up_window = None
 popup_button_clicked = False
 pop_up_close_timer = 0
+sla_timer = 0
+sla_countdown_duration = 10
 countdown_duration = 15
 
 while running:
@@ -177,48 +187,68 @@ while running:
 
     window_surface.blit(background, (0, 0))
     
+
     if scenario_timer >= time_to_show_scenario and not has_scenario and pop_up_window is None:
         pop_up_window, accept_button, pop_up_window_countdown = pop_up_window_func(manager, countdown_duration)
         pop_up_close_timer = 0
 
-    if pop_up_window:
-        pop_up_window.show()  
-        manager.draw_ui(window_surface)
-        countdown_time_left = countdown_duration - pop_up_close_timer
-        pop_up_window_countdown.set_text("SLA: {:.1f}".format(max(0, countdown_time_left)))
-        pop_up_close_timer += time_delta
-
-        if countdown_time_left <= 0:
-            pop_up_window.hide()
-            pop_up_window = None
-            selected_id = random.choice(remaining_ids)
-            remaining_ids.remove(selected_id)
-            scenario_timer = 0
-
-        for event in pygame.event.get():
-            if event.type == pygame_gui.UI_BUTTON_PRESSED:
-                if event.ui_element == accept_button:
-                    selected_id = random.choice(remaining_ids)
-                    cursor.execute('SELECT entry, answer, caller, picture_path FROM tickets WHERE id=?', [selected_id])
-                    current_scenario, answer, caller, path = cursor.fetchone()
-                    selected_threat = None
-
-                    scenario_label = scenario_label_func(manager, current_scenario)
-                    picture = picture_func(manager, path)
-                    profile_label = profile_label_func(manager, caller)
-                    has_scenario = True
-                    remaining_ids.remove(selected_id)
-
-                    # Dismiss the pop-up window
-                    pop_up_window.hide()
-                    pop_up_window = None
-            
-            manager.process_events(event)
-
-
+    if not remaining_ids and not has_scenario:
+        print("Game Over")
+        running = False
     else:
-        manager.draw_ui(window_surface)
+        if pop_up_window:
+            pop_up_window.show()  
+            manager.draw_ui(window_surface)
+            countdown_time_left = countdown_duration - pop_up_close_timer
+            pop_up_window_countdown.set_text("SLA: {:.1f}".format(max(0, countdown_time_left)))
+            pop_up_close_timer += time_delta
 
+            if countdown_time_left <= 0:
+                pop_up_window.hide()
+                pop_up_window = None
+                selected_id = random.choice(remaining_ids)
+                remaining_ids.remove(selected_id)
+                scenario_timer = 0
+
+            for event in pygame.event.get():
+                if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                    if event.ui_element == accept_button:
+
+                        sla_timer = 0
+                        
+                        selected_id = random.choice(remaining_ids)
+                        cursor.execute('SELECT entry, answer, caller, picture_path FROM tickets WHERE id=?', [selected_id])
+                        current_scenario, answer, caller, path = cursor.fetchone()
+                        selected_threat = None
+
+                        scenario_label = scenario_label_func(manager, current_scenario)
+                        picture = picture_func(manager, path)
+                        profile_label = profile_label_func(manager, caller)
+                        has_scenario = True
+                        remaining_ids.remove(selected_id)
+
+                        pop_up_window.hide()
+                        pop_up_window = None
+
+                manager.process_events(event)
+
+        else:
+            manager.draw_ui(window_surface)
+
+        if has_scenario and pop_up_window is None:
+            sla_main_label = sla_main_func(manager, sla_countdown_duration)
+            sla_countdown_time_left = sla_countdown_duration - sla_timer
+            sla_main_label.set_text("SLA: {:.1f}".format(max(0, sla_countdown_duration)))
+            sla_timer += time_delta
+
+            if sla_countdown_time_left <= 0:
+                    scenario_label.kill()
+                    picture.kill()
+                    profile_label.kill()
+                    has_scenario = False
+                    scenario_timer = 0
+
+    manager.draw_ui(window_surface)
     pygame.display.update()
 
 connect.close()
