@@ -10,10 +10,10 @@ def title_label_func(manager):
     return title
 
 
-def sla_main_func(manager, countdown_duration):
+def sla_main_func(manager):
     sla_main_label_rect = pygame.Rect(210, 95, 100, 60)
     sla_main_label = pygame_gui.elements.UILabel(relative_rect=sla_main_label_rect, 
-                                                        text="SLA: ".format(countdown_duration), 
+                                                        text="SLA: ", 
                                                         manager=manager)
     return sla_main_label    
 
@@ -132,6 +132,8 @@ threat_desc_label = threat_desc_label_func(manager)
 scenario_label = scenario_label_func(manager, "Awaiting tickets")
 title = title_label_func(manager)
 profile_label = profile_label_func(manager,"No current caller")
+sla_main_label = sla_main_func(manager)
+
 
 remaining_ids = all_scenario_ids()
 scenario_timer = 0
@@ -149,6 +151,7 @@ pop_up_close_timer = 0
 sla_timer = 0
 sla_countdown_duration = 10
 countdown_duration = 15
+
 
 while running:
     time_delta = clock.tick(60) / 1000.0
@@ -173,6 +176,7 @@ while running:
                 profile_label.kill()
                 has_scenario = False
                 scenario_timer = 0
+                sla_main_label.set_text("SLA: ")
 
                 if selected_threat == answer:
                     print("Correct!")
@@ -236,9 +240,9 @@ while running:
             manager.draw_ui(window_surface)
 
         if has_scenario and pop_up_window is None:
-            sla_main_label = sla_main_func(manager, sla_countdown_duration)
+            
             sla_countdown_time_left = sla_countdown_duration - sla_timer
-            sla_main_label.set_text("SLA: {:.1f}".format(max(0, sla_countdown_duration)))
+            sla_main_label.set_text("SLA: {:.1f}".format(max(0, sla_countdown_time_left)))
             sla_timer += time_delta
 
             if sla_countdown_time_left <= 0:
@@ -247,6 +251,7 @@ while running:
                     profile_label.kill()
                     has_scenario = False
                     scenario_timer = 0
+                    sla_main_label.set_text("SLA: ")
 
     manager.draw_ui(window_surface)
     pygame.display.update()
