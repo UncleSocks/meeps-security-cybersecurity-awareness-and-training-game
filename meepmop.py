@@ -68,7 +68,7 @@ def picture_func(manager, picture_path):
 def pop_up_window_func(manager, countdown_duration):
     pop_up_window_rect = pygame.Rect(0, 0, 400, 200)
     pop_up_window = pygame_gui.elements.UIWindow(rect=pop_up_window_rect,
-                                                 window_display_title="New Window",
+                                                 window_display_title="New Caller",
                                                  manager=manager)
     pop_up_window_content_rect = pygame.Rect(15, -60, 300, 200)
     pop_up_window_content = pygame_gui.elements.UILabel(relative_rect=pop_up_window_content_rect, 
@@ -77,7 +77,7 @@ def pop_up_window_func(manager, countdown_duration):
                                                         container=pop_up_window)
 
     pop_up_window_countdown_rect = pygame.Rect(0, 0, 100, 60)
-    pop_up_window_countdown_rect.bottomright = (-50, -5)
+    pop_up_window_countdown_rect.bottomright = (-30, -5)
     pop_up_window_countdown = pygame_gui.elements.UILabel(relative_rect=pop_up_window_countdown_rect, 
                                                         text="SLA: {:.1f}".format(countdown_duration), 
                                                         manager=manager,
@@ -126,7 +126,7 @@ profile_label = profile_label_func(manager,"No current caller")
 
 remaining_ids = all_scenario_ids()
 scenario_timer = 0
-time_to_show_scenario = random.uniform(5, 15)
+time_to_show_scenario = random.uniform(2, 12)
 has_scenario = False
 #current_scenario = scenarios[0]
 total_score = 0
@@ -212,6 +212,9 @@ while running:
                     # Dismiss the pop-up window
                     pop_up_window.hide()
                     pop_up_window = None
+            
+            manager.process_events(event)
+
 
     else:
         manager.draw_ui(window_surface)
