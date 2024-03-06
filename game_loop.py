@@ -135,7 +135,6 @@ def meeps_game_loop():
         manager.draw_ui(window_surface)
         pygame.display.update()
 
-
     connect.close()
     print(total_score)
     
