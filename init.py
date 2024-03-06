@@ -8,7 +8,7 @@ import elements
 def pygame_init():
 
     pygame.init()
-    pygame.display.set_caption('MEEPS SECURITY: A SOC Training Game')
+    pygame.display.set_caption('MEEPS SECURITY: Cyberecurity Awareness and Training Game')
 
     window_width, window_height = 800, 600
     window_surface = pygame.display.set_mode((window_width, window_height))
