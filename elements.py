@@ -137,3 +137,12 @@ def settings_button_func(manager):
                                                  text="SETTINGS", manager=manager,
                                                  anchors={'centerx':'centerx', 'bottom':'bottom'})
     return settings_button
+
+
+def quit_button_func(manager):
+
+    quit_button_rect = pygame.Rect(0, -170, 300, 40)
+    quit_button = pygame_gui.elements.UIButton(relative_rect=quit_button_rect,
+                                                 text="QUIT", manager=manager,
+                                                 anchors={'centerx':'centerx', 'bottom':'bottom'})
+    return quit_button

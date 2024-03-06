@@ -9,6 +9,7 @@ window_surface, clock, background = init.pygame_init()
 manager = init.pygame_gui_init()
 start_button = elements.start_button_func(manager)
 settings_button = elements.settings_button_func(manager)
+quit_button = elements.quit_button_func(manager)
 
 
 running = True
@@ -21,6 +22,10 @@ while running:
         if event.type == pygame_gui.UI_BUTTON_PRESSED:
             if event.ui_element == start_button:
                 meeps_game_loop()
+
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+            if event.ui_element == quit_button:
+                running = False
 
         manager.process_events(event)
 
