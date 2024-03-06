@@ -2,7 +2,7 @@ import pygame
 import pygame_gui
 import init
 import elements
-from game import meeps_game_loop
+from game_loop import meeps_game_loop
 
 
 window_surface, clock, background = init.pygame_init()
