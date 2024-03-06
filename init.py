@@ -46,7 +46,7 @@ def meeps_background_init(manager, threat_list):
 def meeps_timers_init():
 
     ticket_timer = 0
-    randomized_ticket_entry = random.uniform(2, 12)
+    randomized_ticket_entry = random.uniform(2, 3)
     popup_window_close_timer = 0
     popup_window_sla_countdown = 15
     
@@ -63,5 +63,7 @@ def meeps_loop_init():
     caller_popup_window = None
     popup_button_accepted = False
     total_score = 0
+    missed_calls = 0
+    missed_tickets = 0
 
-    return running, ticket_presence, caller_popup_window, popup_button_accepted, total_score
+    return running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets

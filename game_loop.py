@@ -23,7 +23,7 @@ def meeps_game_loop():
 
         back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_entry_tbox = init.meeps_background_init(manager, threat_list)
         ticket_timer, randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown, main_sla_timer, main_sla_countdown = init.meeps_timers_init()
-        running, ticket_presence, caller_popup_window, popup_button_accepted, total_score   = init.meeps_loop_init()
+        running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets   = init.meeps_loop_init()
 
 
         while running:
@@ -75,8 +75,8 @@ def meeps_game_loop():
                 popup_window_close_timer = 0
 
             if not ticket_ids_list and not ticket_presence:
-                shift_report(total_score, total_tickets, 
-                             window_surface, clock, background, manager)
+                shift_report(total_score, total_tickets, missed_calls, 
+                             missed_tickets, window_surface, clock, background, manager)
                 running = False
             
             else:
@@ -94,6 +94,7 @@ def meeps_game_loop():
                         selected_id = random.choice(ticket_ids_list)
                         ticket_ids_list.remove(selected_id)
                         ticket_timer = 0
+                        missed_calls += 1
 
                     for event in pygame.event.get():
                         if event.type == pygame_gui.UI_BUTTON_PRESSED:
@@ -133,6 +134,7 @@ def meeps_game_loop():
                         caller_profile_tbox.kill()
                         ticket_presence = False
                         ticket_timer = 0
+                        missed_tickets += 1
 
                         main_sla_timer_label.set_text("SLA: ")
 
@@ -141,11 +143,12 @@ def meeps_game_loop():
 
         connect.close()
 
-    def shift_report(total_score, total_tickets, 
-                     window_surface, clock, background, manager):
+    def shift_report(total_score, total_tickets, missed_calls,
+                     missed_tickets, window_surface, clock, background, manager):
         
         manager.clear_and_reset()
-        shift_report_tbox = elements.shift_report_tbox_func(manager, total_score, total_tickets)
+        shift_report_tbox = elements.shift_report_tbox_func(manager, total_score, total_tickets, 
+                                                            missed_calls, missed_tickets)
         end_shift_title_label = elements.end_shift_title_label_func(manager)
         end_shift_button = elements.end_shift_button_func(manager)
 
