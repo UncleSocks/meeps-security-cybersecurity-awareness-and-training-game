@@ -158,13 +158,13 @@ def start_button_func(manager):
     return start_button
 
 
-def settings_button_func(manager):
+def ticket_creation_button_func(manager):
 
-    settings_button_rect = pygame.Rect(0, -230, 300, 40)
-    settings_button = pygame_gui.elements.UIButton(relative_rect=settings_button_rect,
+    ticket_creation_button_rect = pygame.Rect(0, -230, 300, 40)
+    ticket_creation_button = pygame_gui.elements.UIButton(relative_rect=ticket_creation_button_rect,
                                                  text="CREATE TICKET", manager=manager,
                                                  anchors={'centerx':'centerx', 'bottom':'bottom'})
-    return settings_button
+    return ticket_creation_button
 
 
 def quit_button_func(manager):
