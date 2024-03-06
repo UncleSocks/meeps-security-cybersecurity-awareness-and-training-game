@@ -2,6 +2,14 @@ import pygame
 import pygame_gui
 
 
+def back_button_func(manager):
+    
+    back_button_rect = pygame.Rect(5, 5, 30, 30)
+    back_button = pygame_gui.elements.UIButton(relative_rect=back_button_rect,
+                                                 text="<", manager=manager)
+    return back_button
+
+
 def title_label_func(manager):
 
     title_label_rect = pygame.Rect(10, 5, 150, 100)
@@ -67,14 +75,14 @@ def threat_entry_slist_func(manager, threat_list):
     return threat_entry_slist
 
 
-def threat_description_label_func(manager):
+def threat_description_tbox_func(manager):
 
-    threat_description_label_rect = pygame.Rect(0, 0, 460, 350)
-    threat_description_label_rect.bottomright = (-15, -10)
-    threat_description_label = pygame_gui.elements.UITextBox(relative_rect=threat_description_label_rect,
+    threat_description_tbox_rect = pygame.Rect(0, 0, 460, 350)
+    threat_description_tbox_rect.bottomright = (-15, -10)
+    threat_description_tbox = pygame_gui.elements.UITextBox(relative_rect=threat_description_tbox_rect,
                                                            html_text="SELECT A THREAT", manager=manager,
                                                            anchors={'right':'right', 'bottom':'bottom'})
-    return threat_description_label
+    return threat_description_tbox
 
 
 def ticket_entry_label_func(manager, current_ticket):
@@ -115,9 +123,17 @@ def caller_popup_window_func(manager):
 
 def start_button_func(manager):
 
-    start_button_rect = pygame.Rect(0, 0, 300, 40)
-    start_button_rect.bottomleft = (15, -10)
+    start_button_rect = pygame.Rect(0, 30, 300, 40)
     start_button = pygame_gui.elements.UIButton(relative_rect=start_button_rect,
                                                  text="START SHIFT", manager=manager,
                                                  anchors={'center':'center'})
     return start_button
+
+
+def settings_button_func(manager):
+
+    settings_button_rect = pygame.Rect(0, -230, 300, 40)
+    settings_button = pygame_gui.elements.UIButton(relative_rect=settings_button_rect,
+                                                 text="SETTINGS", manager=manager,
+                                                 anchors={'centerx':'centerx', 'bottom':'bottom'})
+    return settings_button

@@ -8,6 +8,7 @@ from game import meeps_game_loop
 window_surface, clock, background = init.pygame_init()
 manager = init.pygame_gui_init()
 start_button = elements.start_button_func(manager)
+settings_button = elements.settings_button_func(manager)
 
 
 running = True

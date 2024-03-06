@@ -18,7 +18,7 @@ def meeps_game_loop():
     ticket_ids_list = ticket_ids(cursor)
     threat_list = threats(cursor)
 
-    title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_label, ticket_entry_label = init.meeps_background_init(manager, threat_list)
+    back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_entry_label = init.meeps_background_init(manager, threat_list)
     ticket_timer, randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown, main_sla_timer, main_sla_countdown = init.meeps_timers_init()
     running, ticket_presence, caller_popup_window, popup_button_accepted, total_score   = init.meeps_loop_init()
 
@@ -30,7 +30,7 @@ def meeps_game_loop():
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
 
             if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
                 if event.ui_element == threat_entry_slist:
@@ -39,9 +39,13 @@ def meeps_game_loop():
 
                     cursor.execute('SELECT description, impact, mitigation FROM threats WHERE name=?', [selected_threat])
                     description, impact, mitigation = cursor.fetchone()
-                    threat_description_label.set_text(f'<b>{selected_threat.upper()}</b>\n<b>Description</b>:\n{description}\n<b>Impact:\n</b>{impact}\n<b>Mitigation:</b>\n{mitigation}')
+                    threat_description_tbox.set_text(f'<b>{selected_threat.upper()}</b>\n<b>Description</b>:\n{description}\n<b>Impact:\n</b>{impact}\n<b>Mitigation:</b>\n{mitigation}')
             
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                
+                if event.ui_element == back_button:
+                    running = False
+                
                 if event.ui_element == submit_button and ticket_presence:
                     ticket_entry_label.kill()
                     caller_profile_image.kill()
@@ -134,7 +138,7 @@ def meeps_game_loop():
 
     connect.close()
     print(total_score)
-    pygame.quit()
+    
 
 
 #meeps_game_loop()
