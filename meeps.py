@@ -7,6 +7,7 @@ from game_loop import meeps_game_loop
 
 if __name__ == "__main__":
 
+    database = 'data.db'
     window_surface, clock, background = init.pygame_init()
     manager = init.pygame_gui_init()
 
@@ -24,7 +25,7 @@ if __name__ == "__main__":
 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == start_button:
-                    meeps_game_loop()
+                    meeps_game_loop(database)
 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == quit_button:
