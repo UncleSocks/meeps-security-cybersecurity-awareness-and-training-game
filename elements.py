@@ -21,7 +21,7 @@ def title_label_func(manager):
 
 def main_sla_timer_label_func(manager):
     
-    main_sla_timer_label_rect = pygame.Rect(210, 95, 100, 60)
+    main_sla_timer_label_rect = pygame.Rect(210, 140, 100, 60)
     main_sla_timer_label = pygame_gui.elements.UILabel(relative_rect=main_sla_timer_label_rect,
                                                        text="SLA: ", manager=manager)
     return main_sla_timer_label
@@ -29,7 +29,7 @@ def main_sla_timer_label_func(manager):
 
 def caller_profile_tbox_func(manager, caller_profile):
 
-    caller_profile_tbox_rect = pygame.Rect(120, 135, 195, 100)
+    caller_profile_tbox_rect = pygame.Rect(120, 180, 195, 100)
     caller_profile_tbox = pygame_gui.elements.UITextBox(relative_rect=caller_profile_tbox_rect,
                                                         html_text=caller_profile,
                                                         manager=manager)
@@ -38,7 +38,7 @@ def caller_profile_tbox_func(manager, caller_profile):
 
 def caller_profile_image_func(manager, image_path):
 
-    caller_profile_image_rect = pygame.Rect(18, 135, 98, 98)
+    caller_profile_image_rect = pygame.Rect(18, 180, 98, 98)
     caller_profile_image_load = pygame.image.load(image_path)
     caller_profile_image = pygame_gui.elements.UIImage(relative_rect=caller_profile_image_rect,
                                                        image_surface=caller_profile_image_load,
@@ -58,9 +58,10 @@ def submit_button_func(manager):
 
 def threat_entry_title_tbox_func(manager):
 
-    threat_entry_title_tbox_rect = pygame.Rect(15, 240, 300, 30)
+    threat_entry_title_tbox_rect = pygame.Rect(15, -360, 300, 30)
     threat_entry_title_tbox = pygame_gui.elements.UITextBox(relative_rect=threat_entry_title_tbox_rect,
-                                                            html_text="THREAT ENTRIES", manager=manager)
+                                                            html_text="THREAT ENTRIES", manager=manager,
+                                                            anchors = {'bottom':'bottom'})
     return threat_entry_title_tbox
 
 
@@ -87,7 +88,7 @@ def threat_description_tbox_func(manager):
 
 def ticket_entry_tbox_func(manager, current_ticket):
 
-    ticket_entry_tbox_rect = pygame.Rect(325, 15, 460, 220)
+    ticket_entry_tbox_rect = pygame.Rect(325, 60, 460, 220)
     ticket_entry_tbox = pygame_gui.elements.UITextBox(relative_rect=ticket_entry_tbox_rect, 
                                                        html_text=current_ticket, manager=manager)
     return ticket_entry_tbox
@@ -160,7 +161,7 @@ def start_button_func(manager):
 
 def ticket_creation_button_func(manager):
 
-    ticket_creation_button_rect = pygame.Rect(0, -230, 300, 40)
+    ticket_creation_button_rect = pygame.Rect(0, -255, 300, 40)
     ticket_creation_button = pygame_gui.elements.UIButton(relative_rect=ticket_creation_button_rect,
                                                  text="CREATE TICKET", manager=manager,
                                                  anchors={'centerx':'centerx', 'bottom':'bottom'})
@@ -169,7 +170,7 @@ def ticket_creation_button_func(manager):
 
 def quit_button_func(manager):
 
-    quit_button_rect = pygame.Rect(0, -170, 300, 40)
+    quit_button_rect = pygame.Rect(0, -195, 300, 40)
     quit_button = pygame_gui.elements.UIButton(relative_rect=quit_button_rect,
                                                  text="LOG OFF", manager=manager,
                                                  anchors={'centerx':'centerx', 'bottom':'bottom'})

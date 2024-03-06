@@ -10,7 +10,7 @@ def pygame_init():
     pygame.init()
     pygame.display.set_caption('MEEPS SECURITY: Cyberecurity Awareness and Training Game')
 
-    window_width, window_height = 800, 600
+    window_width, window_height = 800, 650
     window_surface = pygame.display.set_mode((window_width, window_height))
     clock = pygame.time.Clock()
 
@@ -22,7 +22,7 @@ def pygame_init():
 
 def pygame_gui_init():
     
-    window_width, window_height = 800, 600
+    window_width, window_height = 800, 650
     manager = pygame_gui.UIManager((window_width, window_height), 'theme.json')
 
     return manager
