@@ -18,7 +18,7 @@ def meeps_game_loop():
     ticket_ids_list = ticket_ids(cursor)
     threat_list = threats(cursor)
 
-    back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_entry_label = init.meeps_background_init(manager, threat_list)
+    back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_entry_tbox = init.meeps_background_init(manager, threat_list)
     ticket_timer, randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown, main_sla_timer, main_sla_countdown = init.meeps_timers_init()
     running, ticket_presence, caller_popup_window, popup_button_accepted, total_score   = init.meeps_loop_init()
 
@@ -47,7 +47,7 @@ def meeps_game_loop():
                     running = False
                 
                 if event.ui_element == submit_button and ticket_presence:
-                    ticket_entry_label.kill()
+                    ticket_entry_tbox.kill()
                     caller_profile_image.kill()
                     caller_profile_tbox.kill()
                     ticket_presence = False
@@ -101,7 +101,7 @@ def meeps_game_loop():
                             current_ticket, answer, caller, path = cursor.fetchone()
                             selected_threat = None
 
-                            ticket_entry_label = elements.ticket_entry_label_func(manager, current_ticket)
+                            ticket_entry_tbox = elements.ticket_entry_tbox_func(manager, current_ticket)
                             caller_profile_image = elements.caller_profile_image_func(manager, path)
                             caller_profile_tbox = elements.caller_profile_tbox_func(manager, caller)
                             
@@ -124,7 +124,7 @@ def meeps_game_loop():
 
                 if main_sla_countdown_difference <= 0:
 
-                    ticket_entry_label.kill()
+                    ticket_entry_tbox.kill()
                     caller_profile_image.kill()
                     caller_profile_tbox.kill()
                     ticket_presence = False

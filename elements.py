@@ -85,12 +85,12 @@ def threat_description_tbox_func(manager):
     return threat_description_tbox
 
 
-def ticket_entry_label_func(manager, current_ticket):
+def ticket_entry_tbox_func(manager, current_ticket):
 
-    ticket_entry_label_rect = pygame.Rect(325, 15, 460, 220)
-    ticket_entry_label = pygame_gui.elements.UITextBox(relative_rect=ticket_entry_label_rect, 
+    ticket_entry_tbox_rect = pygame.Rect(325, 15, 460, 220)
+    ticket_entry_tbox = pygame_gui.elements.UITextBox(relative_rect=ticket_entry_tbox_rect, 
                                                        html_text=current_ticket, manager=manager)
-    return ticket_entry_label
+    return ticket_entry_tbox
 
 
 def caller_popup_window_func(manager):
