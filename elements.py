@@ -111,3 +111,13 @@ def caller_popup_window_func(manager):
                                                                      anchors={'left':'left', 'bottom':'bottom'})
     
     return caller_popup_window, caller_popup_window_answer_button, caller_popup_window_sla_timer_label
+
+
+def start_button_func(manager):
+
+    start_button_rect = pygame.Rect(0, 0, 300, 40)
+    start_button_rect.bottomleft = (15, -10)
+    start_button = pygame_gui.elements.UIButton(relative_rect=start_button_rect,
+                                                 text="START SHIFT", manager=manager,
+                                                 anchors={'center':'center'})
+    return start_button
