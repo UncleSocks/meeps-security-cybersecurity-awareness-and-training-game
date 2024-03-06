@@ -86,6 +86,14 @@ def threat_description_tbox_func(manager):
     return threat_description_tbox
 
 
+def ticket_title_tbox_func(manager, current_title):
+
+    ticket_title_tbox_rect = pygame.Rect(325, 20, 460, 40)
+    ticket_title_tbox = pygame_gui.elements.UITextBox(relative_rect=ticket_title_tbox_rect, 
+                                                       html_text=current_title, manager=manager)
+    return ticket_title_tbox
+
+
 def ticket_entry_tbox_func(manager, current_ticket):
 
     ticket_entry_tbox_rect = pygame.Rect(325, 60, 460, 220)

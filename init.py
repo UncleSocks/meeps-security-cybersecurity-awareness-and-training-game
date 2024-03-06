@@ -38,9 +38,10 @@ def meeps_background_init(manager, threat_list):
     threat_entry_title_tbox = elements.threat_entry_title_tbox_func(manager)
     threat_entry_slist = elements.threat_entry_slist_func(manager, threat_list)
     threat_description_tbox = elements.threat_description_tbox_func(manager)
+    ticket_title_tbox = elements.ticket_title_tbox_func(manager, " ")
     ticket_entry_tbox = elements.ticket_entry_tbox_func(manager, "AWAITING TICKETS")
 
-    return back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_entry_tbox
+    return back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_title_tbox, ticket_entry_tbox
 
 
 def meeps_timers_init():

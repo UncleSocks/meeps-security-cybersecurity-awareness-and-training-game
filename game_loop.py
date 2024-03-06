@@ -19,7 +19,7 @@ def meeps_game_loop(database):
     total_tickets = len(ticket_ids_list)
     threat_list = threats(cursor)
 
-    back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_entry_tbox = init.meeps_background_init(manager, threat_list)
+    back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_title_tbox, ticket_entry_tbox = init.meeps_background_init(manager, threat_list)
     ticket_timer, randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown, main_sla_timer, main_sla_countdown = init.meeps_timers_init()
     running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets   = init.meeps_loop_init()
 
@@ -48,6 +48,8 @@ def meeps_game_loop(database):
                     running = False
                 
                 if event.ui_element == submit_button and ticket_presence:
+
+                    ticket_title_tbox.kill()
                     ticket_entry_tbox.kill()
                     caller_profile_image.kill()
                     caller_profile_tbox.kill()
@@ -100,9 +102,12 @@ def meeps_game_loop(database):
                             main_sla_timer = 0
 
                             selected_id = random.choice(ticket_ids_list)
-                            cursor.execute('SELECT entry, answer, caller, picture_path FROM tickets WHERE id=?', [selected_id])
-                            current_ticket, answer, caller, path = cursor.fetchone()
+                            cursor.execute('SELECT title, entry, answer, caller, picture_path FROM tickets WHERE id=?', [selected_id])
+                            title, current_ticket, answer, caller, path = cursor.fetchone()
                             selected_threat = None
+
+                            ticket_title_text = f"Ticket ID#{selected_id} - {title}"
+                            ticket_title_tbox = elements.ticket_title_tbox_func(manager, ticket_title_text)
 
                             ticket_entry_tbox = elements.ticket_entry_tbox_func(manager, current_ticket)
                             caller_profile_image = elements.caller_profile_image_func(manager, path)
@@ -126,7 +131,8 @@ def meeps_game_loop(database):
                 main_sla_timer += time_delta
 
                 if main_sla_countdown_difference <= 0:
-
+                    
+                    ticket_title_tbox.kill()
                     ticket_entry_tbox.kill()
                     caller_profile_image.kill()
                     caller_profile_tbox.kill()
