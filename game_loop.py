@@ -106,7 +106,7 @@ def meeps_game_loop(database):
                             title, current_ticket, answer, caller, path = cursor.fetchone()
                             selected_threat = None
 
-                            ticket_title_text = f"Ticket ID#{selected_id} - {title}"
+                            ticket_title_text = f"<b>Ticket ID#{selected_id} - {title}</b>"
                             ticket_title_tbox = elements.ticket_title_tbox_func(manager, ticket_title_text)
 
                             ticket_entry_tbox = elements.ticket_entry_tbox_func(manager, current_ticket)
