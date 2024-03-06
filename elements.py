@@ -121,6 +121,34 @@ def caller_popup_window_func(manager):
     return caller_popup_window, caller_popup_window_answer_button, caller_popup_window_sla_timer_label
 
 
+def shift_report_tbox_func(manager, score, ticket_count):
+    
+    shift_report_tbox_rect = pygame.Rect(0, 0, 300, 200)
+    shift_report_tbox = pygame_gui.elements.UITextBox(relative_rect=shift_report_tbox_rect,
+                                                           html_text=f"<b>Employee No:</b> #1361\n<b>Title:</b> L1 SOC Analyst\n<b>Total Tickets:</b> {ticket_count}\n<b>Correct Assessment:</b> {score}", 
+                                                           manager=manager,
+                                                           anchors={'center':'center'})
+    return shift_report_tbox
+
+
+def end_shift_button_func(manager):
+
+    end_shift_button_rect = pygame.Rect(0, -195, 300, 40)
+    end_shift_button = pygame_gui.elements.UIButton(relative_rect=end_shift_button_rect,
+                                                 text="END SHIFT", manager=manager,
+                                                 anchors={'centerx':'centerx', 'bottom':'bottom'})
+    return end_shift_button
+
+
+def end_shift_title_label_func(manager):
+
+    end_shift_title_label_rect = pygame.Rect(0, 150, 100, 60)
+    end_shift_title_label = pygame_gui.elements.UILabel(relative_rect=end_shift_title_label_rect,
+                                                       text="SHIFT REPORT", manager=manager,
+                                                       anchors={'centerx':'centerx'})
+    return end_shift_title_label
+
+
 def start_button_func(manager):
 
     start_button_rect = pygame.Rect(0, 30, 300, 40)
