@@ -18,6 +18,7 @@ if __name__ == "__main__":
 
     title_image_path = "Assets/title.png"
     main_title_image = elements.main_title_image_func(manager, title_image_path)
+    main_title_slogan = elements.main_title_slogan_label_func(manager)
 
 
     running = True

@@ -135,7 +135,7 @@ def shift_report_tbox_func(manager, score, ticket_count, missed_calls, missed_ti
     
     shift_report_tbox_rect = pygame.Rect(0, 0, 300, 170)
     shift_report_tbox = pygame_gui.elements.UITextBox(relative_rect=shift_report_tbox_rect,
-                                                           html_text=f"<b>Employee No:</b> #1361\n<b>Title:</b> L1 SOC Analyst\n<b>Total Tickets:</b> {ticket_count}\n<b>Correct Assessment:</b> {score}\n<b>Missed Calls:</b> {missed_calls}\n<b>Missed Tickets:</b> {missed_tickets}", 
+                                                           html_text=f"<b>Employee No:</b> #1361\n<b>Title:</b> L1 SOC Analyst\n<b>Total Tickets:</b> {ticket_count}\n<b>Accurate Ticket Resolution:</b> {score}\n<b>Missed Calls:</b> {missed_calls}\n<b>Missed Tickets:</b> {missed_tickets}", 
                                                            manager=manager,
                                                            anchors={'center':'center'})
     return shift_report_tbox
@@ -167,6 +167,15 @@ def main_title_image_func(manager, image_path):
                                                        image_surface=main_title_image_load,
                                                        manager=manager)
     return main_title_image
+
+
+def main_title_slogan_label_func(manager):
+
+    main_title_slogal_label_rect = pygame.Rect(150, 180, 500, 190)
+    main_title_slogal_label = pygame_gui.elements.UILabel(relative_rect=main_title_slogal_label_rect, 
+                                                          text="Guarding the Cyberspace", 
+                                                          manager=manager)
+    return main_title_slogal_label
 
 
 def start_button_func(manager):
