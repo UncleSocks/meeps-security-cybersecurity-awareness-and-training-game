@@ -107,7 +107,7 @@ def caller_popup_window_func(manager):
     
     caller_popup_window_rect = pygame.Rect(0, 0, 400, 200)
     caller_popup_window = pygame_gui.elements.UIWindow(rect=caller_popup_window_rect,
-                                                 window_display_title="MEEPS Security: New Caller",
+                                                 window_display_title="MEEPS SECURITY: New Caller",
                                                  manager=manager)
     
     caller_popup_window_label_rect = pygame.Rect(15, -60, 300, 200)
