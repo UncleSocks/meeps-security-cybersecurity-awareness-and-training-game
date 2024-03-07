@@ -8,7 +8,11 @@ import elements
 def pygame_init():
 
     pygame.init()
-    pygame.display.set_caption('MEEPS SECURITY: Cyberecurity Awareness and Training Game')
+    pygame.display.set_caption('MEEPS SECURITY Responder.exe')
+
+    icon_path = "Assets/icon.png"
+    icon_load = pygame.image.load(icon_path)
+    pygame.display.set_icon(icon_load)
 
     window_width, window_height = 800, 650
     window_surface = pygame.display.set_mode((window_width, window_height))
