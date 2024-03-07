@@ -21,7 +21,7 @@ def meeps_game_loop(database):
 
     back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_title_tbox, ticket_entry_tbox = init.meeps_background_init(manager, threat_list)
     ticket_timer, randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown, main_sla_timer, main_sla_countdown = init.meeps_timers_init()
-    running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets   = init.meeps_loop_init()
+    running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets, ticket_no   = init.meeps_loop_init()
 
 
     while running:
@@ -106,8 +106,9 @@ def meeps_game_loop(database):
                             title, current_ticket, answer, caller, path = cursor.fetchone()
                             selected_threat = None
 
-                            ticket_title_text = f"<b>Ticket ID#{selected_id} - {title}</b>"
+                            ticket_title_text = f"<b>ID#{ticket_no} | {title}</b>"
                             ticket_title_tbox = elements.ticket_title_tbox_func(manager, ticket_title_text)
+                            ticket_no += 1
 
                             ticket_entry_tbox = elements.ticket_entry_tbox_func(manager, current_ticket)
                             caller_profile_image = elements.caller_profile_image_func(manager, path)
