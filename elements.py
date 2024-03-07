@@ -10,13 +10,14 @@ def back_button_func(manager):
     return back_button
 
 
-def title_label_func(manager):
+def title_image_func(manager, image_path):
 
-    title_label_rect = pygame.Rect(10, 5, 150, 100)
-    title_label = pygame_gui.elements.UILabel(relative_rect=title_label_rect,
-                                              text="MEEPS SECURITY",
-                                              manager=manager)
-    return title_label
+    title_image_rect = pygame.Rect(30, 35, 280, 110)
+    title_image_load = pygame.image.load(image_path)
+    title_image = pygame_gui.elements.UIImage(relative_rect=title_image_rect,
+                                                       image_surface=title_image_load,
+                                                       manager=manager)
+    return title_image
 
 
 def main_sla_timer_label_func(manager):
@@ -88,7 +89,7 @@ def threat_description_tbox_func(manager):
 
 def ticket_title_tbox_func(manager, current_title):
 
-    ticket_title_tbox_rect = pygame.Rect(325, 20, 460, 40)
+    ticket_title_tbox_rect = pygame.Rect(325, 5, 460, 40)
     ticket_title_tbox = pygame_gui.elements.UITextBox(relative_rect=ticket_title_tbox_rect, 
                                                        html_text=current_title, manager=manager)
     return ticket_title_tbox
@@ -96,7 +97,7 @@ def ticket_title_tbox_func(manager, current_title):
 
 def ticket_entry_tbox_func(manager, current_ticket):
 
-    ticket_entry_tbox_rect = pygame.Rect(325, 60, 460, 220)
+    ticket_entry_tbox_rect = pygame.Rect(325, 45, 460, 235)
     ticket_entry_tbox = pygame_gui.elements.UITextBox(relative_rect=ticket_entry_tbox_rect, 
                                                        html_text=current_ticket, manager=manager)
     return ticket_entry_tbox
@@ -142,7 +143,7 @@ def shift_report_tbox_func(manager, score, ticket_count, missed_calls, missed_ti
 
 def end_shift_button_func(manager):
 
-    end_shift_button_rect = pygame.Rect(0, -210, 300, 40)
+    end_shift_button_rect = pygame.Rect(0, -230, 300, 40)
     end_shift_button = pygame_gui.elements.UIButton(relative_rect=end_shift_button_rect,
                                                  text="END SHIFT", manager=manager,
                                                  anchors={'centerx':'centerx', 'bottom':'bottom'})
@@ -151,11 +152,21 @@ def end_shift_button_func(manager):
 
 def end_shift_title_label_func(manager):
 
-    end_shift_title_label_rect = pygame.Rect(0, 170, 100, 60)
+    end_shift_title_label_rect = pygame.Rect(0, 200, 100, 60)
     end_shift_title_label = pygame_gui.elements.UILabel(relative_rect=end_shift_title_label_rect,
                                                        text="SHIFT REPORT", manager=manager,
                                                        anchors={'centerx':'centerx'})
     return end_shift_title_label
+
+
+def main_title_image_func(manager, image_path):
+
+    main_title_image_rect = pygame.Rect(165, 80, 500, 190)
+    main_title_image_load = pygame.image.load(image_path)
+    main_title_image = pygame_gui.elements.UIImage(relative_rect=main_title_image_rect,
+                                                       image_surface=main_title_image_load,
+                                                       manager=manager)
+    return main_title_image
 
 
 def start_button_func(manager):

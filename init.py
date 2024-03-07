@@ -29,9 +29,11 @@ def pygame_gui_init():
 
 
 def meeps_background_init(manager, threat_list):
+
+    title_image_path = "Assets/title.png"
     
     back_button = elements.back_button_func(manager)
-    title_label = elements.title_label_func(manager)
+    title_label = elements.title_image_func(manager, title_image_path)
     main_sla_timer_label = elements.main_sla_timer_label_func(manager)
     caller_profile_tbox = elements.caller_profile_tbox_func(manager, "NO CURRENT CALLER")
     submit_button = elements.submit_button_func(manager)

@@ -16,6 +16,9 @@ if __name__ == "__main__":
     ticket_creation_button = elements.ticket_creation_button_func(manager)
     quit_button = elements.quit_button_func(manager)
 
+    title_image_path = "Assets/title.png"
+    main_title_image = elements.main_title_image_func(manager, title_image_path)
+
 
     running = True
     while running:
