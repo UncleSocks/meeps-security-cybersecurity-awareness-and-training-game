@@ -102,8 +102,8 @@ def meeps_game_loop(database):
                             main_sla_timer = 0
 
                             selected_id = random.choice(ticket_ids_list)
-                            cursor.execute('SELECT title, entry, answer, caller, picture_path FROM tickets WHERE id=?', [selected_id])
-                            title, current_ticket, answer, caller, path = cursor.fetchone()
+                            cursor.execute('SELECT t.title, t.entry, t.answer, a.name, a.organization, a.email, a.contact, a.picture FROM tickets t JOIN accounts a ON t.caller_id = a.id WHERE t.id=?',[selected_id])
+                            title, current_ticket, answer, caller_name, caller_org, caller_email, caller_contact, caller_picture = cursor.fetchone()
                             selected_threat = None
 
                             ticket_title_text = f"<b>ID#{ticket_no} | {title}</b>"
@@ -111,8 +111,10 @@ def meeps_game_loop(database):
                             ticket_no += 1
 
                             ticket_entry_tbox = elements.ticket_entry_tbox_func(manager, current_ticket)
-                            caller_profile_image = elements.caller_profile_image_func(manager, path)
-                            caller_profile_tbox = elements.caller_profile_tbox_func(manager, caller)
+                            caller_profile_image = elements.caller_profile_image_func(manager, caller_picture)
+
+                            caller_profile_text = f"Name: {caller_name}\nOrganization: {caller_org}\nEmail: {caller_email}\nContact: {caller_contact}"
+                            caller_profile_tbox = elements.caller_profile_tbox_func(manager, caller_profile_text)
                             
                             ticket_presence = True
                             ticket_ids_list.remove(selected_id)
