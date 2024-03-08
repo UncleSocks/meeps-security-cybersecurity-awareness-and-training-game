@@ -1,11 +1,12 @@
 ![image](https://github.com/UncleSocks/meeps-security-cybersecurity-awareness-and-training-game/assets/79778613/dcb3f983-15be-4990-838e-70b456791f18)
 
+# MEEPS SECURITY: Cybersecurity Awareness and Training Game
 
 MEEPS SECURITY is a simulation game designed to extend cybersecurity training and awareness by playing as an L1 Security Operation Center (SOC) analyst. Players handle incoming calls regarding cybersecurity incidents, evaluating and submitting the appropriate threat to the callers within the given service level agreement (SLA). The player must correctly resolve at least 80% of tickets to pass the assessment during the shift.
 
 **Note:** The game is playable but still under development.
 
-# Gameplay
+## Gameplay
 
 The main menu has three buttons: START SHIFT, CREATE TICKETS, and LOG OFF. To play MEEPS SECURITY, select the "START SHIFT" button. This will take you to the main game loop, where you play as an L1 SOC analyst. 
 
@@ -15,7 +16,7 @@ MEEPS SECURITY also allows players to create their own custom tickets by selecti
 
 The "LOG OFF" button exits the game -- you can also click on the close window button.
 
-## Starting Your Shift
+### Starting Your Shift
 
 When starting your shift, you will anticipate calls from various MEEPS SECURITY clients regarding cybersecurity incidents. 
 
@@ -41,7 +42,7 @@ Click the "END SHIFT" button to end the game.
 Currently, MEEPS SECURITY does not save your progress. It selects a random ticket from the SQLite database.
 
 
-## Creating Tickets
+### Creating Tickets
 
 MEEPS SECURITY also allows you to create your own tickets by selecting the "CREATE TICKET" on the main menu. It aims to allow users to add their own scenarios to train SOC analysts -- or for those who want to expand the game.
 
