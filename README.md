@@ -6,6 +6,14 @@ MEEPS SECURITY is a simulation game designed to extend cybersecurity training an
 
 **Note:** The game is playable but still under development.
 
+## Prerequisites
+
+Run pip install -r requirements.txt to install the tool's dependencies.
+
+### Dependencies
+
+MEEPS SECURITY is written in Python 3 using the PyGame and PyGame libraries.
+
 ## Gameplay
 
 The main menu has three buttons: START SHIFT, CREATE TICKETS, and LOG OFF. To play MEEPS SECURITY, select the "START SHIFT" button. This will take you to the main game loop, where you play as an L1 SOC analyst. 
