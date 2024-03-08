@@ -203,3 +203,24 @@ def quit_button_func(manager):
                                                  text="LOG OFF", manager=manager,
                                                  anchors={'centerx':'centerx', 'bottom':'bottom'})
     return quit_button
+
+
+def version_label_func(manager, version):
+
+    version_label_rect = pygame.Rect(0, 0, 200, 150)
+    version_label_rect.bottomleft = (-35, 60)
+    version_label = pygame_gui.elements.UILabel(relative_rect=version_label_rect,
+                                                text=version, manager=manager,
+                                                anchors={'left':'left', 'bottom':'bottom'})
+    return version_label
+
+
+def github_label_func(manager):
+
+    github_label_rect = pygame.Rect(0, 0, 200, 200)
+    github_label_rect.bottomright = (0, 85)
+    github_label = pygame_gui.elements.UILabel(relative_rect=github_label_rect,
+                                               text="GitHub @unclesocks", 
+                                               manager=manager,
+                                               anchors={'right':'right', 'bottom':'bottom'})
+    return github_label

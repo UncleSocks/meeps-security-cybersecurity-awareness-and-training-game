@@ -20,6 +20,10 @@ if __name__ == "__main__":
     main_title_image = elements.main_title_image_func(manager, title_image_path)
     main_title_slogan = elements.main_title_slogan_label_func(manager)
 
+    current_version = "MS v2024.0.1"
+    version_label = elements.version_label_func(manager, current_version)
+    github_label = elements.github_label_func(manager)
+
 
     running = True
     while running:
