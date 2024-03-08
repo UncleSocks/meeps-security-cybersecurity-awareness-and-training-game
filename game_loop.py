@@ -111,7 +111,6 @@ def meeps_game_loop(database):
                             ticket_no += 1
 
                             ticket_entry_tbox.set_text(current_ticket)
-                            #ticket_entry_tbox = elements.ticket_entry_tbox_func(manager, current_ticket)
                             caller_profile_image = elements.caller_profile_image_func(manager, caller_picture)
 
                             caller_profile_text = f"Name: {caller_name}\nOrganization: {caller_org}\nEmail: {caller_email}\nContact: {caller_contact}"
