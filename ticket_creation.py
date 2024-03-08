@@ -33,7 +33,21 @@ def ticket_creation(database):
 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == back_button:
-                   running = False 
+                   running = False
+
+            if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
+                if event.ui_element == threat_entry_slist:
+                    selected_threat = event.text
+                    print(selected_threat)
+
+                    cursor.execute('SELECT description, indicators, countermeasures FROM threats WHERE name=?', [selected_threat])
+                    description, indicators, countermeasures = cursor.fetchone()
+                    threat_description_tbox.set_text(f'<b>{selected_threat.upper()}</b>\n<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
+
+            ticket_title = title_text_entry.get_text()
+            ticket_entry = ticket_text_entry.get_text()
+            
+            
         
             manager.process_events(event)
 

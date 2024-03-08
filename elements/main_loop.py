@@ -79,11 +79,9 @@ def threat_entry_slist_func(manager, threat_list):
 
 def threat_description_tbox_func(manager):
 
-    threat_description_tbox_rect = pygame.Rect(0, 0, 460, 350)
-    threat_description_tbox_rect.bottomright = (-15, -10)
+    threat_description_tbox_rect = pygame.Rect(325, 290, 460, 350)
     threat_description_tbox = pygame_gui.elements.UITextBox(relative_rect=threat_description_tbox_rect,
-                                                           html_text="SELECT A THREAT", manager=manager,
-                                                           anchors={'right':'right', 'bottom':'bottom'})
+                                                           html_text="SELECT A THREAT", manager=manager)
     return threat_description_tbox
 
 
