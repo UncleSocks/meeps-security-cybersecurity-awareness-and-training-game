@@ -143,7 +143,7 @@ def shift_report_tbox_func(manager, score, ticket_count, missed_calls, missed_ti
 
 def end_shift_button_func(manager):
 
-    end_shift_button_rect = pygame.Rect(0, -205, 300, 40)
+    end_shift_button_rect = pygame.Rect(0, -210, 300, 40)
     end_shift_button = pygame_gui.elements.UIButton(relative_rect=end_shift_button_rect,
                                                  text="END SHIFT", manager=manager,
                                                  anchors={'centerx':'centerx', 'bottom':'bottom'})
