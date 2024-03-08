@@ -1,4 +1,4 @@
-![image](https://github.com/UncleSocks/meeps-security-cybersecurity-awareness-and-training-game/assets/79778613/abb45c2c-663a-46dd-aca3-ca4c67bdbef1)
+![image](https://github.com/UncleSocks/meeps-security-cybersecurity-awareness-and-training-game/assets/79778613/0d622a7a-f059-455b-9b8e-50e9455bd7ac)
 
 
 MEEPS SECURITY is a simulation game designed to extend cybersecurity training and awareness by playing as an L1 Security Operation Center (SOC) analyst. Players handle incoming calls regarding cybersecurity incidents, evaluating and submitting the appropriate threat to the callers within the given service level agreement (SLA). The player must correctly resolve at least 80% of tickets to pass the assessment during the shift.
