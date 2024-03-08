@@ -38,9 +38,9 @@ def meeps_game_loop(database):
                     selected_threat = event.text
                     print(selected_threat)
 
-                    cursor.execute('SELECT description, impact, mitigation FROM threats WHERE name=?', [selected_threat])
-                    description, impact, mitigation = cursor.fetchone()
-                    threat_description_tbox.set_text(f'<b>{selected_threat.upper()}</b>\n<b>Description</b>:\n{description}\n<b>Impact:\n</b>{impact}\n<b>Mitigation:</b>\n{mitigation}')
+                    cursor.execute('SELECT description, indicators, countermeasures FROM threats WHERE name=?', [selected_threat])
+                    description, indicators, countermeasures = cursor.fetchone()
+                    threat_description_tbox.set_text(f'<b>{selected_threat.upper()}</b>\n<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
             
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 
