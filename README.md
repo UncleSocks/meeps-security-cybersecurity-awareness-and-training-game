@@ -2,17 +2,19 @@
 
 # MEEPS SECURITY: Cybersecurity Awareness and Training Game
 
-MEEPS SECURITY is a simulation game designed to extend cybersecurity training and awareness by playing as an L1 Security Operation Center (SOC) analyst. Players handle incoming calls regarding cybersecurity incidents, evaluating and submitting the appropriate threat to the callers within the given service level agreement (SLA). The player must correctly resolve at least 80% of tickets to pass the assessment during the shift.
+MEEPS SECURITY is a simulation game designed to extend cybersecurity training and awareness by playing as an L1 Security Operation Center (SOC) analyst. Players handle incoming calls regarding cybersecurity incidents, evaluating and submitting the appropriate threat to the callers within the given service level agreement (SLA). The player must correctly resolve at least 80% of tickets to pass the assessment during the shift. 
+
+This is named after one of my chows, named Meepo (Yes, the DOTA character).
 
 **Note:** The game is playable but still under development.
 
 ## Prerequisites
 
-Run pip install -r requirements.txt to install the tool's dependencies.
+Run `pip install -r requirements.txt` to install the tool's dependencies.
 
 ### Dependencies
 
-MEEPS SECURITY is written in Python 3 using the PyGame and PyGame libraries.
+MEEPS SECURITY is written in Python 3 using the `PyGame` and `PyGame GUI` libraries.
 
 ## Gameplay
 
