@@ -3,7 +3,7 @@ import pygame_gui
 import random
 import sqlite3
 import init
-import elements
+import elements.main_loop as main_loop
 from sqlite import ticket_ids, threats
 
 
@@ -72,7 +72,7 @@ def meeps_game_loop(database):
 
 
         if ticket_timer >= randomized_ticket_entry and not ticket_presence and caller_popup_window is None:
-            caller_popup_window, accept_button, popup_window_countdown = elements.caller_popup_window_func(manager)
+            caller_popup_window, accept_button, popup_window_countdown = main_loop.caller_popup_window_func(manager)
             popup_window_close_timer = 0
 
         if not ticket_ids_list and not ticket_presence:
@@ -112,7 +112,7 @@ def meeps_game_loop(database):
                             ticket_no += 1
 
                             ticket_entry_tbox.set_text(current_ticket)
-                            caller_profile_image = elements.caller_profile_image_func(manager, caller_picture)
+                            caller_profile_image = main_loop.caller_profile_image_func(manager, caller_picture)
 
                             caller_profile_text = f"Name: {caller_name}\nOrganization: {caller_org}\nEmail: {caller_email}\nContact: {caller_contact}"
                             caller_profile_tbox.set_text(caller_profile_text)
@@ -162,11 +162,11 @@ def shift_report(total_score, total_tickets, missed_calls,
         assessment_result = "FAIL"
     
     manager.clear_and_reset()
-    shift_report_tbox = elements.shift_report_tbox_func(manager, total_score, total_tickets, 
+    shift_report_tbox = main_loop.shift_report_tbox_func(manager, total_score, total_tickets, 
                                                         missed_calls, missed_tickets, 
                                                         assessment_result)
-    end_shift_title_label = elements.end_shift_title_label_func(manager)
-    end_shift_button = elements.end_shift_button_func(manager)
+    end_shift_title_label = main_loop.end_shift_title_label_func(manager)
+    end_shift_button = main_loop.end_shift_button_func(manager)
 
     running = True
     while running:

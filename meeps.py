@@ -1,7 +1,7 @@
 import pygame
 import pygame_gui
 import init
-import elements
+import elements.main_menu as main_menu
 from game_loop import meeps_game_loop
 from ticket_creation import ticket_creation
 
@@ -12,17 +12,17 @@ if __name__ == "__main__":
     window_surface, clock, background = init.pygame_init()
     manager = init.pygame_gui_init()
 
-    start_button = elements.start_button_func(manager)
-    ticket_creation_button = elements.ticket_creation_button_func(manager)
-    quit_button = elements.quit_button_func(manager)
+    start_button = main_menu.start_button_func(manager)
+    ticket_creation_button = main_menu.ticket_creation_button_func(manager)
+    quit_button = main_menu.quit_button_func(manager)
 
     title_image_path = "Assets/title.png"
-    main_title_image = elements.main_title_image_func(manager, title_image_path)
-    main_title_slogan = elements.main_title_slogan_label_func(manager)
+    main_title_image = main_menu.main_title_image_func(manager, title_image_path)
+    main_title_slogan = main_menu.main_title_slogan_label_func(manager)
 
     current_version = "MS v2024.0.1"
-    version_label = elements.version_label_func(manager, current_version)
-    github_label = elements.github_label_func(manager)
+    version_label = main_menu.version_label_func(manager, current_version)
+    github_label = main_menu.github_label_func(manager)
 
 
     running = True

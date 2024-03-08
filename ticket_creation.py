@@ -3,7 +3,7 @@ import pygame_gui
 import random
 import sqlite3
 import init
-import elements
+import elements.main_loop as main_loop
 
 
 def ticket_creation(database):
@@ -14,7 +14,7 @@ def ticket_creation(database):
     window_surface, clock, background = init.pygame_init()
     manager = init.pygame_gui_init()
 
-    back_button = elements.back_button_func(manager)
+    back_button = main_loop.back_button_func(manager)
 
     running = True
     while running:
