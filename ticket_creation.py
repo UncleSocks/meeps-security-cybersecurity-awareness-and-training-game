@@ -7,6 +7,15 @@ import sqlite
 import elements.ticket_loop as ticket_loop
 
 
+def ticket_init():
+
+    selected_threat = None
+    ticket_title = None
+    ticket_entry = None
+
+    return selected_threat, ticket_title, ticket_entry
+
+
 def ticket_creation(database):
 
     connect = sqlite3.connect(database, timeout=10)
@@ -22,7 +31,8 @@ def ticket_creation(database):
     ticket_label, ticket_text_entry = ticket_loop.ticket_text_entry_func(manager)
     create_button, threat_entry_title_tbox, threat_entry_slist = ticket_loop.threat_entry_slist_func(manager, threat_list)
     threat_description_tbox = ticket_loop.threat_description_tbox_func(manager)
-
+    
+    selected_threat, ticket_title, ticket_entry = ticket_init()
 
     running = True
     while running:
@@ -46,8 +56,23 @@ def ticket_creation(database):
 
             ticket_title = title_text_entry.get_text()
             ticket_entry = ticket_text_entry.get_text()
-            
-            
+
+            if selected_threat is not None and ticket_title is not None and ticket_entry is not None:
+                if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                    if event.ui_element == create_button:
+
+                        cursor.execute('SELECT MAX(id) FROM tickets')
+                        last_id = cursor.fetchone()[0]
+                        new_id = last_id + 1
+
+                        new_ticket = (new_id, ticket_title, ticket_entry, selected_threat, 1)
+                        cursor.execute('INSERT INTO tickets VALUES (?, ?, ?, ?, ?)', new_ticket)
+                        connect.commit()
+
+                        title_text_entry.set_text("")
+                        ticket_text_entry.set_text("")
+                        threat_description_tbox.set_text("")
+                        selected_threat, ticket_title, ticket_entry = ticket_init()
         
             manager.process_events(event)
 
