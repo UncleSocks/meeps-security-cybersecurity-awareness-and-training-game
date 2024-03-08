@@ -28,11 +28,11 @@ def main_sla_timer_label_func(manager):
     return main_sla_timer_label
 
 
-def caller_profile_tbox_func(manager, caller_profile):
+def caller_profile_tbox_func(manager):
 
     caller_profile_tbox_rect = pygame.Rect(120, 180, 195, 100)
     caller_profile_tbox = pygame_gui.elements.UITextBox(relative_rect=caller_profile_tbox_rect,
-                                                        html_text=caller_profile,
+                                                        html_text="NO CALLER",
                                                         manager=manager)
     return caller_profile_tbox
 
@@ -87,19 +87,19 @@ def threat_description_tbox_func(manager):
     return threat_description_tbox
 
 
-def ticket_title_tbox_func(manager, current_title):
+def ticket_title_tbox_func(manager):
 
     ticket_title_tbox_rect = pygame.Rect(325, 5, 460, 40)
     ticket_title_tbox = pygame_gui.elements.UITextBox(relative_rect=ticket_title_tbox_rect, 
-                                                       html_text=current_title, manager=manager)
+                                                       html_text="", manager=manager)
     return ticket_title_tbox
 
 
-def ticket_entry_tbox_func(manager, current_ticket):
+def ticket_entry_tbox_func(manager):
 
     ticket_entry_tbox_rect = pygame.Rect(325, 45, 460, 235)
     ticket_entry_tbox = pygame_gui.elements.UITextBox(relative_rect=ticket_entry_tbox_rect, 
-                                                       html_text=current_ticket, manager=manager)
+                                                       html_text="AWAITING TICKET...", manager=manager)
     return ticket_entry_tbox
 
 

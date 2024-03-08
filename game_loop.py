@@ -49,10 +49,10 @@ def meeps_game_loop(database):
                 
                 if event.ui_element == submit_button and ticket_presence:
 
-                    ticket_title_tbox.kill()
-                    ticket_entry_tbox.kill()
+                    ticket_title_tbox.set_text("")
+                    ticket_entry_tbox.set_text("AWAITING TICKET...")
                     caller_profile_image.kill()
-                    caller_profile_tbox.kill()
+                    caller_profile_tbox.set_text("NO CALLER")
                     ticket_presence = False
                     ticket_timer = 0
 
@@ -107,14 +107,15 @@ def meeps_game_loop(database):
                             selected_threat = None
 
                             ticket_title_text = f"<b>ID#{ticket_no} | {title}</b>"
-                            ticket_title_tbox = elements.ticket_title_tbox_func(manager, ticket_title_text)
+                            ticket_title_tbox.set_text(ticket_title_text)
                             ticket_no += 1
 
-                            ticket_entry_tbox = elements.ticket_entry_tbox_func(manager, current_ticket)
+                            ticket_entry_tbox.set_text(current_ticket)
+                            #ticket_entry_tbox = elements.ticket_entry_tbox_func(manager, current_ticket)
                             caller_profile_image = elements.caller_profile_image_func(manager, caller_picture)
 
                             caller_profile_text = f"Name: {caller_name}\nOrganization: {caller_org}\nEmail: {caller_email}\nContact: {caller_contact}"
-                            caller_profile_tbox = elements.caller_profile_tbox_func(manager, caller_profile_text)
+                            caller_profile_tbox.set_text(caller_profile_text)
                             
                             ticket_presence = True
                             ticket_ids_list.remove(selected_id)
@@ -135,10 +136,10 @@ def meeps_game_loop(database):
 
                 if main_sla_countdown_difference <= 0:
                     
-                    ticket_title_tbox.kill()
-                    ticket_entry_tbox.kill()
+                    ticket_title_tbox.set_text("")
+                    ticket_entry_tbox.set_text("AWAITING TICKET...")
                     caller_profile_image.kill()
-                    caller_profile_tbox.kill()
+                    caller_profile_tbox.set_text("NO CALLER")
                     ticket_presence = False
                     ticket_timer = 0
                     missed_tickets += 1
