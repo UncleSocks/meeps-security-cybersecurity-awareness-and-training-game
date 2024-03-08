@@ -12,8 +12,9 @@ def ticket_init():
     selected_threat = None
     ticket_title = None
     ticket_entry = None
+    ticket_confirm_window = None
 
-    return selected_threat, ticket_title, ticket_entry
+    return selected_threat, ticket_title, ticket_entry, ticket_confirm_window
 
 
 def ticket_creation(database):
@@ -32,7 +33,7 @@ def ticket_creation(database):
     create_button, threat_entry_title_tbox, threat_entry_slist = ticket_loop.threat_entry_slist_func(manager, threat_list)
     threat_description_tbox = ticket_loop.threat_description_tbox_func(manager)
     
-    selected_threat, ticket_title, ticket_entry = ticket_init()
+    selected_threat, ticket_title, ticket_entry, ticket_confirm_window = ticket_init()
 
     running = True
     while running:
@@ -57,7 +58,7 @@ def ticket_creation(database):
             ticket_title = title_text_entry.get_text()
             ticket_entry = ticket_text_entry.get_text()
 
-            if selected_threat is not None and ticket_title is not None and ticket_entry is not None:
+            if selected_threat is not None and ticket_title is not None and ticket_entry is not None and ticket_confirm_window is None:
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == create_button:
 
@@ -69,13 +70,31 @@ def ticket_creation(database):
                         cursor.execute('INSERT INTO tickets VALUES (?, ?, ?, ?, ?)', new_ticket)
                         connect.commit()
 
-                        title_text_entry.set_text("")
-                        ticket_text_entry.set_text("")
-                        threat_description_tbox.set_text("")
-                        selected_threat, ticket_title, ticket_entry = ticket_init()
+                        ticket_confirm_window, ticket_confirm_close_button = ticket_loop.ticket_confirm_window_func(manager)
         
             manager.process_events(event)
 
+        manager.update(time_delta)
+        window_surface.blit(background, (0, 0))
+
+        if ticket_confirm_window:
+            ticket_confirm_window.show()
+            manager.draw_ui(window_surface)
+            
+            for event in pygame.event.get():
+                if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                    if event.ui_element == ticket_confirm_close_button:
+
+                        title_text_entry.set_text("")
+                        ticket_text_entry.set_text("")
+                        threat_description_tbox.set_text("")
+
+                        ticket_confirm_window.hide()
+                        selected_threat, ticket_title, ticket_entry, ticket_confirm_window = ticket_init()
+
+                manager.process_events(event)
+
+                    
         manager.update(time_delta)
 
         window_surface.blit(background, (0, 0))

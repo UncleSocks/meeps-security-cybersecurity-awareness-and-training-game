@@ -63,3 +63,25 @@ def threat_description_tbox_func(manager):
     threat_description_tbox = pygame_gui.elements.UITextBox(relative_rect=threat_description_tbox_rect,
                                                            html_text="SELECT A THREAT", manager=manager)
     return threat_description_tbox
+
+
+def ticket_confirm_window_func(manager):
+    
+    ticket_confirm_window_rect = pygame.Rect(0, 0, 400, 200)
+    ticket_confirm_window = pygame_gui.elements.UIWindow(rect=ticket_confirm_window_rect,
+                                                 window_display_title="MEEPS SECURITY: New Ticket",
+                                                 manager=manager)
+    
+    ticket_confirm_window_label_rect = pygame.Rect(15, -60, 300, 200)
+    ticket_confirm_window_label = pygame_gui.elements.UILabel(relative_rect=ticket_confirm_window_label_rect, 
+                                                            text="TTCKET SUCCESSFULLY CREATED", 
+                                                            manager=manager,
+                                                            container=ticket_confirm_window)
+    
+    ticket_confirm_close_button_rect = pygame.Rect(0, 0, 200, 40)
+    ticket_confirm_close_button_rect.bottomleft = (15, -10)
+    ticket_confirm_close_button = pygame_gui.elements.UIButton(relative_rect=ticket_confirm_close_button_rect, 
+                                                                     text="ANSWER", manager=manager,container=ticket_confirm_window,
+                                                                     anchors={'left':'left', 'bottom':'bottom'})
+    
+    return ticket_confirm_window, ticket_confirm_close_button
