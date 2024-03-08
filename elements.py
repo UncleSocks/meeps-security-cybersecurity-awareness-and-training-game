@@ -131,11 +131,11 @@ def caller_popup_window_func(manager):
     return caller_popup_window, caller_popup_window_answer_button, caller_popup_window_sla_timer_label
 
 
-def shift_report_tbox_func(manager, score, ticket_count, missed_calls, missed_tickets):
+def shift_report_tbox_func(manager, score, ticket_count, missed_calls, missed_tickets, assessment_result):
     
-    shift_report_tbox_rect = pygame.Rect(0, 0, 300, 170)
+    shift_report_tbox_rect = pygame.Rect(0, 0, 300, 230)
     shift_report_tbox = pygame_gui.elements.UITextBox(relative_rect=shift_report_tbox_rect,
-                                                           html_text=f"<b>Employee No:</b> #1361\n<b>Title:</b> L1 SOC Analyst\n<b>Total Tickets:</b> {ticket_count}\n<b>Accurate Ticket Resolution:</b> {score}\n<b>Missed Calls:</b> {missed_calls}\n<b>Missed Tickets:</b> {missed_tickets}", 
+                                                           html_text=f"Employee No: #1361\nTitle: L1 SOC Analyst\nTotal Tickets: {ticket_count}\nAccurate Ticket Resolution: {score}\nMissed Calls: {missed_calls}\nMissed Tickets: {missed_tickets}\n\n<b>ASSESSMENT RESULT:<b> {assessment_result}", 
                                                            manager=manager,
                                                            anchors={'center':'center'})
     return shift_report_tbox
@@ -143,7 +143,7 @@ def shift_report_tbox_func(manager, score, ticket_count, missed_calls, missed_ti
 
 def end_shift_button_func(manager):
 
-    end_shift_button_rect = pygame.Rect(0, -230, 300, 40)
+    end_shift_button_rect = pygame.Rect(0, -205, 300, 40)
     end_shift_button = pygame_gui.elements.UIButton(relative_rect=end_shift_button_rect,
                                                  text="END SHIFT", manager=manager,
                                                  anchors={'centerx':'centerx', 'bottom':'bottom'})
@@ -152,7 +152,7 @@ def end_shift_button_func(manager):
 
 def end_shift_title_label_func(manager):
 
-    end_shift_title_label_rect = pygame.Rect(0, 200, 100, 60)
+    end_shift_title_label_rect = pygame.Rect(0, 170, 100, 60)
     end_shift_title_label = pygame_gui.elements.UILabel(relative_rect=end_shift_title_label_rect,
                                                        text="SHIFT REPORT", manager=manager,
                                                        anchors={'centerx':'centerx'})

@@ -47,7 +47,7 @@ def meeps_game_loop(database):
                 if event.ui_element == back_button:
                     running = False
                 
-                if event.ui_element == submit_button and ticket_presence:
+                if event.ui_element == submit_button and ticket_presence and selected_threat is not None:
 
                     ticket_title_tbox.set_text("")
                     ticket_entry_tbox.set_text("AWAITING TICKET...")
@@ -59,10 +59,11 @@ def meeps_game_loop(database):
                     main_sla_timer_label.set_text("SLA: ")
 
                     if selected_threat == answer:
-                        print("Correct")
+                        print(f"Selected: {selected_threat}, Correct: {answer}, Answer: Correct")
                         total_score += 1
                     else:
-                        print("Wrong!")
+                        print(f"Selected: {selected_threat}, Correct: {answer}, Answer: Wrong")
+                    
                     
             manager.process_events(event)
         
@@ -154,9 +155,16 @@ def meeps_game_loop(database):
 def shift_report(total_score, total_tickets, missed_calls,
                     missed_tickets, window_surface, clock, background, manager):
     
+    assessment_percentage = (total_score / total_tickets) * 100
+    if assessment_percentage >= 80:
+        assessment_result = "PASS"
+    else:
+        assessment_result = "FAIL"
+    
     manager.clear_and_reset()
     shift_report_tbox = elements.shift_report_tbox_func(manager, total_score, total_tickets, 
-                                                        missed_calls, missed_tickets)
+                                                        missed_calls, missed_tickets, 
+                                                        assessment_result)
     end_shift_title_label = elements.end_shift_title_label_func(manager)
     end_shift_button = elements.end_shift_button_func(manager)
 
