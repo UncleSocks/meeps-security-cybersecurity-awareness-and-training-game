@@ -72,16 +72,17 @@ def ticket_confirm_window_func(manager):
                                                  window_display_title="MEEPS SECURITY: New Ticket",
                                                  manager=manager)
     
-    ticket_confirm_window_label_rect = pygame.Rect(15, -60, 300, 200)
+    ticket_confirm_window_label_rect = pygame.Rect(0, -10, 300, 200)
     ticket_confirm_window_label = pygame_gui.elements.UILabel(relative_rect=ticket_confirm_window_label_rect, 
                                                             text="TTCKET SUCCESSFULLY CREATED", 
                                                             manager=manager,
-                                                            container=ticket_confirm_window)
+                                                            container=ticket_confirm_window,
+                                                            anchors={'center':'center'})
     
-    ticket_confirm_close_button_rect = pygame.Rect(0, 0, 200, 40)
-    ticket_confirm_close_button_rect.bottomleft = (15, -10)
+    ticket_confirm_close_button_rect = pygame.Rect(10, 10, 200, 40)
+    ticket_confirm_close_button_rect.bottomright = (285, -10)
     ticket_confirm_close_button = pygame_gui.elements.UIButton(relative_rect=ticket_confirm_close_button_rect, 
-                                                                     text="ANSWER", manager=manager,container=ticket_confirm_window,
+                                                                     text="OK", manager=manager,container=ticket_confirm_window,
                                                                      anchors={'left':'left', 'bottom':'bottom'})
     
     return ticket_confirm_window, ticket_confirm_close_button

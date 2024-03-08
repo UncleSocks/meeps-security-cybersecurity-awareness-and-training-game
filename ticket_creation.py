@@ -87,12 +87,19 @@ def ticket_creation(database):
 
                         title_text_entry.set_text("")
                         ticket_text_entry.set_text("")
-                        threat_description_tbox.set_text("")
+                        threat_description_tbox.set_text("SELECT A THREAT")
 
                         ticket_confirm_window.hide()
                         selected_threat, ticket_title, ticket_entry, ticket_confirm_window = ticket_init()
+                    else:
+                        title_text_entry.set_text("")
+                        ticket_text_entry.set_text("")
+                        threat_description_tbox.set_text("SELECT A THREAT")
+                        selected_threat, ticket_title, ticket_entry, ticket_confirm_window = ticket_init()
 
                 manager.process_events(event)
+
+
 
                     
         manager.update(time_delta)
