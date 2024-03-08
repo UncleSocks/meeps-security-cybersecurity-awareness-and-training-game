@@ -3,7 +3,8 @@ import pygame_gui
 import random
 import sqlite3
 import init
-import elements.main_loop as main_loop
+import sqlite
+import elements.ticket_loop as ticket_loop
 
 
 def ticket_creation(database):
@@ -14,14 +15,21 @@ def ticket_creation(database):
     window_surface, clock, background = init.pygame_init()
     manager = init.pygame_gui_init()
 
-    back_button = main_loop.back_button_func(manager)
+    threat_list = sqlite.threats(cursor)
+
+    back_button = ticket_loop.back_button_func(manager)
+    title_label, title_text_entry = ticket_loop.title_text_entry_func(manager)
+    ticket_label, ticket_text_entry = ticket_loop.ticket_text_entry_func(manager)
+    create_button, threat_entry_title_tbox, threat_entry_slist = ticket_loop.threat_entry_slist_func(manager, threat_list)
+    threat_description_tbox = ticket_loop.threat_description_tbox_func(manager)
+
 
     running = True
     while running:
         time_delta = clock.tick(60) / 1000.0
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == back_button:
