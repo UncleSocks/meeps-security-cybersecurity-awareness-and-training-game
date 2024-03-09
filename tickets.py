@@ -28,8 +28,11 @@ def ticket_management(database):
     id_list, ticket_list = sqlite.tickets(cursor)
 
     back_button = ticket_loop.back_button_func(manager)
-    create_button = ticket_loop.create_ticket_button_func(manager)
-    delete_button, ticket_entry_title_tbox = ticket_loop.ticket_entry_slist_misc_func(manager)
+    ticket_manager_image = ticket_loop.ticket_manager_image_func(manager, "Assets/ticket_mngr.png")
+    ticket_information_label = ticket_loop.ticket_information_label_func(manager)
+
+    create_button, delete_button = ticket_loop.create_ticket_button_func(manager)
+    ticket_entry_title_tbox = ticket_loop.ticket_entry_slist_misc_func(manager)
     ticket_entry_slist = ticket_loop.ticket_entry_slist_func(manager, ticket_list)
     selected_ticket_title_tbox, selected_ticket_description_tbox = ticket_loop.selected_ticket_tbox_func(manager)
 
@@ -60,7 +63,7 @@ def ticket_management(database):
                     
                     cursor.execute('SELECT title, entry, caller_id FROM tickets WHERE id=?', [selected_ticket_id])
                     title, entry, caller_id = cursor.fetchone()
-                    selected_ticket_title_tbox.set_text(f"{title}")
+                    selected_ticket_title_tbox.set_text(f"<b>{title}</b>")
                     selected_ticket_description_tbox.set_text(f"{entry}")
 
             if selected_ticket_id is not None:
@@ -93,6 +96,9 @@ def ticket_creation(database):
     manager = init.pygame_gui_init()
 
     threat_list = sqlite.threats(cursor)
+
+    new_ticket_image = ticket_loop.new_ticket_image_func(manager, "Assets/new_ticket.png")
+    bar_image = ticket_loop.bar_image_func(manager, "Assets/bar.png")
 
     back_button = ticket_loop.back_button_func(manager)
     title_label, title_text_entry = ticket_loop.title_text_entry_func(manager)
