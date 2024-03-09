@@ -93,7 +93,7 @@ def new_ticket_image_func(manager, image_path):
 
 def bar_image_func(manager, image_path):
 
-    bar_image_rect = pygame.Rect(300, 50, 450, 1)
+    bar_image_rect = pygame.Rect(300, 50, 450, 10)
     bar_image_load = pygame.image.load(image_path)
     bar_image = pygame_gui.elements.UIImage(relative_rect=bar_image_rect,
                                                        image_surface=bar_image_load,

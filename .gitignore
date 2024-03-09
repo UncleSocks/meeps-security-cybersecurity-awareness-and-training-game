@@ -8,3 +8,5 @@ elements/__pycache__/main_menu.cpython-310.pyc
 __pycache__/tickets.cpython-310.pyc
 __pycache__/sqlite.cpython-310.pyc
 elements/__pycache__/main_loop.cpython-310.pyc
+elements/__pycache__/threats_loop.cpython-310.pyc
+__pycache__/threats.cpython-310.pyc

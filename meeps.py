@@ -4,6 +4,7 @@ import init
 import elements.main_menu as main_menu
 from game_loop import meeps_game_loop
 from tickets import ticket_management
+from threats import threat_database_management_func
 
 
 if __name__ == "__main__":
@@ -13,7 +14,8 @@ if __name__ == "__main__":
     manager = init.pygame_gui_init()
 
     start_button = main_menu.start_button_func(manager)
-    ticket_creation_button = main_menu.ticket_creation_button_func(manager)
+    ticket_management_button = main_menu.ticket_management_button_func(manager)
+    threat_entries_button = main_menu.threat_entries_button_func(manager)
     quit_button = main_menu.quit_button_func(manager)
 
     title_image_path = "Assets/title.png"
@@ -36,11 +38,14 @@ if __name__ == "__main__":
                 if event.ui_element == start_button:
                     meeps_game_loop(database)
 
-                if event.ui_element == ticket_creation_button:
-                    print("Under Development")
+                elif event.ui_element == ticket_management_button:
                     ticket_management(database)
 
-                if event.ui_element == quit_button:
+                elif event.ui_element == threat_entries_button:
+                    print("Under Development")
+                    threat_database_management_func(database)
+
+                elif event.ui_element == quit_button:
                     running = False
 
             manager.process_events(event)

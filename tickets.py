@@ -1,6 +1,5 @@
 import pygame
 import pygame_gui
-import random
 import sqlite3
 import init
 import sqlite
