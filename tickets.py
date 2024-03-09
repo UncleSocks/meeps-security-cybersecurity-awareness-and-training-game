@@ -101,8 +101,8 @@ def ticket_creation(database):
     bar_image = ticket_loop.bar_image_func(manager, "Assets/bar.png")
 
     back_button = ticket_loop.back_button_func(manager)
-    title_label, title_text_entry = ticket_loop.title_text_entry_func(manager)
-    ticket_label, ticket_text_entry = ticket_loop.ticket_text_entry_func(manager)
+    title_text_entry = ticket_loop.title_text_entry_func(manager)
+    ticket_text_entry = ticket_loop.ticket_text_entry_func(manager)
     create_button, threat_entry_title_tbox, threat_entry_slist = ticket_loop.threat_entry_slist_func(manager, threat_list)
     threat_description_tbox = ticket_loop.threat_description_tbox_func(manager)
     
@@ -131,7 +131,7 @@ def ticket_creation(database):
 
             ticket_title = title_text_entry.get_text()
             ticket_entry = ticket_text_entry.get_text()
-
+            
             if selected_threat is not None and ticket_title is not None and ticket_entry is not None and ticket_confirm_window is None:
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == create_button:

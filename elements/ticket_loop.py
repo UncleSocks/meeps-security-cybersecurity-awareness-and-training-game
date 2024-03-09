@@ -103,27 +103,23 @@ def bar_image_func(manager, image_path):
 
 
 def title_text_entry_func(manager):
-
-    title_label_rect = pygame.Rect(10, 60, 60, 30)
-    title_label = pygame_gui.elements.UILabel(relative_rect=title_label_rect,
-                                              text="TITLE", manager=manager)
     
     title_text_entry_rect = pygame.Rect(15, 85, 765, 30)
     title_text_entry = pygame_gui.elements.UITextEntryBox(relative_rect=title_text_entry_rect,
+                                                          placeholder_text="Enter Ticket Title",
+                                                          initial_text="Enter Ticket Title",
                                                           manager=manager)
-    return title_label, title_text_entry
+    return title_text_entry
 
 
 def ticket_text_entry_func(manager):
 
-    ticket_label_rect = pygame.Rect(5, 125, 120, 30)
-    ticket_label = pygame_gui.elements.UILabel(relative_rect=ticket_label_rect,
-                                               text="DESCRIPTION", manager=manager)
-
-    ticket_text_entry_rect = pygame.Rect(15, 150, 765, 200)
+    ticket_text_entry_rect = pygame.Rect(15, 120, 765, 240)
     ticket_text_entry = pygame_gui.elements.UITextEntryBox(relative_rect=ticket_text_entry_rect,
+                                                           placeholder_text="Enter Ticket Description",
+                                                           initial_text="Enter Ticket Description",
                                                            manager=manager)
-    return ticket_label, ticket_text_entry
+    return ticket_text_entry
 
 
 def threat_entry_slist_func(manager, threat_list):
