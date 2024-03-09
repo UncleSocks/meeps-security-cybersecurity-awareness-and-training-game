@@ -83,7 +83,7 @@ def selected_ticket_tbox_func(manager):
 
 def new_ticket_image_func(manager, image_path):
 
-    new_ticket_image_rect = pygame.Rect(50, 10, 200, 20)
+    new_ticket_image_rect = pygame.Rect(50, 5, 250, 75)
     new_ticket_image_load = pygame.image.load(image_path)
     new_ticket_image = pygame_gui.elements.UIImage(relative_rect=new_ticket_image_rect,
                                                        image_surface=new_ticket_image_load,
@@ -93,7 +93,7 @@ def new_ticket_image_func(manager, image_path):
 
 def bar_image_func(manager, image_path):
 
-    bar_image_rect = pygame.Rect(255, 15, 520, 10)
+    bar_image_rect = pygame.Rect(300, 50, 450, 1)
     bar_image_load = pygame.image.load(image_path)
     bar_image = pygame_gui.elements.UIImage(relative_rect=bar_image_rect,
                                                        image_surface=bar_image_load,
@@ -106,8 +106,8 @@ def title_text_entry_func(manager):
     
     title_text_entry_rect = pygame.Rect(15, 85, 765, 30)
     title_text_entry = pygame_gui.elements.UITextEntryBox(relative_rect=title_text_entry_rect,
-                                                          placeholder_text="Enter Ticket Title",
-                                                          initial_text="Enter Ticket Title",
+                                                          placeholder_text="ENTER TICKET TITLE",
+                                                          initial_text="ENTER TICKET TITLE",
                                                           manager=manager)
     return title_text_entry
 
@@ -116,8 +116,8 @@ def ticket_text_entry_func(manager):
 
     ticket_text_entry_rect = pygame.Rect(15, 120, 765, 240)
     ticket_text_entry = pygame_gui.elements.UITextEntryBox(relative_rect=ticket_text_entry_rect,
-                                                           placeholder_text="Enter Ticket Description",
-                                                           initial_text="Enter Ticket Description",
+                                                           placeholder_text="ENTER TICKET DESCRIPTION",
+                                                           initial_text="ENTER TICKET DESCRIPTION",
                                                            manager=manager)
     return ticket_text_entry
 
