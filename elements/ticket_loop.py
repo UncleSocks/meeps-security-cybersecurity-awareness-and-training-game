@@ -94,7 +94,7 @@ def threat_entry_slist_func(manager, threat_list):
 
     threat_entry_title_tbox_rect = pygame.Rect(65, -350, 300, 30)
     threat_entry_title_tbox = pygame_gui.elements.UITextBox(relative_rect=threat_entry_title_tbox_rect,
-                                                            html_text="THREAT ENTRIES", manager=manager,
+                                                            html_text="TICKET RESOLUTION", manager=manager,
                                                             anchors = {'bottom':'bottom'})
 
     threat_entry_slist_rect = pygame.Rect(0, 0, 300, 270)
