@@ -20,9 +20,9 @@ MEEPS SECURITY is written in Python 3 using the `PyGame` and `PyGame GUI` librar
 
 The main menu has three buttons: START SHIFT, CREATE TICKETS, and LOG OFF. To play MEEPS SECURITY, select the "START SHIFT" button. This will take you to the main game loop, where you play as an L1 SOC analyst. 
 
-MEEPS SECURITY also allows players to create their own custom tickets by selecting the "CREATE TICKET" button.
+MEEPS SECURITY also allows players to manage the tickets, including creating custom tickets by clicking the "MANAGE TICKET" button. At the time of wiring, threat management is still under development.
 
-![image](https://github.com/UncleSocks/meeps-security-cybersecurity-awareness-and-training-game/assets/79778613/2510b5d9-9faf-46c3-b347-392ac0107e94)
+![image](https://github.com/UncleSocks/meeps-security-cybersecurity-awareness-and-training-game/assets/79778613/d449ad9d-8346-4fd8-b552-7c1ab7833ef0)
 
 The "LOG OFF" button exits the game -- you can also click on the close window button.
 
@@ -52,17 +52,19 @@ Click the "END SHIFT" button to end the game.
 Currently, MEEPS SECURITY does not save your progress. It selects a random ticket from the SQLite database.
 
 
-### Creating Tickets
+### Managing Tickets
 
-MEEPS SECURITY also allows you to create your own tickets by selecting the "CREATE TICKET" on the main menu. It aims to allow users to add their own scenarios to train SOC analysts -- or for those who want to expand the game.
+MEEPS SECURITY also allows you to manage the tickets. Users can view, delete, or even create custom tickets to expand the game further. Select a ticket title to view its details. To delete a ticket, click the "-" button. To create a ticket, click the "+" button to take you to the ticket creation page.
 
-![image](https://github.com/UncleSocks/meeps-security-cybersecurity-awareness-and-training-game/assets/79778613/a4d91d64-a262-4daa-a16e-fe8f2dc736b3)
+**Note:** Be careful when deleting a ticket. Currently, it does not provide a confirmation mechanism.
+
+![image](https://github.com/UncleSocks/meeps-security-cybersecurity-awareness-and-training-game/assets/79778613/da17fdf0-15d8-4917-8f17-c0c8da9741f8)
 
 Enter the ticket title and description, then choose the threat (answer) relating to the ticket. Click the "CREATE TICKET" button to add the custom ticket. MEEP SECURITY automatically correlates the Guest account to all custom tickets.
 
-**Note:** You can definitely manually create new accounts and correlate them to a certain ticket.
+**Note:** You can manually create new accounts and correlate them to a certain ticket.
 
-![image](https://github.com/UncleSocks/meeps-security-cybersecurity-awareness-and-training-game/assets/79778613/b72fbffc-c1b6-44ac-8b23-67bd70256f6d)
+![image](https://github.com/UncleSocks/meeps-security-cybersecurity-awareness-and-training-game/assets/79778613/6358106d-63f7-4106-b264-01f97c89a3ea)
 
 A confirmation pop-up window will notify the player that the new ticket has been successfully inserted into the database.
 
