@@ -3,7 +3,7 @@ import pygame_gui
 import init
 import elements.main_menu as main_menu
 from game_loop import meeps_game_loop
-from ticket_creation import ticket_creation
+from tickets import ticket_management
 
 
 if __name__ == "__main__":
@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
                 if event.ui_element == ticket_creation_button:
                     print("Under Development")
-                    ticket_creation(database)
+                    ticket_management(database)
 
                 if event.ui_element == quit_button:
                     running = False

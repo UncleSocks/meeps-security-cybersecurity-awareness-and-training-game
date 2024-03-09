@@ -17,6 +17,61 @@ def ticket_init():
     return selected_threat, ticket_title, ticket_entry, ticket_confirm_window
 
 
+def ticket_management(database):
+
+    connect = sqlite3.connect(database, timeout=10)
+    cursor = connect.cursor()
+
+    window_surface, clock, background = init.pygame_init()
+    manager = init.pygame_gui_init()
+
+    id_list, ticket_list = sqlite.tickets(cursor)
+
+    back_button = ticket_loop.back_button_func(manager)
+    create_button = ticket_loop.create_ticket_button_func(manager)
+    delete_button, ticket_entry_title_tbox = ticket_loop.ticket_entry_slist_misc_func(manager)
+    ticket_entry_slist = ticket_loop.ticket_entry_slist_func(manager, ticket_list)
+    selected_ticket_title_tbox, selected_ticket_description_tbox = ticket_loop.selected_ticket_tbox_func(manager)
+
+    running = True
+    while running:
+        time_delta = clock.tick(60) / 1000.0
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == back_button:
+                    running = False
+                
+                if event.ui_element == create_button:
+                    id_list, ticket_list = ticket_creation(database)
+                    ticket_entry_slist.kill()
+                    ticket_entry_slist = ticket_loop.ticket_entry_slist_func(manager, ticket_list)
+
+            if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
+                if event.ui_element == ticket_entry_slist:
+                    selected_ticket = event.text
+                    
+                    id_index_find = ticket_list.index(selected_ticket)
+                    selected_ticket_id = id_list[id_index_find]
+                    
+                    cursor.execute('SELECT title, entry, caller_id FROM tickets WHERE id=?', [selected_ticket_id])
+                    title, entry, caller_id = cursor.fetchone()
+                    selected_ticket_title_tbox.set_text(f"{title}")
+                    selected_ticket_description_tbox.set_text(f"{entry}")
+
+
+            manager.process_events(event)
+
+        manager.update(time_delta)
+
+        window_surface.blit(background, (0, 0))
+        manager.draw_ui(window_surface)
+        pygame.display.update()
+
+
+
 def ticket_creation(database):
 
     connect = sqlite3.connect(database, timeout=10)
@@ -44,7 +99,8 @@ def ticket_creation(database):
 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == back_button:
-                   running = False
+                   updated_id_list, updated_ticket_list = sqlite.tickets(cursor)
+                   return updated_id_list, updated_ticket_list
 
             if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
                 if event.ui_element == threat_entry_slist:
@@ -91,17 +147,10 @@ def ticket_creation(database):
 
                         ticket_confirm_window.hide()
                         selected_threat, ticket_title, ticket_entry, ticket_confirm_window = ticket_init()
-                    else:
-                        title_text_entry.set_text("")
-                        ticket_text_entry.set_text("")
-                        threat_description_tbox.set_text("SELECT A THREAT")
-                        selected_threat, ticket_title, ticket_entry, ticket_confirm_window = ticket_init()
 
                 manager.process_events(event)
 
 
-
-                    
         manager.update(time_delta)
 
         window_surface.blit(background, (0, 0))

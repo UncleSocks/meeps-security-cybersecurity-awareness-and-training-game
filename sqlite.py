@@ -16,4 +16,13 @@ def threats(cursor):
     threat_list = [threat_list_result[0] for threat_list_result in threat_list_results]
 
     return threat_list
-    
+
+
+def tickets(cursor):
+
+    cursor.execute('SELECT id, title FROM tickets')
+    ticket_list_results = cursor.fetchall()
+    id_list = [ticket_list_result[0] for ticket_list_result in ticket_list_results]
+    ticket_list = [ticket_list_result[1] for ticket_list_result in ticket_list_results]
+
+    return id_list, ticket_list

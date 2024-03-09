@@ -36,7 +36,7 @@ def ticket_creation_button_func(manager):
 
     ticket_creation_button_rect = pygame.Rect(0, -255, 300, 40)
     ticket_creation_button = pygame_gui.elements.UIButton(relative_rect=ticket_creation_button_rect,
-                                                 text="CREATE TICKET", manager=manager,
+                                                 text="MANAGE TICKETS", manager=manager,
                                                  anchors={'centerx':'centerx', 'bottom':'bottom'})
     return ticket_creation_button
 
