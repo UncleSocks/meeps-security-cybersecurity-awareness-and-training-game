@@ -33,6 +33,8 @@ def ticket_management(database):
     ticket_entry_slist = ticket_loop.ticket_entry_slist_func(manager, ticket_list)
     selected_ticket_title_tbox, selected_ticket_description_tbox = ticket_loop.selected_ticket_tbox_func(manager)
 
+    selected_ticket_id = None
+
     running = True
     while running:
         time_delta = clock.tick(60) / 1000.0
@@ -60,6 +62,16 @@ def ticket_management(database):
                     title, entry, caller_id = cursor.fetchone()
                     selected_ticket_title_tbox.set_text(f"{title}")
                     selected_ticket_description_tbox.set_text(f"{entry}")
+
+            if selected_ticket_id is not None:
+                if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                    if event.ui_element == delete_button:
+                        cursor.execute('DELETE FROM tickets WHERE id=?', [selected_ticket_id])
+                        connect.commit()
+
+                        id_list, ticket_list = sqlite.tickets(cursor)
+                        ticket_entry_slist.kill()
+                        ticket_entry_slist = ticket_loop.ticket_entry_slist_func(manager, ticket_list)
 
 
             manager.process_events(event)
