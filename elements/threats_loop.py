@@ -62,7 +62,7 @@ def threat_entry_slist_func(manager, threat_list):
 
 def threat_details_func(manager):
 
-    threat_details_label_rect = pygame.Rect(360, 10, 150, 30)
+    threat_details_label_rect = pygame.Rect(360, 15, 150, 30)
     threat_details_label = pygame_gui.elements.UILabel(relative_rect=threat_details_label_rect,
                                                            text="THREAT DETAILS", manager=manager)
     

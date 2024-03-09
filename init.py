@@ -58,7 +58,7 @@ def meeps_timers_init():
     popup_window_sla_countdown = 15
     
     main_sla_timer = 0
-    main_sla_countdown = 120
+    main_sla_countdown = 180
 
     return ticket_timer, randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown, main_sla_timer, main_sla_countdown
 
