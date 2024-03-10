@@ -25,6 +25,8 @@ def threat_database_management_func(database):
 
     threat_details_label, selected_threat_title_tbox, selected_threat_description_tbox, selected_threat_indicators_tbox, selected_threat_countermeasures_tbox = threat_loops.threat_details_func(manager)
 
+    selected_threat = None
+
     running = True
     while running:
         time_delta = clock.tick(60) / 1000.0
@@ -47,6 +49,21 @@ def threat_database_management_func(database):
                     selected_threat_description_tbox.set_text(f"DESCRIPTION:\n{description}")
                     selected_threat_indicators_tbox.set_text(f"INDICATORS:\n{indicators}")
                     selected_threat_countermeasures_tbox.set_text(f"COUNTERMEASURES:\n{countermeasures}")
+
+            if selected_threat is not None:
+                if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                    if event.ui_element == delete_button:
+                        
+                        cursor.execute('DELETE FROM tickets WHERE answer=?', [selected_threat])
+                        connect.commit()
+                        cursor.execute('DELETE FROM threats WHERE name=?', [selected_threat])
+                        connect.commit()
+
+                        threat_list = sqlite.threats(cursor)
+                        threat_entry_slist.kill()
+                        threat_entry_slist = threat_loops.threat_entry_slist_func(manager, threat_list)
+
+
 
             manager.process_events(event)
 
