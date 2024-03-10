@@ -85,6 +85,8 @@ def threat_creation(database):
     window_surface, clock, background = init.pygame_init()
     manager = init.pygame_gui_init()
     
+    add_threat_image = threat_loops.add_threat_image_func(manager, "Assets/add_threat.png")
+
     back_button = threat_loops.back_button_func(manager)
     threat_entry_title_tentry, threat_entry_description_tentry, threat_entry_indicators_tentry, threat_entry_countermeasures_tentry = threat_loops.threat_entry_func(manager)
     add_button = threat_loops.threat_entry_add_button_func(manager)

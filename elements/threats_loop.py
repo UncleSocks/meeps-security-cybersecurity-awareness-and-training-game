@@ -85,6 +85,17 @@ def threat_details_func(manager):
     return threat_details_label, selected_threat_title_tbox, selected_threat_description_tbox, selected_threat_indicators_tbox, selected_threat_countermeasures_tbox
 
 
+def add_threat_image_func(manager, image_path):
+
+    add_threat_image_rect = pygame.Rect(20, 10, 350, 75)
+    add_threat_image_load = pygame.image.load(image_path)
+    add_threat_image = pygame_gui.elements.UIImage(relative_rect=add_threat_image_rect,
+                                                       image_surface=add_threat_image_load,
+                                                       manager=manager)
+    
+    return add_threat_image
+
+
 def threat_entry_func(manager):
 
     threat_entry_title_tentry_rect = pygame.Rect(15, 95, 765, 30)
