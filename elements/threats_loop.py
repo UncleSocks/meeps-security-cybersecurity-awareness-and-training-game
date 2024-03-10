@@ -83,3 +83,41 @@ def threat_details_func(manager):
                                                                      html_text="THREAT COUNTERMEASURES", manager=manager)
     
     return threat_details_label, selected_threat_title_tbox, selected_threat_description_tbox, selected_threat_indicators_tbox, selected_threat_countermeasures_tbox
+
+
+def threat_entry_func(manager):
+
+    threat_entry_title_tentry_rect = pygame.Rect(15, 95, 765, 30)
+    threat_entry_title_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=threat_entry_title_tentry_rect,
+                                                                   placeholder_text="ENTER THREAT TITLE",
+                                                                   initial_text="ENTER THREAT TITLE",
+                                                                   manager=manager)
+    
+    threat_entry_description_tentry_rect = pygame.Rect(15, 135, 765, 160)
+    threat_entry_description_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=threat_entry_description_tentry_rect,
+                                                                         placeholder_text="ENTER THREAT DESCRIPTION",
+                                                                         initial_text="ENTER THREAT DESCRIPTION",
+                                                                         manager=manager)
+    
+    threat_entry_indicators_tentry_rect = pygame.Rect(15, 305, 765, 160)
+    threat_entry_indicators_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=threat_entry_indicators_tentry_rect,
+                                                                        placeholder_text="ENTER THREAT INDICATORS",
+                                                                        initial_text="ENTER THREAT INDICATORS",
+                                                                        manager=manager)
+    
+    threat_entry_countermeasures_tentry_rect = pygame.Rect(15, 475, 765, 160)
+    threat_entry_countermeasures_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=threat_entry_countermeasures_tentry_rect,
+                                                                             placeholder_text="ENTER THREAT COUNTERMEASURES",
+                                                                             initial_text="ENTER THREAT COUNTERMEASURES",
+                                                                             manager=manager)
+    
+    return threat_entry_title_tentry, threat_entry_description_tentry, threat_entry_indicators_tentry, threat_entry_countermeasures_tentry
+
+
+def threat_entry_add_button_func(manager):
+
+    add_button_rect = pygame.Rect(600, 30, 180, 45)
+    add_button = pygame_gui.elements.UIButton(relative_rect=add_button_rect,
+                                                 text="ADD THREAT", manager=manager)
+    
+    return add_button

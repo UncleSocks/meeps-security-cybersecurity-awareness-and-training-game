@@ -72,6 +72,5 @@ def meeps_loop_init():
     total_score = 0
     missed_calls = 0
     missed_tickets = 0
-    ticket_no = int(random.uniform(1000,5000))
 
-    return running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets, ticket_no
+    return running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets

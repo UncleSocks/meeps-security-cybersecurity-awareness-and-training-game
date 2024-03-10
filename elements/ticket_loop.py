@@ -124,11 +124,9 @@ def ticket_text_entry_func(manager):
 
 def threat_entry_slist_func(manager, threat_list):
 
-    create_button_rect = pygame.Rect(0, 0, 300, 40)
-    create_button_rect.bottomleft = (15, -10)
+    create_button_rect = pygame.Rect(600, 30, 180, 45)
     create_button = pygame_gui.elements.UIButton(relative_rect=create_button_rect,
-                                                 text="CREATE TICKET", manager=manager,
-                                                 anchors={'left':'left', 'bottom':'bottom'})
+                                                 text="CREATE TICKET", manager=manager)
 
     threat_entry_title_tbox_rect = pygame.Rect(0, 0, 300, 30)
     threat_entry_title_tbox_rect.bottomleft = (15, -250)
@@ -136,8 +134,8 @@ def threat_entry_slist_func(manager, threat_list):
                                                             html_text="TICKET RESOLUTION", manager=manager,
                                                             anchors={'left':'left', 'bottom':'bottom'})
 
-    threat_entry_slist_rect = pygame.Rect(0, 0, 300, 200)
-    threat_entry_slist_rect.bottomleft = (15, -50)
+    threat_entry_slist_rect = pygame.Rect(0, 0, 300, 240)
+    threat_entry_slist_rect.bottomleft = (15, -10)
     threat_entry_slist = pygame_gui.elements.UISelectionList(item_list=threat_list,
                                                              relative_rect=threat_entry_slist_rect,
                                                              manager=manager,

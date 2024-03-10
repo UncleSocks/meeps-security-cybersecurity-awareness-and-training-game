@@ -24,8 +24,9 @@ def meeps_game_loop(database):
 
     back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_title_tbox, ticket_entry_tbox = init.meeps_background_init(manager, threat_list)
     ticket_timer, randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown, main_sla_timer, main_sla_countdown = init.meeps_timers_init()
-    running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets, ticket_no   = init.meeps_loop_init()
-
+    running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets   = init.meeps_loop_init()
+    
+    current_ticket_id_index = 0
 
     while running:
 
@@ -105,14 +106,14 @@ def meeps_game_loop(database):
                         if event.ui_element == accept_button:
                             main_sla_timer = 0
 
-                            selected_id = random.choice(ticket_ids_list)
+                            #selected_id = random.choice(ticket_ids_list)
+                            selected_id = ticket_ids_list[0]
                             cursor.execute('SELECT t.title, t.entry, t.answer, a.name, a.organization, a.email, a.contact, a.picture FROM tickets t JOIN accounts a ON t.caller_id = a.id WHERE t.id=?',[selected_id])
                             title, current_ticket, answer, caller_name, caller_org, caller_email, caller_contact, caller_picture = cursor.fetchone()
                             selected_threat = None
 
-                            ticket_title_text = f"<b>ID#{ticket_no} | {title}</b>"
+                            ticket_title_text = f"<b>ID#{selected_id} | {title}</b>"
                             ticket_title_tbox.set_text(ticket_title_text)
-                            ticket_no += 1
 
                             ticket_entry_tbox.set_text(current_ticket)
                             caller_profile_image = main_loop.caller_profile_image_func(manager, caller_picture)

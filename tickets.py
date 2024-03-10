@@ -97,7 +97,7 @@ def ticket_creation(database):
     threat_list = sqlite.threats(cursor)
 
     new_ticket_image = ticket_loop.new_ticket_image_func(manager, "Assets/new_ticket.png")
-    bar_image = ticket_loop.bar_image_func(manager, "Assets/bar.png")
+    #bar_image = ticket_loop.bar_image_func(manager, "Assets/bar.png")
 
     back_button = ticket_loop.back_button_func(manager)
     title_text_entry = ticket_loop.title_text_entry_func(manager)

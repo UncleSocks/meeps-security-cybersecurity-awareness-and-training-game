@@ -38,6 +38,9 @@ def threat_database_management_func(database):
                 if event.ui_element == back_button:
                     running = False
 
+                if event.ui_element == create_button:
+                    threat_creation(database)
+
             if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
                 if event.ui_element == threat_entry_slist:
                     selected_threat = event.text
@@ -69,6 +72,38 @@ def threat_database_management_func(database):
 
         manager.update(time_delta)
 
+        window_surface.blit(background, (0, 0))
+        manager.draw_ui(window_surface)
+        pygame.display.update()
+
+
+def threat_creation(database):
+    
+    connect = sqlite3.connect(database, timeout=10)
+    cursor = connect.cursor()
+
+    window_surface, clock, background = init.pygame_init()
+    manager = init.pygame_gui_init()
+    
+    back_button = threat_loops.back_button_func(manager)
+    threat_entry_title_tentry, threat_entry_description_tentry, threat_entry_indicators_tentry, threat_entry_countermeasures_tentry = threat_loops.threat_entry_func(manager)
+    add_button = threat_loops.threat_entry_add_button_func(manager)
+
+    running = True
+    while running:
+        time_delta = clock.tick(60) / 1000.0
+        for event in pygame.event.get():
+
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == back_button:
+                    running = False
+
+            manager.process_events(event)
+
+        manager.update(time_delta)
         window_surface.blit(background, (0, 0))
         manager.draw_ui(window_surface)
         pygame.display.update()
