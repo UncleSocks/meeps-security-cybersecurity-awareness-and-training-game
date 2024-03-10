@@ -98,8 +98,8 @@ def add_threat_image_func(manager, image_path):
 
 def threat_entry_func(manager):
 
-    threat_entry_title_tentry_rect = pygame.Rect(15, 95, 765, 30)
-    threat_entry_title_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=threat_entry_title_tentry_rect,
+    threat_entry_name_tentry_rect = pygame.Rect(15, 95, 765, 30)
+    threat_entry_name_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=threat_entry_name_tentry_rect,
                                                                    placeholder_text="ENTER THREAT TITLE",
                                                                    initial_text="ENTER THREAT TITLE",
                                                                    manager=manager)
@@ -122,7 +122,7 @@ def threat_entry_func(manager):
                                                                              initial_text="ENTER THREAT COUNTERMEASURES",
                                                                              manager=manager)
     
-    return threat_entry_title_tentry, threat_entry_description_tentry, threat_entry_indicators_tentry, threat_entry_countermeasures_tentry
+    return threat_entry_name_tentry, threat_entry_description_tentry, threat_entry_indicators_tentry, threat_entry_countermeasures_tentry
 
 
 def threat_entry_add_button_func(manager):
@@ -132,3 +132,26 @@ def threat_entry_add_button_func(manager):
                                                  text="ADD THREAT", manager=manager)
     
     return add_button
+
+
+def threat_confirm_window_func(manager):
+    
+    threat_confirm_window_rect = pygame.Rect(0, 0, 400, 200)
+    threat_confirm_window = pygame_gui.elements.UIWindow(rect=threat_confirm_window_rect,
+                                                 window_display_title="MEEPS SECURITY: New Threat",
+                                                 manager=manager)
+    
+    threat_confirm_window_label_rect = pygame.Rect(0, -10, 300, 200)
+    threat_confirm_window_label = pygame_gui.elements.UILabel(relative_rect=threat_confirm_window_label_rect, 
+                                                            text="THRAT SUCCESSFULLY ADDED", 
+                                                            manager=manager,
+                                                            container=threat_confirm_window,
+                                                            anchors={'center':'center'})
+    
+    threat_confirm_close_button_rect = pygame.Rect(10, 10, 200, 40)
+    threat_confirm_close_button_rect.bottomright = (285, -10)
+    threat_confirm_close_button = pygame_gui.elements.UIButton(relative_rect=threat_confirm_close_button_rect, 
+                                                                     text="OK", manager=manager,container=threat_confirm_window,
+                                                                     anchors={'left':'left', 'bottom':'bottom'})
+    
+    return threat_confirm_window, threat_confirm_close_button
