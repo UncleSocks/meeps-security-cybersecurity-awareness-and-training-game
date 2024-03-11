@@ -10,3 +10,9 @@ __pycache__/sqlite.cpython-310.pyc
 elements/__pycache__/main_loop.cpython-310.pyc
 elements/__pycache__/threats_loop.cpython-310.pyc
 __pycache__/threats.cpython-310.pyc
+elements/__pycache__/main_loop_elements.cpython-310.pyc
+elements/__pycache__/threats_elements.cpython-310.pyc
+elements/__pycache__/ticket_elements.cpython-310.pyc
+game_loops/__pycache__/shift.cpython-310.pyc
+game_loops/__pycache__/threats.cpython-310.pyc
+game_loops/__pycache__/tickets.cpython-310.pyc

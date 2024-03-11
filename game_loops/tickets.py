@@ -3,7 +3,7 @@ import pygame_gui
 import sqlite3
 import init
 import sqlite
-import elements.ticket_loop as ticket_loop
+import elements.ticket_elements as ticket_elements
 
 
 def ticket_init():
@@ -26,14 +26,14 @@ def ticket_management(database):
 
     id_list, ticket_list = sqlite.tickets(cursor)
 
-    back_button = ticket_loop.back_button_func(manager)
-    ticket_manager_image = ticket_loop.ticket_manager_image_func(manager, "Assets/ticket_mngr.png")
-    ticket_information_label = ticket_loop.ticket_information_label_func(manager)
+    back_button = ticket_elements.back_button_func(manager)
+    ticket_manager_image = ticket_elements.ticket_manager_image_func(manager, "Assets/ticket_mngr.png")
+    ticket_information_label = ticket_elements.ticket_information_label_func(manager)
 
-    create_button, delete_button = ticket_loop.create_ticket_button_func(manager)
-    ticket_entry_title_tbox = ticket_loop.ticket_entry_slist_misc_func(manager)
-    ticket_entry_slist = ticket_loop.ticket_entry_slist_func(manager, ticket_list)
-    selected_ticket_title_tbox, selected_ticket_description_tbox = ticket_loop.selected_ticket_tbox_func(manager)
+    create_button, delete_button = ticket_elements.create_ticket_button_func(manager)
+    ticket_entry_title_tbox = ticket_elements.ticket_entry_slist_misc_func(manager)
+    ticket_entry_slist = ticket_elements.ticket_entry_slist_func(manager, ticket_list)
+    selected_ticket_title_tbox, selected_ticket_description_tbox = ticket_elements.selected_ticket_tbox_func(manager)
 
     selected_ticket_id = None
 
@@ -51,7 +51,7 @@ def ticket_management(database):
                 if event.ui_element == create_button:
                     id_list, ticket_list = ticket_creation(database)
                     ticket_entry_slist.kill()
-                    ticket_entry_slist = ticket_loop.ticket_entry_slist_func(manager, ticket_list)
+                    ticket_entry_slist = ticket_elements.ticket_entry_slist_func(manager, ticket_list)
 
             if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
                 if event.ui_element == ticket_entry_slist:
@@ -73,7 +73,7 @@ def ticket_management(database):
 
                         id_list, ticket_list = sqlite.tickets(cursor)
                         ticket_entry_slist.kill()
-                        ticket_entry_slist = ticket_loop.ticket_entry_slist_func(manager, ticket_list)
+                        ticket_entry_slist = ticket_elements.ticket_entry_slist_func(manager, ticket_list)
 
 
             manager.process_events(event)
@@ -96,14 +96,14 @@ def ticket_creation(database):
 
     threat_list = sqlite.threats(cursor)
 
-    new_ticket_image = ticket_loop.new_ticket_image_func(manager, "Assets/new_ticket.png")
+    new_ticket_image = ticket_elements.new_ticket_image_func(manager, "Assets/new_ticket.png")
     #bar_image = ticket_loop.bar_image_func(manager, "Assets/bar.png")
 
-    back_button = ticket_loop.back_button_func(manager)
-    title_text_entry = ticket_loop.title_text_entry_func(manager)
-    ticket_text_entry = ticket_loop.ticket_text_entry_func(manager)
-    create_button, threat_entry_title_tbox, threat_entry_slist = ticket_loop.threat_entry_slist_func(manager, threat_list)
-    threat_description_tbox = ticket_loop.threat_description_tbox_func(manager)
+    back_button = ticket_elements.back_button_func(manager)
+    title_text_entry = ticket_elements.title_text_entry_func(manager)
+    ticket_text_entry = ticket_elements.ticket_text_entry_func(manager)
+    create_button, threat_entry_title_tbox, threat_entry_slist = ticket_elements.threat_entry_slist_func(manager, threat_list)
+    threat_description_tbox = ticket_elements.threat_description_tbox_func(manager)
     
     selected_threat, ticket_title, ticket_entry, ticket_confirm_window = ticket_init()
 
@@ -143,7 +143,7 @@ def ticket_creation(database):
                         cursor.execute('INSERT INTO tickets VALUES (?, ?, ?, ?, ?)', new_ticket)
                         connect.commit()
 
-                        ticket_confirm_window, ticket_confirm_close_button = ticket_loop.ticket_confirm_window_func(manager)
+                        ticket_confirm_window, ticket_confirm_close_button = ticket_elements.ticket_confirm_window_func(manager)
         
             manager.process_events(event)
 

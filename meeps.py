@@ -2,9 +2,9 @@ import pygame
 import pygame_gui
 import init
 import elements.main_menu as main_menu
-from game_loop import meeps_game_loop
-from tickets import ticket_management   
-from threats import threat_database_management_func
+from game_loops.shift import meeps_game_loop
+from game_loops.tickets import ticket_management   
+from game_loops.threats import threat_database_management_func
 
 
 if __name__ == "__main__":
@@ -42,7 +42,6 @@ if __name__ == "__main__":
                     ticket_management(database)
 
                 elif event.ui_element == threat_entries_button:
-                    print("Under Development")
                     threat_database_management_func(database)
 
                 elif event.ui_element == quit_button:

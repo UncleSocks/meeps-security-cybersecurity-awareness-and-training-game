@@ -2,7 +2,7 @@ import random
 import pygame
 import pygame_gui
 from colors import color
-import elements.main_loop as main_loop
+import elements.main_loop_elements as main_loop_elements
 
 
 def pygame_init():
@@ -36,16 +36,16 @@ def meeps_background_init(manager, threat_list):
 
     title_image_path = "Assets/title.png"
     
-    back_button = main_loop.back_button_func(manager)
-    title_label = main_loop.title_image_func(manager, title_image_path)
-    main_sla_timer_label = main_loop.main_sla_timer_label_func(manager)
-    caller_profile_tbox = main_loop.caller_profile_tbox_func(manager)
-    submit_button = main_loop.submit_button_func(manager)
-    threat_entry_title_tbox = main_loop.threat_entry_title_tbox_func(manager)
-    threat_entry_slist = main_loop.threat_entry_slist_func(manager, threat_list)
-    threat_panel, threat_title_tbox, threat_image, threat_description_tbox = main_loop.threat_panel_func(manager)
-    ticket_title_tbox = main_loop.ticket_title_tbox_func(manager)
-    ticket_entry_tbox = main_loop.ticket_entry_tbox_func(manager)
+    back_button = main_loop_elements.back_button_func(manager)
+    title_label = main_loop_elements.title_image_func(manager, title_image_path)
+    main_sla_timer_label = main_loop_elements.main_sla_timer_label_func(manager)
+    caller_profile_tbox = main_loop_elements.caller_profile_tbox_func(manager)
+    submit_button = main_loop_elements.submit_button_func(manager)
+    threat_entry_title_tbox = main_loop_elements.threat_entry_title_tbox_func(manager)
+    threat_entry_slist = main_loop_elements.threat_entry_slist_func(manager, threat_list)
+    threat_panel, threat_title_tbox, threat_image, threat_description_tbox = main_loop_elements.threat_panel_func(manager)
+    ticket_title_tbox = main_loop_elements.ticket_title_tbox_func(manager)
+    ticket_entry_tbox = main_loop_elements.ticket_entry_tbox_func(manager)
 
     return back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_panel, threat_title_tbox, threat_image, threat_description_tbox, ticket_title_tbox, ticket_entry_tbox
 

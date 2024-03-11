@@ -3,7 +3,7 @@ import pygame_gui
 import sqlite3
 import init
 import sqlite
-import elements.threats_loop as threat_loops
+import elements.threats_elements as threat_loops
 
 
 def threat_database_management_func(database):
