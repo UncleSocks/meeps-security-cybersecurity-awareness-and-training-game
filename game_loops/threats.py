@@ -2,7 +2,7 @@ import pygame
 import pygame_gui
 import sqlite3
 import init
-import sqlite
+import queries
 import elements.threats_elements as threat_loops
 
 
@@ -14,7 +14,7 @@ def threat_database_management_func(database):
     window_surface, clock, background = init.pygame_init()
     manager = init.pygame_gui_init()
 
-    threat_list = sqlite.threats(cursor)
+    threat_list = queries.threats(cursor)
 
     back_button = threat_loops.back_button_func(manager)
     threat_database_image = threat_loops.threat_database_image_func(manager, "Assets/threat_database.png")
@@ -65,7 +65,7 @@ def threat_database_management_func(database):
                         cursor.execute('DELETE FROM threats WHERE name=?', [selected_threat])
                         connect.commit()
 
-                        threat_list = sqlite.threats(cursor)
+                        threat_list = queries.threats(cursor)
                         threat_entry_slist.kill()
                         threat_entry_slist = threat_loops.threat_entry_slist_func(manager, threat_list)
 
@@ -110,7 +110,7 @@ def threat_creation(database):
 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == back_button:
-                    updated_threat_list = sqlite.threats(cursor)
+                    updated_threat_list = queries.threats(cursor)
                     return updated_threat_list
 
             threat_entry_name = threat_entry_name_tentry.get_text()

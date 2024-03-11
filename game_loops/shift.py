@@ -4,7 +4,7 @@ import random
 import sqlite3
 import init
 import elements.main_loop_elements as main_loop_elements
-from sqlite import ticket_ids, threats
+from queries import ticket_ids, threats
 
 
 def meeps_game_loop(database):

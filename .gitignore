@@ -16,3 +16,4 @@ elements/__pycache__/ticket_elements.cpython-310.pyc
 game_loops/__pycache__/shift.cpython-310.pyc
 game_loops/__pycache__/threats.cpython-310.pyc
 game_loops/__pycache__/tickets.cpython-310.pyc
+__pycache__/queries.cpython-310.pyc

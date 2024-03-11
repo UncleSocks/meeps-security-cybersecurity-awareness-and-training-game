@@ -2,7 +2,7 @@ import pygame
 import pygame_gui
 import sqlite3
 import init
-import sqlite
+import queries
 import elements.ticket_elements as ticket_elements
 
 
@@ -24,7 +24,7 @@ def ticket_management(database):
     window_surface, clock, background = init.pygame_init()
     manager = init.pygame_gui_init()
 
-    id_list, ticket_list = sqlite.tickets(cursor)
+    id_list, ticket_list = queries.tickets(cursor)
 
     back_button = ticket_elements.back_button_func(manager)
     ticket_manager_image = ticket_elements.ticket_manager_image_func(manager, "Assets/ticket_mngr.png")
@@ -71,7 +71,7 @@ def ticket_management(database):
                         cursor.execute('DELETE FROM tickets WHERE id=?', [selected_ticket_id])
                         connect.commit()
 
-                        id_list, ticket_list = sqlite.tickets(cursor)
+                        id_list, ticket_list = queries.tickets(cursor)
                         ticket_entry_slist.kill()
                         ticket_entry_slist = ticket_elements.ticket_entry_slist_func(manager, ticket_list)
 
@@ -94,7 +94,7 @@ def ticket_creation(database):
     window_surface, clock, background = init.pygame_init()
     manager = init.pygame_gui_init()
 
-    threat_list = sqlite.threats(cursor)
+    threat_list = queries.threats(cursor)
 
     new_ticket_image = ticket_elements.new_ticket_image_func(manager, "Assets/new_ticket.png")
     #bar_image = ticket_loop.bar_image_func(manager, "Assets/bar.png")
@@ -116,7 +116,7 @@ def ticket_creation(database):
 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 if event.ui_element == back_button:
-                   updated_id_list, updated_ticket_list = sqlite.tickets(cursor)
+                   updated_id_list, updated_ticket_list = queries.tickets(cursor)
                    return updated_id_list, updated_ticket_list
 
             if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
