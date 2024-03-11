@@ -1,5 +1,6 @@
 import pygame
 import pygame_gui
+from pygame_gui.core import ObjectID
 
 
 def back_button_func(manager):
@@ -77,12 +78,31 @@ def threat_entry_slist_func(manager, threat_list):
     return threat_entry_slist
 
 
-def threat_description_tbox_func(manager):
+def threat_panel_func(manager):
 
-    threat_description_tbox_rect = pygame.Rect(325, 290, 460, 350)
+    threat_panel_rect = pygame.Rect(325, 290, 460, 350)
+    threat_panel = pygame_gui.elements.UIPanel(relative_rect=threat_panel_rect,
+                                               manager=manager)
+    
+    threat_title_rect = pygame.Rect(5, 5, 445, 30)
+    threat_title_tbox = pygame_gui.elements.UITextBox(relative_rect=threat_title_rect,
+                                                 html_text="SELECT THREAT", manager=manager,
+                                                 container=threat_panel,
+                                                 object_id=ObjectID(object_id='#threat'))
+    
+    threat_image_rect = pygame.Rect(0, 40, 250, 50)
+    threat_image_load = pygame.image.load("Assets/blank.png")
+    threat_image = pygame_gui.elements.UIImage(relative_rect=threat_image_rect,
+                                               image_surface=threat_image_load, 
+                                               container=threat_panel, manager=manager,
+                                               anchors={'centerx':'centerx'})
+
+
+    threat_description_tbox_rect = pygame.Rect(5, 95, 445, 250)
     threat_description_tbox = pygame_gui.elements.UITextBox(relative_rect=threat_description_tbox_rect,
-                                                           html_text="SELECT A THREAT", manager=manager)
-    return threat_description_tbox
+                                                           html_text="", manager=manager, container=threat_panel,
+                                                           object_id=ObjectID(object_id='#threat'))
+    return threat_panel, threat_title_tbox, threat_image, threat_description_tbox
 
 
 def ticket_title_tbox_func(manager):

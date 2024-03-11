@@ -23,7 +23,7 @@ def threat_database_management_func(database):
     threat_entry_title_tbox = threat_loops.threat_entry_slist_misc_func(manager)
     threat_entry_slist = threat_loops.threat_entry_slist_func(manager, threat_list)
 
-    threat_details_label, selected_threat_title_tbox, selected_threat_description_tbox, selected_threat_indicators_tbox, selected_threat_countermeasures_tbox = threat_loops.threat_details_func(manager)
+    threat_details_label, selected_threat_title_tbox, selected_threat_description_tbox, selected_threat_indicators_tbox, selected_threat_countermeasures_tbox, selected_threat_image_path_tbox = threat_loops.threat_details_func(manager)
 
     selected_threat = None
 
@@ -47,13 +47,14 @@ def threat_database_management_func(database):
                 if event.ui_element == threat_entry_slist:
                     selected_threat = event.text
 
-                    cursor.execute('SELECT description, indicators, countermeasures FROM threats WHERE name=?', [selected_threat])
-                    description, indicators, countermeasures = cursor.fetchone()
+                    cursor.execute('SELECT description, indicators, countermeasures, image FROM threats WHERE name=?', [selected_threat])
+                    description, indicators, countermeasures, image_path = cursor.fetchone()
 
                     selected_threat_title_tbox.set_text(f"<b>{selected_threat}</b>")
                     selected_threat_description_tbox.set_text(f"DESCRIPTION:\n{description}")
                     selected_threat_indicators_tbox.set_text(f"INDICATORS:\n{indicators}")
                     selected_threat_countermeasures_tbox.set_text(f"COUNTERMEASURES:\n{countermeasures}")
+                    selected_threat_image_path_tbox.set_text(f"{image_path}")
 
             if selected_threat is not None:
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
@@ -90,7 +91,7 @@ def threat_creation(database):
     add_threat_image = threat_loops.add_threat_image_func(manager, "Assets/add_threat.png")
 
     back_button = threat_loops.back_button_func(manager)
-    threat_entry_name_tentry, threat_entry_description_tentry, threat_entry_indicators_tentry, threat_entry_countermeasures_tentry = threat_loops.threat_entry_func(manager)
+    threat_entry_name_tentry, threat_entry_description_tentry, threat_entry_indicators_tentry, threat_entry_countermeasures_tentry, threat_entry_image_path_tentry = threat_loops.threat_entry_func(manager)
     add_button = threat_loops.threat_entry_add_button_func(manager)
 
     threat_entry_name = None
@@ -116,6 +117,7 @@ def threat_creation(database):
             threat_entry_description = threat_entry_description_tentry.get_text()
             threat_entry_indicators = threat_entry_indicators_tentry.get_text()
             threat_entry_countermeasures = threat_entry_countermeasures_tentry.get_text()
+            threat_entry_image_path = threat_entry_image_path_tentry.get_text()
 
             if threat_entry_name is not None and threat_entry_description is not None and threat_entry_indicators is not None and threat_entry_countermeasures is not None:
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
@@ -125,8 +127,8 @@ def threat_creation(database):
                         last_id = cursor.fetchone()[0]
                         new_id = last_id + 1
 
-                        new_threat = (new_id, threat_entry_name, threat_entry_description, threat_entry_indicators, threat_entry_countermeasures)
-                        cursor.execute('INSERT INTO threats VALUES (?, ?, ?, ?, ?)', new_threat)
+                        new_threat = (new_id, threat_entry_name, threat_entry_description, threat_entry_indicators, threat_entry_countermeasures, threat_entry_image_path)
+                        cursor.execute('INSERT INTO threats VALUES (?, ?, ?, ?, ?, ?)', new_threat)
                         connect.commit()
 
                         threat_confirm_window, threat_confirm_close_button = threat_loops.threat_confirm_window_func(manager)

@@ -43,11 +43,11 @@ def meeps_background_init(manager, threat_list):
     submit_button = main_loop.submit_button_func(manager)
     threat_entry_title_tbox = main_loop.threat_entry_title_tbox_func(manager)
     threat_entry_slist = main_loop.threat_entry_slist_func(manager, threat_list)
-    threat_description_tbox = main_loop.threat_description_tbox_func(manager)
+    threat_panel, threat_title_tbox, threat_image, threat_description_tbox = main_loop.threat_panel_func(manager)
     ticket_title_tbox = main_loop.ticket_title_tbox_func(manager)
     ticket_entry_tbox = main_loop.ticket_entry_tbox_func(manager)
 
-    return back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_title_tbox, ticket_entry_tbox
+    return back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_panel, threat_title_tbox, threat_image, threat_description_tbox, ticket_title_tbox, ticket_entry_tbox
 
 
 def meeps_timers_init():

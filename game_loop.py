@@ -22,7 +22,7 @@ def meeps_game_loop(database):
     mid_difficulty_marker = total_tickets / 2
     final_difficulty_marker = mid_difficulty_marker / 2
 
-    back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_description_tbox, ticket_title_tbox, ticket_entry_tbox = init.meeps_background_init(manager, threat_list)
+    back_button, title_label, main_sla_timer_label, caller_profile_tbox, submit_button, threat_entry_title_tbox, threat_entry_slist, threat_panel, threat_title_tbox, threat_image, threat_description_tbox, ticket_title_tbox, ticket_entry_tbox = init.meeps_background_init(manager, threat_list)
     ticket_timer, randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown, main_sla_timer, main_sla_countdown = init.meeps_timers_init()
     running, ticket_presence, caller_popup_window, popup_button_accepted, total_score, missed_calls, missed_tickets   = init.meeps_loop_init()
     
@@ -42,9 +42,12 @@ def meeps_game_loop(database):
                     selected_threat = event.text
                     print(selected_threat)
 
-                    cursor.execute('SELECT description, indicators, countermeasures FROM threats WHERE name=?', [selected_threat])
-                    description, indicators, countermeasures = cursor.fetchone()
-                    threat_description_tbox.set_text(f'<b>{selected_threat.upper()}</b>\n<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
+                    cursor.execute('SELECT description, indicators, countermeasures, image FROM threats WHERE name=?', [selected_threat])
+                    description, indicators, countermeasures, image_path = cursor.fetchone()
+                    threat_title_tbox.set_text(f'<b>{selected_threat.upper()}</b>')
+                    threat_image_load = pygame.image.load(image_path)
+                    threat_image.set_image(new_image=threat_image_load)
+                    threat_description_tbox.set_text(f'<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
             
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 

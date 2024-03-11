@@ -76,6 +76,30 @@
         {
            "border_width": "1"
         }
+    },
+    "#threat":
+    {
+        "colours":
+        {
+            "dark_bg":"#000000",
+            "normal_border": "#000000",
+            "link_text": "#FF0000",
+            "link_hover": "#FFFF00",
+            "link_selected": "#FFFFFF",
+            "normal_text":"#00b217"
+        }
+    },
+    "panel":
+    {
+        "colours":
+        {
+            "dark_bg":"#000000",
+            "normal_border": "#999999",
+            "link_text": "#FF0000",
+            "link_hover": "#FFFF00",
+            "link_selected": "#FFFFFF",
+            "normal_text":"#00b217"
+        }
     }
 }
 
