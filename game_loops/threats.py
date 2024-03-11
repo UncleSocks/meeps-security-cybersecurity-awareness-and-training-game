@@ -1,6 +1,5 @@
 import pygame
 import pygame_gui
-import sqlite3
 import init
 import queries
 import elements.threats_elements as threat_element
@@ -18,12 +17,9 @@ def threat_creation_init_values():
     threat_entry_countermeasures, threat_confirm_window
 
 
-def threat_database_management(database):
+def threat_database_management(connect, cursor):
 
-    def threat_database_management_init(database):
-
-        connect = sqlite3.connect(database, timeout=10)
-        cursor = connect.cursor()
+    def threat_database_management_init(connect, cursor):
 
         window_surface, clock, background = init.pygame_init()
         manager = init.pygame_gui_init()
@@ -45,7 +41,7 @@ def threat_database_management(database):
         
         selected_threat = None
 
-        return threat_database_management_loop(database, connect, cursor, 
+        return threat_database_management_loop(connect, cursor, 
                                             window_surface, clock, background, manager,
                                             threat_list, back_button, threat_database_image,
                                             create_button, delete_button,
@@ -55,7 +51,7 @@ def threat_database_management(database):
                                             selected_threat_countermeasures_tbox, selected_threat_image_path_tbox,
                                             selected_threat)
 
-    def threat_database_management_loop(database, connect, cursor, 
+    def threat_database_management_loop(connect, cursor, 
                                         window_surface, clock, background, manager,
                                         threat_list, back_button, threat_database_image,
                                         create_button, delete_button,
@@ -77,7 +73,7 @@ def threat_database_management(database):
                         running = False
 
                     if event.ui_element == create_button:
-                        threat_list = threat_creation_init(database)
+                        threat_list = threat_creation_init(connect, cursor)
                         threat_entry_slist.kill()
                         threat_entry_slist = threat_element.threat_entry_slist_func(manager, threat_list)
 
@@ -116,10 +112,7 @@ def threat_database_management(database):
             pygame.display.update()
 
 
-    def threat_creation_init(database):
-
-        connect = sqlite3.connect(database, timeout=10)
-        cursor = connect.cursor()
+    def threat_creation_init(connect, cursor):
 
         window_surface, clock, background = init.pygame_init()
         manager = init.pygame_gui_init()
@@ -215,4 +208,4 @@ def threat_database_management(database):
             pygame.display.update()
 
 
-    threat_database_management_init(database)   
+    threat_database_management_init(connect, cursor)   

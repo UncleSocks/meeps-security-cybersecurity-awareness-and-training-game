@@ -1,18 +1,14 @@
 import pygame
 import pygame_gui
 import random
-import sqlite3
 import init
 import elements.main_loop_elements as main_loop_elements
 from queries import ticket_ids, threats
 
 
-def start_shift(database):
+def start_shift(connect, cursor):
 
-    def start_shift_init(database):
-
-        connect = sqlite3.connect(database, timeout=10)
-        cursor = connect.cursor()
+    def start_shift_init(connect, cursor):
 
         window_surface, clock, background = init.pygame_init()
         manager = init.pygame_gui_init()
@@ -267,4 +263,4 @@ def start_shift(database):
             pygame.display.update()
 
 
-    start_shift_init(database)
+    start_shift_init(connect, cursor)

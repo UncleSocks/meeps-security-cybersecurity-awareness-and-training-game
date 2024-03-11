@@ -1,6 +1,5 @@
 import pygame
 import pygame_gui
-import sqlite3
 import init
 import queries
 import elements.ticket_elements as ticket_elements
@@ -16,13 +15,10 @@ def ticket_management_init_values():
     return selected_threat, ticket_title, ticket_entry, ticket_confirm_window
 
 
-def ticket_management(database):
+def ticket_management(connect, cursor):
 
     
-    def ticket_management_init(database):
-
-        connect = sqlite3.connect(database, timeout=10)
-        cursor = connect.cursor()
+    def ticket_management_init(connect, cursor):
 
         window_surface, clock, background = init.pygame_init()
         manager = init.pygame_gui_init()
@@ -42,7 +38,7 @@ def ticket_management(database):
         selected_threat, ticket_title, ticket_entry, ticket_confirm_window = ticket_management_init_values()
         
 
-        return ticket_management_loop(database, connect, cursor, window_surface, clock, background, manager,
+        return ticket_management_loop(connect, cursor, window_surface, clock, background, manager,
                                 id_list, ticket_list, back_button, ticket_manager_image, 
                                 ticket_information_label, create_button, delete_button, 
                                 ticket_entry_title_tbox, ticket_entry_slist, 
@@ -51,7 +47,7 @@ def ticket_management(database):
                                 selected_ticket_id)
 
 
-    def ticket_management_loop(database, connect, cursor, window_surface, clock, background, manager, 
+    def ticket_management_loop(connect, cursor, window_surface, clock, background, manager, 
                         id_list, ticket_list, back_button, ticket_manager_image, 
                         ticket_information_label, create_button, delete_button, 
                         ticket_entry_title_tbox, ticket_entry_slist, 
@@ -72,7 +68,7 @@ def ticket_management(database):
                         running = False
                     
                     if event.ui_element == create_button:
-                        id_list, ticket_list = ticket_creation_init(database)
+                        id_list, ticket_list = ticket_creation_init(connect, cursor)
                         ticket_entry_slist.kill()
                         ticket_entry_slist = ticket_elements.ticket_entry_slist_func(manager, ticket_list)
 
@@ -108,10 +104,7 @@ def ticket_management(database):
             pygame.display.update()
 
 
-    def ticket_creation_init(database):
-
-        connect = sqlite3.connect(database, timeout=10)
-        cursor = connect.cursor()
+    def ticket_creation_init(connect, cursor):
 
         window_surface, clock, background = init.pygame_init()
         manager = init.pygame_gui_init()
@@ -135,6 +128,7 @@ def ticket_management(database):
                                ticket_text_entry, create_button, threat_entry_title_tbox, threat_entry_slist, 
                                threat_description_tbox, selected_threat, ticket_title, ticket_entry, 
                                ticket_confirm_window)
+    
         
     def ticket_creation(connect, cursor, window_surface, clock, background, manager, 
                         threat_list, new_ticket_image, back_button, title_text_entry, 
@@ -210,4 +204,4 @@ def ticket_management(database):
             pygame.display.update()
 
 
-    ticket_management_init(database)
+    ticket_management_init(connect, cursor)

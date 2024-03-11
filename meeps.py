@@ -1,3 +1,4 @@
+import sqlite3
 import pygame
 import pygame_gui
 import init
@@ -12,6 +13,8 @@ def main_menu():
     def main_menu_init():
 
         database = 'data.db'
+        connect, cursor = init.database_init(database)
+
         window_surface, clock, background = init.pygame_init()
         manager = init.pygame_gui_init()
 
@@ -28,12 +31,12 @@ def main_menu():
         version_label = main_menu_element.version_label_func(manager, current_version)
         github_label = main_menu_element.github_label_func(manager)
 
-        return main_menu_loop(database, window_surface, clock, background, manager, start_button, 
+        return main_menu_loop(connect, cursor, window_surface, clock, background, manager, start_button, 
                               ticket_management_button, threat_entries_button, quit_button, main_title_image, 
                               main_title_slogan, version_label, github_label)
 
 
-    def main_menu_loop(database, window_surface, clock, background, manager, 
+    def main_menu_loop(connect, cursor, window_surface, clock, background, manager, 
                        start_button, ticket_management_button, threat_entries_button, 
                        quit_button, main_title_image, main_title_slogan, version_label, 
                        github_label):
@@ -47,13 +50,13 @@ def main_menu():
 
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == start_button:
-                        start_shift(database)
+                        start_shift(connect, cursor)
 
                     elif event.ui_element == ticket_management_button:
-                        ticket_management(database)
+                        ticket_management(connect, cursor)
 
                     elif event.ui_element == threat_entries_button:
-                        threat_database_management(database)
+                        threat_database_management(connect, cursor)
 
                     elif event.ui_element == quit_button:
                         running = False
