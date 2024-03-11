@@ -4,7 +4,7 @@ import init
 import elements.main_menu as main_menu_element
 from game_loops.shift import start_shift
 from game_loops.tickets import ticket_management   
-from game_loops.threats import threat_database_management_func
+from game_loops.threats import threat_database_management
 
 
 def main_menu():
@@ -53,7 +53,7 @@ def main_menu():
                         ticket_management(database)
 
                     elif event.ui_element == threat_entries_button:
-                        threat_database_management_func(database)
+                        threat_database_management(database)
 
                     elif event.ui_element == quit_button:
                         running = False
