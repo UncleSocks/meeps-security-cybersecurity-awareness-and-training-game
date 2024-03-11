@@ -7,9 +7,9 @@ import elements.main_loop_elements as main_loop_elements
 from queries import ticket_ids, threats
 
 
-def main_game(database):
+def start_shift(database):
 
-    def game_init(database):
+    def start_shift_init(database):
 
         connect = sqlite3.connect(database, timeout=10)
         cursor = connect.cursor()
@@ -57,7 +57,7 @@ def main_game(database):
         ticket_title_tbox = main_loop_elements.ticket_title_tbox_func(manager)
         ticket_entry_tbox = main_loop_elements.ticket_entry_tbox_func(manager)
 
-        return meeps_game_loop(connect, cursor, window_surface, clock, background, manager,
+        return start_shift_loop(connect, cursor, window_surface, clock, background, manager,
                                ticket_ids_list, total_tickets, threat_list, ticket_timer, 
                                randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown,
                                main_sla_timer, main_sla_countdown, mid_difficulty_marker, final_difficulty_marker,
@@ -69,7 +69,7 @@ def main_game(database):
                                ticket_title_tbox, ticket_entry_tbox)
     
 
-    def meeps_game_loop(connect, cursor, window_surface, clock, background, manager, 
+    def start_shift_loop(connect, cursor, window_surface, clock, background, manager, 
                         ticket_ids_list, total_tickets, threat_list, ticket_timer, 
                         randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown, 
                         main_sla_timer, main_sla_countdown, mid_difficulty_marker, final_difficulty_marker,
@@ -267,4 +267,4 @@ def main_game(database):
             pygame.display.update()
 
 
-    game_init(database)
+    start_shift_init(database)
