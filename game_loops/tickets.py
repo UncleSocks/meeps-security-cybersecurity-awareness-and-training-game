@@ -120,7 +120,6 @@ def ticket_management(database):
 
         ticket_image_path = "Assets/new_ticket.png"
         new_ticket_image = ticket_elements.new_ticket_image_func(manager, ticket_image_path)
-        #bar_image = ticket_loop.bar_image_func(manager, "Assets/bar.png")
 
         back_button = ticket_elements.back_button_func(manager)
         title_text_entry = ticket_elements.title_text_entry_func(manager)
