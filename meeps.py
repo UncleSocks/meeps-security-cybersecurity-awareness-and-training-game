@@ -2,7 +2,7 @@ import pygame
 import pygame_gui
 import init
 import elements.main_menu as main_menu_element
-from game_loops.shift import meeps_game_loop
+from game_loops.shift import main_game
 from game_loops.tickets import ticket_management   
 from game_loops.threats import threat_database_management_func
 
@@ -47,7 +47,7 @@ def main_menu():
 
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == start_button:
-                        meeps_game_loop(database)
+                        main_game(database)
 
                     elif event.ui_element == ticket_management_button:
                         ticket_management(database)
