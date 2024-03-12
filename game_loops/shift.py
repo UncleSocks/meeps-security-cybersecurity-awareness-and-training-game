@@ -53,6 +53,9 @@ def start_shift(connect, cursor):
         ticket_title_tbox = main_loop_elements.ticket_title_tbox_func(manager)
         ticket_entry_tbox = main_loop_elements.ticket_entry_tbox_func(manager)
 
+        music_path = "Assets/Sounds/incoming_call_2.mp3"
+        pygame.mixer.music.load(music_path)
+
         return start_shift_loop(connect, cursor, window_surface, clock, background, manager,
                                ticket_ids_list, total_tickets, threat_list, ticket_timer, 
                                randomized_ticket_entry, popup_window_close_timer, popup_window_sla_countdown,
@@ -131,6 +134,8 @@ def start_shift(connect, cursor):
                 caller_popup_window, accept_button, popup_window_countdown = main_loop_elements.caller_popup_window_func(manager)
                 popup_window_close_timer = 0
 
+                pygame.mixer.music.play(-1)
+
             if not ticket_ids_list and not ticket_presence:
 
                 shift_report_init(window_surface, clock, background, manager,
@@ -155,9 +160,13 @@ def start_shift(connect, cursor):
                         ticket_timer = 0
                         missed_calls += 1
 
+                        pygame.mixer.music.stop()
+
                     for event in pygame.event.get():
                         if event.type == pygame_gui.UI_BUTTON_PRESSED:
                             if event.ui_element == accept_button:
+
+                                pygame.mixer.music.stop()
 
                                 main_sla_timer = 0
 
