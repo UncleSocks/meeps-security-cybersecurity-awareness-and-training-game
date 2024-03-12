@@ -68,7 +68,8 @@ def main_menu():
             window_surface.blit(background, (0, 0))
             manager.draw_ui(window_surface)
             pygame.display.update()
-
+        
+        connect.close()
         pygame.quit()
 
     main_menu_init()

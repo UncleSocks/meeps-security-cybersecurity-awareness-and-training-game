@@ -214,8 +214,6 @@ def start_shift(connect, cursor):
             manager.draw_ui(window_surface)
             pygame.display.update()
 
-        connect.close()
-
 
     def shift_report_init(window_surface, clock, background, manager, 
                           total_score, total_tickets, missed_calls, missed_tickets):
