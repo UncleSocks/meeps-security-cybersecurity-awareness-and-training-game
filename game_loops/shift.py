@@ -8,6 +8,34 @@ from queries import ticket_ids, threats
 
 def start_shift(connect, cursor):
 
+    
+    def music_init():
+
+        incoming_call_music_path = "Assets/Sounds/incoming_call_2.mp3"
+        pygame.mixer.music.load(incoming_call_music_path)
+        incoming_call_channel = pygame.mixer.Channel(0)
+
+        background_music_path = "Assets/Sounds/background.mp3"
+        pygame.mixer.music.load(background_music_path)
+        background_music_channel = pygame.mixer.Channel(1)
+
+        list_click_music_path = "Assets/Sounds/list_click.mp3"
+        pygame.mixer.music.load(list_click_music_path)
+        list_click_music_channel = pygame.mixer.Channel(2)
+
+        incorrect_submit_music_path = "Assets/Sounds/incorrect_submit.mp3"
+        pygame.mixer.music.load(incorrect_submit_music_path)
+        incorrect_submit_music_channel = pygame.mixer.Channel(3)
+
+        correct_submit_music_path = "Assets/Sounds/correct_submit.mp3"
+        pygame.mixer.music.load(correct_submit_music_path)
+        correct_submit_music_channel = pygame.mixer.Channel(4)
+
+        return incoming_call_music_path, incoming_call_channel, background_music_path, background_music_channel, \
+            list_click_music_path, list_click_music_channel, incorrect_submit_music_path, incorrect_submit_music_channel, \
+            correct_submit_music_path, correct_submit_music_channel
+    
+    
     def start_shift_init(connect, cursor):
 
         window_surface, clock, background = init.pygame_init()
@@ -53,8 +81,9 @@ def start_shift(connect, cursor):
         ticket_title_tbox = main_loop_elements.ticket_title_tbox_func(manager)
         ticket_entry_tbox = main_loop_elements.ticket_entry_tbox_func(manager)
 
-        music_path = "Assets/Sounds/incoming_call_2.mp3"
-        pygame.mixer.music.load(music_path)
+        incoming_call_music_path, incoming_call_channel, background_music_path, background_music_channel, \
+             list_click_music_path, list_click_music_channel, incorrect_submit_music_path, incorrect_submit_music_channel, \
+                correct_submit_music_path, correct_submit_music_channel = music_init()
 
         return start_shift_loop(connect, cursor, window_surface, clock, background, manager,
                                ticket_ids_list, total_tickets, threat_list, ticket_timer, 
@@ -65,7 +94,10 @@ def start_shift(connect, cursor):
                                back_button, title_label, main_sla_timer_label, caller_profile_tbox, 
                                submit_button, threat_entry_title_tbox, threat_entry_slist,
                                threat_panel, threat_title_tbox, threat_image, threat_description_tbox,
-                               ticket_title_tbox, ticket_entry_tbox)
+                               ticket_title_tbox, ticket_entry_tbox, incoming_call_music_path, incoming_call_channel,
+                               background_music_path, background_music_channel, list_click_music_path, 
+                               list_click_music_channel, incorrect_submit_music_path, incorrect_submit_music_channel, 
+                               correct_submit_music_path, correct_submit_music_channel)
     
 
     def start_shift_loop(connect, cursor, window_surface, clock, background, manager, 
@@ -77,8 +109,13 @@ def start_shift(connect, cursor):
                         back_button, title_label, main_sla_timer_label, caller_profile_tbox, 
                         submit_button, threat_entry_title_tbox, threat_entry_slist, 
                         threat_panel, threat_title_tbox, threat_image, threat_description_tbox, 
-                        ticket_title_tbox, ticket_entry_tbox):
+                        ticket_title_tbox, ticket_entry_tbox, incoming_call_music_path, incoming_call_channel, 
+                        background_music_path, background_music_channel, list_click_music_path, list_click_music_channel, 
+                        incorrect_submit_music_path, incorrect_submit_music_channel, correct_submit_music_path, 
+                        correct_submit_music_channel):
 
+        #background_music_channel.play(pygame.mixer.Sound(background_music_path), loops=-1)
+        
         running = True
         while running:
 
@@ -95,6 +132,8 @@ def start_shift(connect, cursor):
                         selected_threat = event.text
                         print(selected_threat)
 
+                        list_click_music_channel.play(pygame.mixer.Sound(list_click_music_path))
+
                         cursor.execute('SELECT description, indicators, countermeasures, image FROM threats WHERE name=?', [selected_threat])
                         description, indicators, countermeasures, image_path = cursor.fetchone()
                         threat_title_tbox.set_text(f'<b>{selected_threat.upper()}</b>')
@@ -105,6 +144,7 @@ def start_shift(connect, cursor):
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     
                     if event.ui_element == back_button:
+                        background_music_channel.stop()
                         running = False
                     
                     if event.ui_element == submit_button and ticket_presence and selected_threat is not None:
@@ -119,10 +159,14 @@ def start_shift(connect, cursor):
                         main_sla_timer_label.set_text("SLA: ")
 
                         if selected_threat == answer:
+                            correct_submit_music_channel.play(pygame.mixer.Sound(correct_submit_music_path))
                             print(f"Selected: {selected_threat}, Correct: {answer}, Answer: Correct")
                             total_score += 1
                         else:
+                            incorrect_submit_music_channel.play(pygame.mixer.Sound(incorrect_submit_music_path))
                             print(f"Selected: {selected_threat}, Correct: {answer}, Answer: Wrong")
+
+                        background_music_channel.unpause()
                         
                 manager.process_events(event)
             
@@ -134,7 +178,10 @@ def start_shift(connect, cursor):
                 caller_popup_window, accept_button, popup_window_countdown = main_loop_elements.caller_popup_window_func(manager)
                 popup_window_close_timer = 0
 
-                pygame.mixer.music.play(-1)
+                background_music_channel.pause()
+                incoming_call_channel.set_volume(0.3)
+                incoming_call_channel.play(pygame.mixer.Sound(incoming_call_music_path), loops=-1)
+                
 
             if not ticket_ids_list and not ticket_presence:
 
@@ -160,13 +207,14 @@ def start_shift(connect, cursor):
                         ticket_timer = 0
                         missed_calls += 1
 
-                        pygame.mixer.music.stop()
+                        incoming_call_channel.stop()
+                        background_music_channel.unpause()
 
                     for event in pygame.event.get():
                         if event.type == pygame_gui.UI_BUTTON_PRESSED:
                             if event.ui_element == accept_button:
 
-                                pygame.mixer.music.stop()
+                                incoming_call_channel.stop()
 
                                 main_sla_timer = 0
 
