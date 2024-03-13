@@ -167,6 +167,8 @@ def start_shift(connect, cursor):
                             print(f"Selected: {selected_threat}, Correct: {answer}, Answer: Wrong")
 
                         background_music_channel.unpause()
+                        ticket_transcript_channel.stop()
+                        pygame.mixer.music.unload()
                         
                 manager.process_events(event)
             
@@ -238,6 +240,13 @@ def start_shift(connect, cursor):
 
                                 caller_popup_window.hide()
                                 caller_popup_window = None
+
+                                        
+                                cursor.execute('SELECT transcript_path FROM tickets WHERE id=?', [selected_id])
+                                ticket_transcript_path = cursor.fetchone()[0]
+                                pygame.mixer.music.load(ticket_transcript_path)
+                                ticket_transcript_channel = pygame.mixer.Channel(5)
+                                ticket_transcript_channel.play(pygame.mixer.Sound(ticket_transcript_path))
                         
                         manager.process_events(event)
 
