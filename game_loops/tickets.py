@@ -1,8 +1,21 @@
 import pygame
 import pygame_gui
+import pyttsx3
 import init
 import queries
 import elements.ticket_elements as ticket_elements
+
+
+def ticket_transcript_generator(id, ticket):
+
+    engine = pyttsx3.init()
+    
+    filename = f"Assets/Sounds/{id}_transcript.wav"
+    ticket_transcript_path = engine.save_to_file(ticket, filename)
+    engine.runAndWait()
+
+    return filename
+
 
 
 def ticket_management_init_values():
@@ -168,8 +181,11 @@ def ticket_management(connect, cursor):
                             last_id = cursor.fetchone()[0]
                             new_id = last_id + 1
 
-                            new_ticket = (new_id, ticket_title, ticket_entry, selected_threat, 1)
-                            cursor.execute('INSERT INTO tickets VALUES (?, ?, ?, ?, ?)', new_ticket)
+                            transcript_path = ticket_transcript_generator(new_id, ticket_entry)
+                            print(transcript_path)
+
+                            new_ticket = (new_id, ticket_title, ticket_entry, selected_threat, 1, transcript_path)
+                            cursor.execute('INSERT INTO tickets VALUES (?, ?, ?, ?, ?, ?)', new_ticket)
                             connect.commit()
 
                             ticket_confirm_window, ticket_confirm_close_button = ticket_elements.ticket_confirm_window_func(manager)

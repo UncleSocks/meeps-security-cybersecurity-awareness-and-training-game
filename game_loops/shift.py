@@ -15,7 +15,7 @@ def start_shift(connect, cursor):
         pygame.mixer.music.load(incoming_call_music_path)
         incoming_call_channel = pygame.mixer.Channel(0)
 
-        background_music_path = "Assets/Sounds/background.mp3"
+        background_music_path = "Assets/Sounds/background2.mp3"
         pygame.mixer.music.load(background_music_path)
         background_music_channel = pygame.mixer.Channel(1)
 
@@ -46,7 +46,7 @@ def start_shift(connect, cursor):
         threat_list = threats(cursor)
 
         ticket_timer = 0
-        randomized_ticket_entry = random.uniform(2, 3)
+        randomized_ticket_entry = random.uniform(5, 12)
         popup_window_close_timer = 0
         popup_window_sla_countdown = 15
         
@@ -114,7 +114,8 @@ def start_shift(connect, cursor):
                         incorrect_submit_music_path, incorrect_submit_music_channel, correct_submit_music_path, 
                         correct_submit_music_channel):
 
-        #background_music_channel.play(pygame.mixer.Sound(background_music_path), loops=-1)
+        background_music_channel.play(pygame.mixer.Sound(background_music_path), loops=-1)
+        background_music_channel.set_volume(0.5)
         
         running = True
         while running:
@@ -137,9 +138,16 @@ def start_shift(connect, cursor):
                         cursor.execute('SELECT description, indicators, countermeasures, image FROM threats WHERE name=?', [selected_threat])
                         description, indicators, countermeasures, image_path = cursor.fetchone()
                         threat_title_tbox.set_text(f'<b>{selected_threat.upper()}</b>')
-                        threat_image_load = pygame.image.load(image_path)
-                        threat_image.set_image(new_image=threat_image_load)
-                        threat_description_tbox.set_text(f'<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
+                        
+                        try:
+                            threat_image_load = pygame.image.load(image_path)
+                            threat_image.set_image(new_image=threat_image_load)
+                            threat_description_tbox.set_text(f'<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
+                        except:
+                            threat_image_load = pygame.image.load("Assets/Threat_Images/default.png")
+                            threat_image.set_image(new_image=threat_image_load)
+                            threat_description_tbox.set_text(f'<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
+
                 
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     
@@ -166,7 +174,7 @@ def start_shift(connect, cursor):
                             incorrect_submit_music_channel.play(pygame.mixer.Sound(incorrect_submit_music_path))
                             print(f"Selected: {selected_threat}, Correct: {answer}, Answer: Wrong")
 
-                        background_music_channel.unpause()
+                        #background_music_channel.unpause()
                         ticket_transcript_channel.stop()
                         pygame.mixer.music.unload()
                         
@@ -180,13 +188,14 @@ def start_shift(connect, cursor):
                 caller_popup_window, accept_button, popup_window_countdown = main_loop_elements.caller_popup_window_func(manager)
                 popup_window_close_timer = 0
 
-                background_music_channel.pause()
+                #background_music_channel.pause()
                 incoming_call_channel.set_volume(0.3)
                 incoming_call_channel.play(pygame.mixer.Sound(incoming_call_music_path), loops=-1)
                 
 
             if not ticket_ids_list and not ticket_presence:
 
+                background_music_channel.stop()
                 shift_report_init(window_surface, clock, background, manager,
                              total_score, total_tickets, missed_calls, missed_tickets)
                 running = False
@@ -210,7 +219,7 @@ def start_shift(connect, cursor):
                         missed_calls += 1
 
                         incoming_call_channel.stop()
-                        background_music_channel.unpause()
+                        #background_music_channel.unpause()
 
                     for event in pygame.event.get():
                         if event.type == pygame_gui.UI_BUTTON_PRESSED:
