@@ -8,8 +8,8 @@ import elements.ticket_elements as ticket_elements
 
 def ticket_transcript_generator(id, ticket):
 
-    engine = pyttsx3.init()
     
+    engine = pyttsx3.init()
     filename = f"Assets/Sounds/{id}_transcript.wav"
     ticket_transcript_path = engine.save_to_file(ticket, filename)
     engine.runAndWait()

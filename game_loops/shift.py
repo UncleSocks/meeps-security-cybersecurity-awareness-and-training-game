@@ -153,6 +153,7 @@ def start_shift(connect, cursor):
                     
                     if event.ui_element == back_button:
                         background_music_channel.stop()
+                        ticket_transcript_channel.stop()
                         running = False
                     
                     if event.ui_element == submit_button and ticket_presence and selected_threat is not None:
