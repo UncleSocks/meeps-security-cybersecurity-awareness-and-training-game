@@ -19,6 +19,24 @@ def threat_creation_init_values():
 
 def threat_database_management(connect, cursor):
 
+    
+    def music_init():
+
+        menu_button_music_path = "Assets/Sounds/list_click2.mp3"
+        pygame.mixer.music.load(menu_button_music_path)
+        menu_button_music_channel = pygame.mixer.Channel(0)
+
+        delete_button_music_path = "Assets/Sounds/delete_button.mp3"
+        pygame.mixer.music.load(delete_button_music_path)
+        delete_button_music_channel = pygame.mixer.Channel(1)
+
+        add_button_music_path = "Assets/Sounds/add_button.mp3"
+        pygame.mixer.music.load(add_button_music_path)
+        add_button_music_channel = pygame.mixer.Channel(2)
+
+        return menu_button_music_path, menu_button_music_channel, delete_button_music_path, delete_button_music_channel, add_button_music_path, add_button_music_channel
+
+    
     def threat_database_management_init(connect, cursor):
 
         window_surface, clock, background = init.pygame_init()
@@ -61,6 +79,12 @@ def threat_database_management(connect, cursor):
                                         selected_threat_countermeasures_tbox, selected_threat_image_path_tbox,
                                         selected_threat):
 
+        menu_button_music_path, menu_button_music_channel, delete_button_music_path, delete_button_music_channel, add_button_music_path, add_button_music_channel = music_init()
+        
+        back_button_music_path = "Assets/Sounds/back_button.mp3"
+        pygame.mixer.music.load(back_button_music_path)
+        back_button_music_channel = pygame.mixer.Channel(3)
+       
         running = True
         while running:
             time_delta = clock.tick(60) / 1000.0
@@ -70,15 +94,23 @@ def threat_database_management(connect, cursor):
 
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == back_button:
+                        back_button_music_channel.play(pygame.mixer.Sound(back_button_music_path))
+                        back_button_music_channel.set_volume(0.2)
                         running = False
 
                     if event.ui_element == create_button:
+
+                        add_button_music_channel.play(pygame.mixer.Sound(add_button_music_path))
+
                         threat_list = threat_creation_init(connect, cursor)
                         threat_entry_slist.kill()
                         threat_entry_slist = threat_element.threat_entry_slist_func(manager, threat_list)
 
                 if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
                     if event.ui_element == threat_entry_slist:
+                        
+                        menu_button_music_channel.play(pygame.mixer.Sound(menu_button_music_path))
+                        
                         selected_threat = event.text
 
                         cursor.execute('SELECT description, indicators, countermeasures, image FROM threats WHERE name=?', [selected_threat])
@@ -93,6 +125,8 @@ def threat_database_management(connect, cursor):
                 if selected_threat is not None:
                     if event.type == pygame_gui.UI_BUTTON_PRESSED:
                         if event.ui_element == delete_button:
+
+                            delete_button_music_channel.play(pygame.mixer.Sound(delete_button_music_path))
                             
                             cursor.execute('DELETE FROM tickets WHERE answer=?', [selected_threat])
                             connect.commit()
@@ -144,6 +178,15 @@ def threat_database_management(connect, cursor):
                              threat_entry_name, threat_entry_description, threat_entry_indicators, 
                              threat_entry_countermeasures, threat_confirm_window):
         
+        
+        create_button_music_path = "Assets/Sounds/create_button.mp3"
+        pygame.mixer.music.load(create_button_music_path)
+        create_button_music_channel = pygame.mixer.Channel(3)
+
+        back_button_music_path = "Assets/Sounds/back_button.mp3"
+        pygame.mixer.music.load(back_button_music_path)
+        back_button_music_channel = pygame.mixer.Channel(4)
+        
         running = True
         while running:
             time_delta = clock.tick(60) / 1000.0
@@ -154,6 +197,8 @@ def threat_database_management(connect, cursor):
 
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == back_button:
+                        back_button_music_channel.play(pygame.mixer.Sound(back_button_music_path))
+                        back_button_music_channel.set_volume(0.2)
                         updated_threat_list = queries.threats(cursor)
                         return updated_threat_list
 
@@ -166,6 +211,8 @@ def threat_database_management(connect, cursor):
                 if threat_entry_name is not None and threat_entry_description is not None and threat_entry_indicators is not None and threat_entry_countermeasures is not None:
                     if event.type == pygame_gui.UI_BUTTON_PRESSED:
                         if event.ui_element == add_button:
+
+                            create_button_music_channel.play(pygame.mixer.Sound(create_button_music_path))
 
                             cursor.execute('SELECT MAX(id) FROM threats')
                             last_id = cursor.fetchone()[0]

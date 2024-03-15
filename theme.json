@@ -100,7 +100,15 @@
             "link_selected": "#FFFFFF",
             "normal_text":"#00b217"
         }
+    },
+    "window":
+    {
+        "misc":
+        {
+            "enable_close_button":"0"
+        }
     }
+    
 }
 
 

@@ -9,6 +9,16 @@ from game_loops.threats import threat_database_management
 
 def main_menu():
 
+    
+    def music_init():
+
+        menu_button_music_path = "Assets/Sounds/menu_button.mp3"
+        pygame.mixer.music.load(menu_button_music_path)
+        menu_button_music_channel = pygame.mixer.Channel(0)
+
+        return menu_button_music_path, menu_button_music_channel
+    
+    
     def main_menu_init():
 
         database = 'data.db'
@@ -39,6 +49,8 @@ def main_menu():
                        start_button, ticket_management_button, threat_entries_button, 
                        quit_button, main_title_image, main_title_slogan, version_label, 
                        github_label):
+        
+        menu_button_music_path, menu_button_music_channel = music_init()
 
         running = True
         while running:
@@ -48,6 +60,7 @@ def main_menu():
                     running = False
 
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                    menu_button_music_channel.play(pygame.mixer.Sound(menu_button_music_path))
                     if event.ui_element == start_button:
                         start_shift(connect, cursor)
 

@@ -31,6 +31,15 @@ def ticket_management_init_values():
 def ticket_management(connect, cursor):
 
     
+    def music_init():
+
+        list_click_music_path = "Assets/Sounds/list_click2.mp3"
+        pygame.mixer.music.load(list_click_music_path)
+        list_click_music_channel = pygame.mixer.Channel(0)
+
+        return list_click_music_path, list_click_music_channel
+    
+    
     def ticket_management_init(connect, cursor):
 
         window_surface, clock, background = init.pygame_init()
@@ -67,6 +76,8 @@ def ticket_management(connect, cursor):
                         selected_ticket_title_tbox, selected_ticket_description_tbox, 
                         selected_threat, ticket_title, ticket_entry, ticket_confirm_window, 
                         selected_ticket_id):
+        
+        list_click_music_path, list_click_music_channel = music_init()
 
         running = True
         while running:
@@ -78,6 +89,7 @@ def ticket_management(connect, cursor):
 
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == back_button:
+                        pygame.mixer.music.unload()
                         running = False
                     
                     if event.ui_element == create_button:
@@ -87,6 +99,8 @@ def ticket_management(connect, cursor):
 
                 if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
                     if event.ui_element == ticket_entry_slist:
+
+                        list_click_music_channel.play(pygame.mixer.Sound(list_click_music_path))
                         selected_ticket = event.text
                         
                         id_index_find = ticket_list.index(selected_ticket)
