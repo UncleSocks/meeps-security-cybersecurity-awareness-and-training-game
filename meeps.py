@@ -2,7 +2,7 @@ import pygame
 import pygame_gui
 import init
 import elements.main_menu as main_menu_element
-from game_loops.shift import start_shift
+from game_loops.shift import shift_introduction
 from game_loops.tickets import ticket_management   
 from game_loops.threats import threat_database_management
 
@@ -62,7 +62,7 @@ def main_menu():
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     menu_button_music_channel.play(pygame.mixer.Sound(menu_button_music_path))
                     if event.ui_element == start_button:
-                        start_shift(connect, cursor)
+                        shift_introduction(connect, cursor)
 
                     elif event.ui_element == ticket_management_button:
                         ticket_management(connect, cursor)

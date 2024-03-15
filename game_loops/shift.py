@@ -6,6 +6,43 @@ import elements.main_loop_elements as main_loop_elements
 from queries import ticket_ids, threats
 
 
+def shift_introduction(connect, cursor):
+
+    window_surface, clock, background = init.pygame_init()
+    manager = init.pygame_gui_init()
+
+    back_button = main_loop_elements.back_button_func(manager)
+
+    introduction_text = "The cyberspace has never been this dangerous. As an L1 SOC Analyst at MEEPS SECURITY, you must successfully assess 80% of the tickets to protect the clients."
+    introduction_tbox = main_loop_elements.introduction_tbox_func(manager, introduction_text)
+
+    continue_button = main_loop_elements.continue_button_func(manager)
+
+    running = True
+    while running:
+        time_delta = clock.tick(60) / 1000.0
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+            if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                if event.ui_element == back_button:
+                    running = False
+
+                if event.ui_element == continue_button:
+                    start_shift(connect, cursor)
+                    return
+
+            manager.process_events(event)
+
+        manager.update(time_delta)
+        window_surface.blit(background, (0, 0))
+        manager.draw_ui(window_surface)
+        pygame.display.update()
+
+
+
+
 def start_shift(connect, cursor):
 
     
