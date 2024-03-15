@@ -111,6 +111,11 @@ def start_shift(connect, cursor):
 
         ticket_transcript_channel = None
         background_music_channel.play(pygame.mixer.Sound(background_music_path), loops=-1)
+
+        back_button_music_path = "Assets/Sounds/back_button.mp3"
+        pygame.mixer.music.load(back_button_music_path)
+        back_button_music_channel = pygame.mixer.Channel(4)
+        back_button_music_channel.set_volume(0.2)
         
         running = True
         while running:
@@ -147,6 +152,7 @@ def start_shift(connect, cursor):
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     
                     if event.ui_element == back_button:
+                        back_button_music_channel.play(pygame.mixer.Sound(back_button_music_path))
                         background_music_channel.stop()
                         if ticket_transcript_channel:
                             ticket_transcript_channel.stop()

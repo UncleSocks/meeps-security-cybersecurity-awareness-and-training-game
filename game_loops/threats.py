@@ -186,6 +186,7 @@ def threat_database_management(connect, cursor):
         back_button_music_path = "Assets/Sounds/back_button.mp3"
         pygame.mixer.music.load(back_button_music_path)
         back_button_music_channel = pygame.mixer.Channel(4)
+        back_button_music_channel.set_volume(0.2)
         
         running = True
         while running:
@@ -198,7 +199,6 @@ def threat_database_management(connect, cursor):
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == back_button:
                         back_button_music_channel.play(pygame.mixer.Sound(back_button_music_path))
-                        back_button_music_channel.set_volume(0.2)
                         updated_threat_list = queries.threats(cursor)
                         return updated_threat_list
 
