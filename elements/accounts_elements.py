@@ -47,3 +47,34 @@ def account_entry_slist_func(manager, account_list):
                                                               anchors={'left':'left', 'bottom':'bottom'})
 
     return account_entry_slist
+
+
+def account_details(manager):
+
+    account_details_label_rect = pygame.Rect(360, 10, 150, 30)
+    account_details_label = pygame_gui.elements.UILabel(relative_rect=account_details_label_rect,
+                                                           text="ACCOUNT DETAILS", manager=manager)
+    
+    selected_account_description_tbox_rect = pygame.Rect(375, 40, 405, 160)
+    selected_account_description_tbox = pygame_gui.elements.UITextBox(relative_rect=selected_account_description_tbox_rect,
+                                                                     html_text="SELECT AN ACCOUNT", manager=manager)
+    
+    return account_details_label, selected_account_description_tbox
+
+
+def assigned_ticket_label_func(manager):
+
+    assigned_ticket_label_rect = pygame.Rect(365, 220, 150, 30)
+    assigned_ticket_label = pygame_gui.elements.UILabel(relative_rect=assigned_ticket_label_rect,
+                                                        text="ASSIGNED TICKETS", manager=manager)
+    
+    return assigned_ticket_label
+
+
+def assigned_tickets(manager, ticket_list):
+    
+    assigned_ticket_slist_rect = pygame.Rect(375, 250, 405, 390)
+    assigned_ticket_slist = pygame_gui.elements.UISelectionList(item_list=ticket_list, 
+                                                                relative_rect=assigned_ticket_slist_rect,
+                                                                manager=manager)
+    return assigned_ticket_slist

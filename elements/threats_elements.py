@@ -102,7 +102,7 @@ def add_threat_image_func(manager, image_path):
 
 def threat_entry_func(manager):
 
-    threat_entry_name_tentry_rect = pygame.Rect(15, 90, 765, 30)
+    threat_entry_name_tentry_rect = pygame.Rect(180, 90, 600, 30)
     threat_entry_name_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=threat_entry_name_tentry_rect,
                                                                    placeholder_text="ENTER THREAT TITLE",
                                                                    initial_text="ENTER THREAT TITLE",
