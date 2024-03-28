@@ -74,11 +74,19 @@ def selected_ticket_tbox_func(manager):
     selected_ticket_title_tbox = pygame_gui.elements.UITextBox(relative_rect=selected_ticket_title_tbox_rect,
                                                                html_text="", manager=manager)
     
-    selected_ticket_description_tbox_rect = pygame.Rect(375, 70, 405, 570)
+    selected_ticket_description_tbox_rect = pygame.Rect(375, 70, 405, 530)
     selected_ticket_description_tbox = pygame_gui.elements.UITextBox(relative_rect=selected_ticket_description_tbox_rect,
                                                                html_text="SELECT A TICKET", manager=manager)
     
     return selected_ticket_title_tbox, selected_ticket_description_tbox
+
+
+def selected_ticket_account_func(manager):
+
+    selected_ticket_account_tbox_rect = pygame.Rect(375, 605, 405, 35)
+    selected_ticket_account_tbox = pygame_gui.elements.UITextBox(relative_rect=selected_ticket_account_tbox_rect,
+                                                                 html_text="", manager=manager)
+    return selected_ticket_account_tbox
 
 
 def new_ticket_image_func(manager, image_path):
@@ -104,7 +112,7 @@ def bar_image_func(manager, image_path):
 
 def title_text_entry_func(manager):
     
-    title_text_entry_rect = pygame.Rect(15, 85, 765, 30)
+    title_text_entry_rect = pygame.Rect(15, 125, 765, 30)
     title_text_entry = pygame_gui.elements.UITextEntryBox(relative_rect=title_text_entry_rect,
                                                           placeholder_text="ENTER TICKET TITLE",
                                                           initial_text="ENTER TICKET TITLE",
@@ -114,12 +122,25 @@ def title_text_entry_func(manager):
 
 def ticket_text_entry_func(manager):
 
-    ticket_text_entry_rect = pygame.Rect(15, 120, 765, 240)
+    ticket_text_entry_rect = pygame.Rect(15, 160, 765, 200)
     ticket_text_entry = pygame_gui.elements.UITextEntryBox(relative_rect=ticket_text_entry_rect,
                                                            placeholder_text="ENTER TICKET DESCRIPTION",
                                                            initial_text="ENTER TICKET DESCRIPTION",
                                                            manager=manager)
     return ticket_text_entry
+
+
+def caller_dropdown_func(manager, account_list):
+
+    caller_dropdown_label_rect = pygame.Rect(60, 78, 285, 45)
+    caller_dropdown_label = pygame_gui.elements.UILabel(relative_rect=caller_dropdown_label_rect,
+                                                        text="SELECT TICKET CALLER ACCOUNT:",
+                                                        manager=manager)
+    
+    caller_dropdown_rect = pygame.Rect(325, 85, 455, 30)
+    caller_dropdown = pygame_gui.elements.UIDropDownMenu(relative_rect=caller_dropdown_rect, starting_option="Guest",
+                                                         options_list=account_list, manager=manager)
+    return caller_dropdown_label, caller_dropdown
 
 
 def threat_entry_slist_func(manager, threat_list):

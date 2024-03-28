@@ -4,6 +4,7 @@ import init
 import elements.main_menu as main_menu_element
 from game_loops.shift import shift_introduction
 from game_loops.tickets import ticket_management   
+from game_loops.accounts import accounts_management
 from game_loops.threats import threat_database_management
 
 
@@ -29,6 +30,7 @@ def main_menu():
 
         start_button = main_menu_element.start_button_func(manager)
         ticket_management_button = main_menu_element.ticket_management_button_func(manager)
+        account_management_button = main_menu_element.accounts_management_button_func(manager)
         threat_entries_button = main_menu_element.threat_entries_button_func(manager)
         quit_button = main_menu_element.quit_button_func(manager)
 
@@ -41,14 +43,15 @@ def main_menu():
         github_label = main_menu_element.github_label_func(manager)
 
         return main_menu_loop(connect, cursor, window_surface, clock, background, manager, start_button, 
-                              ticket_management_button, threat_entries_button, quit_button, main_title_image, 
+                              ticket_management_button, account_management_button, 
+                              threat_entries_button, quit_button, main_title_image, 
                               main_title_slogan, version_label, github_label)
 
 
     def main_menu_loop(connect, cursor, window_surface, clock, background, manager, 
-                       start_button, ticket_management_button, threat_entries_button, 
-                       quit_button, main_title_image, main_title_slogan, version_label, 
-                       github_label):
+                       start_button, ticket_management_button, account_management_button, 
+                       threat_entries_button, quit_button, main_title_image, 
+                       main_title_slogan, version_label, github_label):
         
         menu_button_music_path, menu_button_music_channel = music_init()
 
@@ -67,6 +70,9 @@ def main_menu():
                     elif event.ui_element == ticket_management_button:
                         ticket_management(connect, cursor)
 
+                    elif event.ui_element == account_management_button:
+                        accounts_management(connect, cursor)
+                    
                     elif event.ui_element == threat_entries_button:
                         threat_database_management(connect, cursor)
 

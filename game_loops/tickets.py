@@ -63,6 +63,7 @@ def ticket_management(connect, cursor):
         ticket_entry_title_tbox = ticket_elements.ticket_entry_slist_misc_func(manager)
         ticket_entry_slist = ticket_elements.ticket_entry_slist_func(manager, ticket_list)
         selected_ticket_title_tbox, selected_ticket_description_tbox = ticket_elements.selected_ticket_tbox_func(manager)
+        selected_ticket_account_tbox = ticket_elements.selected_ticket_account_func(manager)
 
         selected_ticket_id = None
         selected_threat, ticket_title, ticket_entry, ticket_confirm_window = ticket_management_init_values()
@@ -72,7 +73,7 @@ def ticket_management(connect, cursor):
                                 id_list, ticket_list, back_button, ticket_manager_image, 
                                 ticket_information_label, create_button, delete_button, 
                                 ticket_entry_title_tbox, ticket_entry_slist, 
-                                selected_ticket_title_tbox, selected_ticket_description_tbox, 
+                                selected_ticket_title_tbox, selected_ticket_description_tbox, selected_ticket_account_tbox, 
                                 selected_threat, ticket_title, ticket_entry, ticket_confirm_window, 
                                 selected_ticket_id)
 
@@ -81,7 +82,7 @@ def ticket_management(connect, cursor):
                         id_list, ticket_list, back_button, ticket_manager_image, 
                         ticket_information_label, create_button, delete_button, 
                         ticket_entry_title_tbox, ticket_entry_slist, 
-                        selected_ticket_title_tbox, selected_ticket_description_tbox, 
+                        selected_ticket_title_tbox, selected_ticket_description_tbox, selected_ticket_account_tbox, 
                         selected_threat, ticket_title, ticket_entry, ticket_confirm_window, 
                         selected_ticket_id):
         
@@ -124,10 +125,11 @@ def ticket_management(connect, cursor):
                         id_index_find = ticket_list.index(selected_ticket)
                         selected_ticket_id = id_list[id_index_find]
                         
-                        cursor.execute('SELECT title, entry, caller_id FROM tickets WHERE id=?', [selected_ticket_id])
-                        title, entry, caller_id = cursor.fetchone()
+                        cursor.execute('SELECT t.title, t.entry, a.name FROM tickets t JOIN accounts a ON t.caller_id = a.id WHERE t.id=?', [selected_ticket_id])
+                        title, entry, caller_name = cursor.fetchone()
                         selected_ticket_title_tbox.set_text(f"<b>{title}</b>")
                         selected_ticket_description_tbox.set_text(f"{entry}")
+                        selected_ticket_account_tbox.set_text(f"<b>CALLER:</b> {caller_name}")
 
                 if selected_ticket_id is not None:
                     if event.type == pygame_gui.UI_BUTTON_PRESSED:
@@ -158,6 +160,7 @@ def ticket_management(connect, cursor):
         manager = init.pygame_gui_init()
 
         threat_list = queries.threats(cursor)
+        account_list = queries.accounts(cursor)
 
         ticket_image_path = "Assets/new_ticket.png"
         new_ticket_image = ticket_elements.new_ticket_image_func(manager, ticket_image_path)
@@ -166,6 +169,8 @@ def ticket_management(connect, cursor):
         title_text_entry = ticket_elements.title_text_entry_func(manager)
 
         ticket_text_entry = ticket_elements.ticket_text_entry_func(manager)
+        caller_dropdown_label, caller_dropdown = ticket_elements.caller_dropdown_func(manager, account_list)
+
         create_button, threat_entry_title_tbox, threat_entry_slist = ticket_elements.threat_entry_slist_func(manager, threat_list)
         threat_description_tbox = ticket_elements.threat_description_tbox_func(manager)
 
@@ -173,14 +178,15 @@ def ticket_management(connect, cursor):
 
         return ticket_creation(connect, cursor, window_surface, clock, background, manager, 
                                threat_list, new_ticket_image, back_button, title_text_entry,
-                               ticket_text_entry, create_button, threat_entry_title_tbox, threat_entry_slist, 
+                               ticket_text_entry, caller_dropdown_label, caller_dropdown, create_button, threat_entry_title_tbox, threat_entry_slist, 
                                threat_description_tbox, selected_threat, ticket_title, ticket_entry, 
                                ticket_confirm_window)
     
         
     def ticket_creation(connect, cursor, window_surface, clock, background, manager, 
                         threat_list, new_ticket_image, back_button, title_text_entry, 
-                        ticket_text_entry, create_button, threat_entry_title_tbox, threat_entry_slist, 
+                        ticket_text_entry, caller_dropdown_label, caller_dropdown, create_button, 
+                        threat_entry_title_tbox, threat_entry_slist, 
                         threat_description_tbox, selected_threat, ticket_title, ticket_entry,
                         ticket_confirm_window):
 
@@ -196,6 +202,8 @@ def ticket_management(connect, cursor):
         pygame.mixer.music.load(back_button_music_path)
         back_button_music_channel = pygame.mixer.Channel(4)
         back_button_music_channel.set_volume(0.2)
+
+        selected_caller = None
         
         
         running = True
@@ -223,6 +231,10 @@ def ticket_management(connect, cursor):
                         description, indicators, countermeasures = cursor.fetchone()
                         threat_description_tbox.set_text(f'<b>{selected_threat.upper()}</b>\n<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
 
+                if event.type == pygame_gui.UI_DROP_DOWN_MENU_CHANGED:
+                    if event.ui_element == caller_dropdown:
+                        selected_caller = event.text
+                
                 ticket_title = title_text_entry.get_text()
                 ticket_entry = ticket_text_entry.get_text()
                 
@@ -230,6 +242,13 @@ def ticket_management(connect, cursor):
                     if event.type == pygame_gui.UI_BUTTON_PRESSED:
                         if event.ui_element == create_button:
 
+                            
+                            if selected_caller is None:
+                                selected_caller_id = 1
+                            else:
+                                cursor.execute('SELECT id FROM accounts WHERE name=?', [selected_caller])
+                                selected_caller_id = int(cursor.fetchone()[0])
+                            
                             create_button_music_channel.play(pygame.mixer.Sound(create_button_music_path))
 
                             cursor.execute('SELECT MAX(id) FROM tickets')
@@ -239,7 +258,7 @@ def ticket_management(connect, cursor):
                             transcript_path = ticket_transcript_generator(new_id, ticket_entry)
                             print(transcript_path)
 
-                            new_ticket = (new_id, ticket_title, ticket_entry, selected_threat, 1, transcript_path)
+                            new_ticket = (new_id, ticket_title, ticket_entry, selected_threat, selected_caller_id, transcript_path)
                             cursor.execute('INSERT INTO tickets VALUES (?, ?, ?, ?, ?, ?)', new_ticket)
                             connect.commit()
 

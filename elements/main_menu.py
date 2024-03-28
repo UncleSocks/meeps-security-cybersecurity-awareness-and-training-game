@@ -39,9 +39,19 @@ def ticket_management_button_func(manager):
     return ticket_management_button
 
 
+def accounts_management_button_func(manager):
+
+    accounts_button_rect = pygame.Rect(0, -195, 300, 40)
+    accounts_button = pygame_gui.elements.UIButton(relative_rect=accounts_button_rect,
+                                                   text="MANAGE ACCOUNTS", manager=manager,
+                                                   anchors={'centerx':'centerx', 'bottom':'bottom'})
+    
+    return accounts_button
+
+
 def threat_entries_button_func(manager):
 
-    threat_entries_button_rect = pygame.Rect(0, -195, 300, 40)
+    threat_entries_button_rect = pygame.Rect(0, -135, 300, 40)
     threat_entries_button = pygame_gui.elements.UIButton(relative_rect=threat_entries_button_rect,
                                                          text="THREAT DATABASE", manager=manager,
                                                          anchors={'centerx':'centerx', 'bottom':'bottom'})
@@ -50,10 +60,9 @@ def threat_entries_button_func(manager):
 
 def quit_button_func(manager):
 
-    quit_button_rect = pygame.Rect(0, -135, 300, 40)
+    quit_button_rect = pygame.Rect(10, 10, 100, 40)
     quit_button = pygame_gui.elements.UIButton(relative_rect=quit_button_rect,
-                                                 text="LOG OFF", manager=manager,
-                                                 anchors={'centerx':'centerx', 'bottom':'bottom'})
+                                                 text="LOG OFF", manager=manager)
     return quit_button
 
 

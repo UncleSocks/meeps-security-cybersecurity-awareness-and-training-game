@@ -18,6 +18,15 @@ def threats(cursor):
     return threat_list
 
 
+def accounts(cursor):
+
+    cursor.execute('SELECT name FROM accounts')
+    account_list_results = cursor.fetchall()
+    account_list = [account_list_result[0] for account_list_result in account_list_results]
+
+    return account_list
+
+
 def tickets(cursor):
 
     cursor.execute('SELECT id, title FROM tickets')
