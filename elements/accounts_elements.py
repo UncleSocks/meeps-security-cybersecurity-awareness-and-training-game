@@ -78,3 +78,66 @@ def assigned_tickets(manager, ticket_list):
                                                                 relative_rect=assigned_ticket_slist_rect,
                                                                 manager=manager)
     return assigned_ticket_slist
+
+
+def new_account_name_tentry_func(manager):
+
+    account_name_label_rect = pygame.Rect(20, 100, 100, 30)
+    account_name_label = pygame_gui.elements.UILabel(relative_rect=account_name_label_rect,
+                                                     text="ACCOUNT NAME", manager=manager)
+    
+    new_account_name_tentry_rect = pygame.Rect(15, 125, 765, 30)
+    new_account_name_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=new_account_name_tentry_rect,
+                                                                 manager=manager)
+    return account_name_label, new_account_name_tentry
+
+def new_account_organization_func(manager):
+
+    organization_label_rect = pygame.Rect(20, 170, 100, 30)
+    organization_label = pygame_gui.elements.UILabel(relative_rect=organization_label_rect,
+                                                     text="ORGANIZATION NAME", manager=manager)
+    
+    organization_tentry_rect = pygame.Rect(15, 195, 765, 30)
+    organization_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=organization_tentry_rect, 
+                                                             manager=manager)
+    
+    return organization_label, organization_tentry
+
+
+def new_account_email_func(manager):
+
+    account_email_rect = pygame.Rect(20, 240, 50, 30)
+    account_email = pygame_gui.elements.UILabel(relative_rect=account_email_rect,
+                                                text="EMAIL", manager=manager)
+    
+    account_email_tentry_rect = pygame.Rect(15, 265, 765, 30)
+    account_email_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=account_email_tentry_rect,
+                                                              manager=manager)
+    
+    return account_email, account_email_tentry
+
+
+def new_account_contact_func(manager):
+
+    account_contact_rect = pygame.Rect(20, 310, 65, 30)
+    account_contact = pygame_gui.elements.UILabel(relative_rect=account_contact_rect,
+                                                  text="CONTACT", manager=manager)
+    
+    account_contact_tentry_rect = pygame.Rect(15, 335, 765, 30)
+    account_contact_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=account_contact_tentry_rect,
+                                                                manager=manager)
+    
+    return account_contact, account_contact_tentry
+
+
+def new_account_picture_path_func(manager):
+
+    account_picture_path_label_rect = pygame.Rect(15, 385, 100, 30)
+    account_picture_path_label = pygame_gui.elements.UILabel(relative_rect=account_picture_path_label_rect,
+                                                             text="PICTURE PATH", manager=manager)
+    
+    account_picture_path_tentry_rect = pygame.Rect(15, 405, 765, 30)
+    account_picture_path_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=account_picture_path_tentry_rect,
+                                                                     manager=manager)
+    
+    return account_picture_path_label, account_picture_path_tentry

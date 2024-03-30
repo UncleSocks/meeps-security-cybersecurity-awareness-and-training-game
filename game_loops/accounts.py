@@ -82,6 +82,12 @@ def accounts_management(connect, cursor):
 
         back_button = accounts_elements.back_button_func(manager)
 
+        account_name_label, new_account_name_tentry = accounts_elements.new_account_name_tentry_func(manager)
+        organization_label, organization_tentry = accounts_elements.new_account_organization_func(manager)
+        account_email, account_email_tentry = accounts_elements.new_account_email_func(manager)
+        account_contact, account_contact_tentry = accounts_elements.new_account_contact_func(manager)
+        account_picture_path_label, account_picture_path_tentry = accounts_elements.new_account_picture_path_func(manager)
+
         running = True
         while running:
             time_delta = clock.tick(60) / 1000.0
