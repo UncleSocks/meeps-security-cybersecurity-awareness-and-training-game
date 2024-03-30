@@ -160,7 +160,7 @@ def ticket_management(connect, cursor):
         manager = init.pygame_gui_init()
 
         threat_list = queries.threats(cursor)
-        account_list = queries.accounts(cursor)
+        id_list, account_list = queries.accounts(cursor)
 
         ticket_image_path = "Assets/new_ticket.png"
         new_ticket_image = ticket_elements.new_ticket_image_func(manager, ticket_image_path)
