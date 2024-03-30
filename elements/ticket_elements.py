@@ -74,16 +74,22 @@ def selected_ticket_tbox_func(manager):
     selected_ticket_title_tbox = pygame_gui.elements.UITextBox(relative_rect=selected_ticket_title_tbox_rect,
                                                                html_text="", manager=manager)
     
-    selected_ticket_description_tbox_rect = pygame.Rect(375, 70, 405, 530)
+    selected_ticket_description_tbox_rect = pygame.Rect(375, 70, 405, 400)
     selected_ticket_description_tbox = pygame_gui.elements.UITextBox(relative_rect=selected_ticket_description_tbox_rect,
                                                                html_text="SELECT A TICKET", manager=manager)
     
     return selected_ticket_title_tbox, selected_ticket_description_tbox
 
+def account_details_label_func(manager):
+
+    account_details_label_rect = pygame.Rect(370, 480, 195, 35)
+    account_details_label = pygame_gui.elements.UILabel(relative_rect=account_details_label_rect,
+                                                        text="CALLER ACCOUNT DETAILS", manager=manager)
+    return account_details_label
 
 def selected_ticket_account_func(manager):
 
-    selected_ticket_account_tbox_rect = pygame.Rect(375, 605, 405, 35)
+    selected_ticket_account_tbox_rect = pygame.Rect(375, 510, 405, 130)
     selected_ticket_account_tbox = pygame_gui.elements.UITextBox(relative_rect=selected_ticket_account_tbox_rect,
                                                                  html_text="", manager=manager)
     return selected_ticket_account_tbox

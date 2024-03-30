@@ -63,6 +63,8 @@ def ticket_management(connect, cursor):
         ticket_entry_title_tbox = ticket_elements.ticket_entry_slist_misc_func(manager)
         ticket_entry_slist = ticket_elements.ticket_entry_slist_func(manager, ticket_list)
         selected_ticket_title_tbox, selected_ticket_description_tbox = ticket_elements.selected_ticket_tbox_func(manager)
+        
+        account_details_label = ticket_elements.account_details_label_func(manager)
         selected_ticket_account_tbox = ticket_elements.selected_ticket_account_func(manager)
 
         selected_ticket_id = None
@@ -73,18 +75,20 @@ def ticket_management(connect, cursor):
                                 id_list, ticket_list, back_button, ticket_manager_image, 
                                 ticket_information_label, create_button, delete_button, 
                                 ticket_entry_title_tbox, ticket_entry_slist, 
-                                selected_ticket_title_tbox, selected_ticket_description_tbox, selected_ticket_account_tbox, 
-                                selected_threat, ticket_title, ticket_entry, ticket_confirm_window, 
+                                selected_ticket_title_tbox, selected_ticket_description_tbox, 
+                                account_details_label, selected_ticket_account_tbox, selected_threat, 
+                                ticket_title, ticket_entry, ticket_confirm_window, 
                                 selected_ticket_id)
 
 
-    def ticket_management_loop(connect, cursor, window_surface, clock, background, manager, 
-                        id_list, ticket_list, back_button, ticket_manager_image, 
-                        ticket_information_label, create_button, delete_button, 
-                        ticket_entry_title_tbox, ticket_entry_slist, 
-                        selected_ticket_title_tbox, selected_ticket_description_tbox, selected_ticket_account_tbox, 
-                        selected_threat, ticket_title, ticket_entry, ticket_confirm_window, 
-                        selected_ticket_id):
+    def ticket_management_loop(connect, cursor, window_surface, clock, background, manager,
+                                id_list, ticket_list, back_button, ticket_manager_image, 
+                                ticket_information_label, create_button, delete_button, 
+                                ticket_entry_title_tbox, ticket_entry_slist, 
+                                selected_ticket_title_tbox, selected_ticket_description_tbox, 
+                                account_details_label, selected_ticket_account_tbox, selected_threat, 
+                                ticket_title, ticket_entry, ticket_confirm_window, 
+                                selected_ticket_id):
         
         menu_button_music_path, menu_button_music_channel, delete_button_music_path, delete_button_music_channel, add_button_music_path, add_button_music_channel = music_init()
 
@@ -125,11 +129,11 @@ def ticket_management(connect, cursor):
                         id_index_find = ticket_list.index(selected_ticket)
                         selected_ticket_id = id_list[id_index_find]
                         
-                        cursor.execute('SELECT t.title, t.entry, a.name FROM tickets t JOIN accounts a ON t.caller_id = a.id WHERE t.id=?', [selected_ticket_id])
-                        title, entry, caller_name = cursor.fetchone()
+                        cursor.execute('SELECT t.title, t.entry, a.name, a.organization, a.email, a.contact FROM tickets t JOIN accounts a ON t.caller_id = a.id WHERE t.id=?', [selected_ticket_id])
+                        title, entry, name, organization, email, contact = cursor.fetchone()
                         selected_ticket_title_tbox.set_text(f"<b>{title}</b>")
                         selected_ticket_description_tbox.set_text(f"{entry}")
-                        selected_ticket_account_tbox.set_text(f"<b>CALLER:</b> {caller_name}")
+                        selected_ticket_account_tbox.set_text(f"<b>Name:</b> {name}\n<b>Organization:</b> {organization}\n<b>Email:</b> {email}\n<b>Contact:</b> {contact}")
 
                 if selected_ticket_id is not None:
                     if event.type == pygame_gui.UI_BUTTON_PRESSED:
