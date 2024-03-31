@@ -59,7 +59,10 @@ def caller_profile_tbox_func(manager):
 def caller_profile_image_func(manager, image_path):
 
     caller_profile_image_rect = pygame.Rect(18, 180, 98, 98)
-    caller_profile_image_load = pygame.image.load(image_path)
+    try:
+        caller_profile_image_load = pygame.image.load(image_path)
+    except:
+        caller_profile_image_load = pygame.image.load("Assets/Profile_Images/guest.png")
     caller_profile_image = pygame_gui.elements.UIImage(relative_rect=caller_profile_image_rect,
                                                        image_surface=caller_profile_image_load,
                                                        manager=manager)

@@ -141,3 +141,34 @@ def new_account_picture_path_func(manager):
                                                                      manager=manager)
     
     return account_picture_path_label, account_picture_path_tentry
+
+
+def add_new_account_button_func(manager):
+
+    add_account_button_rect = pygame.Rect(15, 455, 120, 40)
+    add_account_button = pygame_gui.elements.UIButton(relative_rect=add_account_button_rect, 
+                                                      text="ADD ACCOUNT", manager=manager)
+    return add_account_button
+
+
+def account_confirm_window_func(manager):
+    
+    account_confirm_window_rect = pygame.Rect(0, 0, 400, 200)
+    account_confirm_window = pygame_gui.elements.UIWindow(rect=account_confirm_window_rect,
+                                                 window_display_title="MEEPS SECURITY: New Account",
+                                                 manager=manager)
+    
+    account_confirm_window_label_rect = pygame.Rect(0, -10, 300, 200)
+    account_confirm_window_label = pygame_gui.elements.UILabel(relative_rect=account_confirm_window_label_rect, 
+                                                            text="ACCOUNT SUCCESSFULLY CREATED", 
+                                                            manager=manager,
+                                                            container=account_confirm_window,
+                                                            anchors={'center':'center'})
+    
+    account_confirm_close_button_rect = pygame.Rect(10, 10, 200, 40)
+    account_confirm_close_button_rect.bottomright = (285, -10)
+    account_confirm_close_button = pygame_gui.elements.UIButton(relative_rect=account_confirm_close_button_rect, 
+                                                                     text="OK", manager=manager,container=account_confirm_window,
+                                                                     anchors={'left':'left', 'bottom':'bottom'})
+    
+    return account_confirm_window, account_confirm_close_button
