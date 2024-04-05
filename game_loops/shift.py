@@ -48,23 +48,23 @@ def start_shift(connect, cursor):
     
     def music_init():
 
-        incoming_call_music_path = "Assets/Sounds/incoming_call_2.mp3"
+        incoming_call_music_path = "assets/sounds/incoming_call_2.mp3"
         pygame.mixer.music.load(incoming_call_music_path)
         incoming_call_channel = pygame.mixer.Channel(0)
 
-        background_music_path = "Assets/Sounds/background2.mp3"
+        background_music_path = "assets/sounds/background2.mp3"
         pygame.mixer.music.load(background_music_path)
         background_music_channel = pygame.mixer.Channel(1)
 
-        list_click_music_path = "Assets/Sounds/list_click2.mp3"
+        list_click_music_path = "assets/sounds/list_click2.mp3"
         pygame.mixer.music.load(list_click_music_path)
         list_click_music_channel = pygame.mixer.Channel(2)
 
-        incorrect_submit_music_path = "Assets/Sounds/incorrect_submit.mp3"
+        incorrect_submit_music_path = "assets/sounds/incorrect_submit.mp3"
         pygame.mixer.music.load(incorrect_submit_music_path)
         incorrect_submit_music_channel = pygame.mixer.Channel(3)
 
-        correct_submit_music_path = "Assets/Sounds/correct_submit.mp3"
+        correct_submit_music_path = "assets/sounds/correct_submit.mp3"
         pygame.mixer.music.load(correct_submit_music_path)
         correct_submit_music_channel = pygame.mixer.Channel(4)
 
@@ -102,7 +102,7 @@ def start_shift(connect, cursor):
         missed_tickets = 0
         current_ticket_id_index = 0
         
-        title_image_path = "Assets/title.png"
+        title_image_path = "assets/images/general/title.png"
         
         back_button = main_loop_elements.back_button_func(manager)
         title_label = main_loop_elements.title_image_func(manager, title_image_path)
@@ -149,7 +149,7 @@ def start_shift(connect, cursor):
         ticket_transcript_channel = None
         background_music_channel.play(pygame.mixer.Sound(background_music_path), loops=-1)
 
-        back_button_music_path = "Assets/Sounds/back_button.mp3"
+        back_button_music_path = "assets/sounds/back_button.mp3"
         pygame.mixer.music.load(back_button_music_path)
         back_button_music_channel = pygame.mixer.Channel(4)
         back_button_music_channel.set_volume(0.2)
@@ -174,7 +174,7 @@ def start_shift(connect, cursor):
 
                         cursor.execute('SELECT description, indicators, countermeasures, image FROM threats WHERE name=?', [selected_threat])
                         description, indicators, countermeasures, image_file = cursor.fetchone()
-                        image_path = f"Assets/images/threats/{image_file}"
+                        image_path = f"assets/images/threats/{image_file}"
                         threat_title_tbox.set_text(f'<b>{selected_threat.upper()}</b>')
                         
                         try:
@@ -182,7 +182,7 @@ def start_shift(connect, cursor):
                             threat_image.set_image(new_image=threat_image_load)
                             threat_description_tbox.set_text(f'<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
                         except:
-                            threat_image_load = pygame.image.load("Assets/Threat_Images/default.png")
+                            threat_image_load = pygame.image.load("assets/images/threats/default.png")
                             threat_image.set_image(new_image=threat_image_load)
                             threat_description_tbox.set_text(f'<b>Description</b>:\n{description}\n<b>Indicators:\n</b>{indicators}\n<b>Countermeasures:</b>\n{countermeasures}')
 
@@ -275,7 +275,7 @@ def start_shift(connect, cursor):
                                 cursor.execute('SELECT t.title, t.entry, t.answer, a.name, a.organization, a.email, a.contact, a.picture FROM tickets t JOIN accounts a ON t.caller_id = a.id WHERE t.id=?',
                                                [selected_id])
                                 title, current_ticket, answer, caller_name, caller_org, caller_email, caller_contact, caller_picture_file = cursor.fetchone()
-                                caller_picture = f"Assets/images/accounts/{caller_picture_file}"
+                                caller_picture = f"assets/images/accounts/{caller_picture_file}"
                                 selected_threat = None
 
                                 ticket_title_text = f"<b>ID#{selected_id} | {title}</b>"

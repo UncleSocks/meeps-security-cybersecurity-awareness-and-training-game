@@ -10,7 +10,7 @@ def pygame_init():
     pygame.init()
     pygame.display.set_caption('MEEPS SECURITY Responder.exe')
 
-    icon_path = "Assets/icon.png"
+    icon_path = "assets/images/general/icon.png"
     icon_load = pygame.image.load(icon_path)
     pygame.display.set_icon(icon_load)
 

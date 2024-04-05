@@ -10,7 +10,7 @@ def ticket_transcript_generator(id, ticket):
 
     
     engine = pyttsx3.init()
-    filename = f"Assets/Sounds/{id}_transcript.wav"
+    filename = f"assets/sounds/{id}_transcript.wav"
     ticket_transcript_path = engine.save_to_file(ticket, filename)
     engine.runAndWait()
 
@@ -33,15 +33,15 @@ def ticket_management(connect, cursor):
     
     def music_init():
 
-        menu_button_music_path = "Assets/Sounds/list_click2.mp3"
+        menu_button_music_path = "assets/sounds/list_click2.mp3"
         pygame.mixer.music.load(menu_button_music_path)
         menu_button_music_channel = pygame.mixer.Channel(0)
 
-        delete_button_music_path = "Assets/Sounds/delete_button.mp3"
+        delete_button_music_path = "assets/sounds/delete_button.mp3"
         pygame.mixer.music.load(delete_button_music_path)
         delete_button_music_channel = pygame.mixer.Channel(1)
 
-        add_button_music_path = "Assets/Sounds/add_button.mp3"
+        add_button_music_path = "assets/sounds/add_button.mp3"
         pygame.mixer.music.load(add_button_music_path)
         add_button_music_channel = pygame.mixer.Channel(2)
 
@@ -56,7 +56,7 @@ def ticket_management(connect, cursor):
         id_list, ticket_list = queries.tickets(cursor)
 
         back_button = ticket_elements.back_button_func(manager)
-        ticket_manager_image = ticket_elements.ticket_manager_image_func(manager, "Assets/ticket_mngr.png")
+        ticket_manager_image = ticket_elements.ticket_manager_image_func(manager, "assets/images/general/ticket_mngr.png")
         ticket_information_label = ticket_elements.ticket_information_label_func(manager)
 
         create_button, delete_button = ticket_elements.create_ticket_button_func(manager)
@@ -92,7 +92,7 @@ def ticket_management(connect, cursor):
         
         menu_button_music_path, menu_button_music_channel, delete_button_music_path, delete_button_music_channel, add_button_music_path, add_button_music_channel = music_init()
 
-        back_button_music_path = "Assets/Sounds/back_button.mp3"
+        back_button_music_path = "assets/sounds/back_button.mp3"
         pygame.mixer.music.load(back_button_music_path)
         back_button_music_channel = pygame.mixer.Channel(4)
         back_button_music_channel.set_volume(0.2)
@@ -166,7 +166,7 @@ def ticket_management(connect, cursor):
         threat_list = queries.threats(cursor)
         id_list, account_list = queries.accounts(cursor)
 
-        ticket_image_path = "Assets/new_ticket.png"
+        ticket_image_path = "assets/images/general/new_ticket.png"
         new_ticket_image = ticket_elements.new_ticket_image_func(manager, ticket_image_path)
 
         back_button = ticket_elements.back_button_func(manager)
@@ -194,15 +194,15 @@ def ticket_management(connect, cursor):
                         threat_description_tbox, selected_threat, ticket_title, ticket_entry,
                         ticket_confirm_window):
 
-        menu_button_music_path = "Assets/Sounds/list_click2.mp3"
+        menu_button_music_path = "assets/sounds/list_click2.mp3"
         pygame.mixer.music.load(menu_button_music_path)
         menu_button_music_channel = pygame.mixer.Channel(0)
 
-        create_button_music_path = "Assets/Sounds/create_button.mp3"
+        create_button_music_path = "assets/sounds/create_button.mp3"
         pygame.mixer.music.load(create_button_music_path)
         create_button_music_channel = pygame.mixer.Channel(3)
 
-        back_button_music_path = "Assets/Sounds/back_button.mp3"
+        back_button_music_path = "assets/sounds/back_button.mp3"
         pygame.mixer.music.load(back_button_music_path)
         back_button_music_channel = pygame.mixer.Channel(4)
         back_button_music_channel.set_volume(0.2)

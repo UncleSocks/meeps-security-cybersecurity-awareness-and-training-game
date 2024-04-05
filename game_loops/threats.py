@@ -22,15 +22,15 @@ def threat_database_management(connect, cursor):
     
     def music_init():
 
-        menu_button_music_path = "Assets/Sounds/list_click2.mp3"
+        menu_button_music_path = "assets/sounds/list_click2.mp3"
         pygame.mixer.music.load(menu_button_music_path)
         menu_button_music_channel = pygame.mixer.Channel(0)
 
-        delete_button_music_path = "Assets/Sounds/delete_button.mp3"
+        delete_button_music_path = "assets/sounds/delete_button.mp3"
         pygame.mixer.music.load(delete_button_music_path)
         delete_button_music_channel = pygame.mixer.Channel(1)
 
-        add_button_music_path = "Assets/Sounds/add_button.mp3"
+        add_button_music_path = "assets/sounds/add_button.mp3"
         pygame.mixer.music.load(add_button_music_path)
         add_button_music_channel = pygame.mixer.Channel(2)
 
@@ -43,7 +43,7 @@ def threat_database_management(connect, cursor):
         manager = init.pygame_gui_init()
 
         threat_list = queries.threats(cursor)
-        threat_database_image_path = "Assets/threat_database.png"
+        threat_database_image_path = "assets/images/general/threat_database.png"
 
         back_button = threat_element.back_button_func(manager)
         threat_database_image = threat_element.threat_database_image_func(manager, 
@@ -81,7 +81,7 @@ def threat_database_management(connect, cursor):
 
         menu_button_music_path, menu_button_music_channel, delete_button_music_path, delete_button_music_channel, add_button_music_path, add_button_music_channel = music_init()
         
-        back_button_music_path = "Assets/Sounds/back_button.mp3"
+        back_button_music_path = "assets/sounds/back_button.mp3"
         pygame.mixer.music.load(back_button_music_path)
         back_button_music_channel = pygame.mixer.Channel(3)
        
@@ -151,7 +151,7 @@ def threat_database_management(connect, cursor):
         window_surface, clock, background = init.pygame_init()
         manager = init.pygame_gui_init()
 
-        add_threat_image_path = "Assets/add_threat.png"
+        add_threat_image_path = "assets/images/general/add_threat.png"
         add_threat_image = threat_element.add_threat_image_func(manager, add_threat_image_path)
 
         back_button = threat_element.back_button_func(manager)
@@ -179,11 +179,11 @@ def threat_database_management(connect, cursor):
                              threat_entry_countermeasures, threat_confirm_window):
         
         
-        create_button_music_path = "Assets/Sounds/create_button.mp3"
+        create_button_music_path = "assets/sounds/create_button.mp3"
         pygame.mixer.music.load(create_button_music_path)
         create_button_music_channel = pygame.mixer.Channel(3)
 
-        back_button_music_path = "Assets/Sounds/back_button.mp3"
+        back_button_music_path = "assets/sounds/back_button.mp3"
         pygame.mixer.music.load(back_button_music_path)
         back_button_music_channel = pygame.mixer.Channel(4)
         back_button_music_channel.set_volume(0.2)

@@ -62,7 +62,7 @@ def caller_profile_image_func(manager, image_path):
     try:
         caller_profile_image_load = pygame.image.load(image_path)
     except:
-        caller_profile_image_load = pygame.image.load("Assets/Profile_Images/guest.png")
+        caller_profile_image_load = pygame.image.load("assets/images/accounts/guest.png")
     caller_profile_image = pygame_gui.elements.UIImage(relative_rect=caller_profile_image_rect,
                                                        image_surface=caller_profile_image_load,
                                                        manager=manager)
@@ -112,7 +112,7 @@ def threat_panel_func(manager):
                                                  object_id=ObjectID(object_id='#threat'))
     
     threat_image_rect = pygame.Rect(0, 40, 250, 50)
-    threat_image_load = pygame.image.load("Assets/blank.png")
+    threat_image_load = pygame.image.load("assets/images/general/blank.png")
     threat_image = pygame_gui.elements.UIImage(relative_rect=threat_image_rect,
                                                image_surface=threat_image_load, 
                                                container=threat_panel, manager=manager,
