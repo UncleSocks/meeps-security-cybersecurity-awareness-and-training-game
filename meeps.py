@@ -34,7 +34,7 @@ def main_menu():
         threat_entries_button = main_menu_element.threat_entries_button_func(manager)
         quit_button = main_menu_element.quit_button_func(manager)
 
-        title_image_path = "Assets/title.png"
+        title_image_path = "Assets/images/general/title.png"
         main_title_image = main_menu_element.main_title_image_func(manager, title_image_path)
         main_title_slogan = main_menu_element.main_title_slogan_label_func(manager)
 

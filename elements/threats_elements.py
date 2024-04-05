@@ -128,8 +128,8 @@ def threat_entry_func(manager):
     
     threat_entry_image_path_tentry_rect = pygame.Rect(15, 610, 765, 30)
     threat_entry_image_path_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=threat_entry_image_path_tentry_rect,
-                                                                        placeholder_text="ENTER THREAT IMAGE PATH",
-                                                                        initial_text="ENTER THREAT IMAGE PATH",
+                                                                        placeholder_text="ENTER THREAT IMAGE FILENAME",
+                                                                        initial_text="ENTER THREAT IMAGE FILENAME",
                                                                         manager=manager)
     
     return threat_entry_name_tentry, threat_entry_description_tentry, threat_entry_indicators_tentry, threat_entry_countermeasures_tentry, threat_entry_image_path_tentry

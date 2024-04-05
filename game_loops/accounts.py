@@ -70,7 +70,7 @@ def accounts_management(connect, cursor):
 
                         cursor.execute('SELECT name, organization, email, contact, picture FROM accounts WHERE id=?', [selected_account_id])
                         name, organization, email, contact, picture_path = cursor.fetchone()
-                        selected_account_description_tbox.set_text(f"<b>Name:</b> {name}\n<b>Organization:</b> {organization}\n<b>Email:</b> {email}\n<b>Contact:</b> {contact}\n<b>Picture Path:</b> {picture_path}")
+                        selected_account_description_tbox.set_text(f"<b>Name:</b> {name}\n<b>Organization:</b> {organization}\n<b>Email:</b> {email}\n<b>Contact:</b> {contact}\n<b>Picture Filename:</b> {picture_path}")
 
                         cursor.execute('SELECT title FROM tickets WHERE caller_id=?', [selected_account_id])
                         assigned_tickets_results = cursor.fetchall()

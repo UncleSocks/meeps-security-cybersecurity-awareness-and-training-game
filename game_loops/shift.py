@@ -173,7 +173,8 @@ def start_shift(connect, cursor):
                         list_click_music_channel.play(pygame.mixer.Sound(list_click_music_path))
 
                         cursor.execute('SELECT description, indicators, countermeasures, image FROM threats WHERE name=?', [selected_threat])
-                        description, indicators, countermeasures, image_path = cursor.fetchone()
+                        description, indicators, countermeasures, image_file = cursor.fetchone()
+                        image_path = f"Assets/images/threats/{image_file}"
                         threat_title_tbox.set_text(f'<b>{selected_threat.upper()}</b>')
                         
                         try:
@@ -273,7 +274,8 @@ def start_shift(connect, cursor):
                                 selected_id = ticket_ids_list[0]
                                 cursor.execute('SELECT t.title, t.entry, t.answer, a.name, a.organization, a.email, a.contact, a.picture FROM tickets t JOIN accounts a ON t.caller_id = a.id WHERE t.id=?',
                                                [selected_id])
-                                title, current_ticket, answer, caller_name, caller_org, caller_email, caller_contact, caller_picture = cursor.fetchone()
+                                title, current_ticket, answer, caller_name, caller_org, caller_email, caller_contact, caller_picture_file = cursor.fetchone()
+                                caller_picture = f"Assets/images/accounts/{caller_picture_file}"
                                 selected_threat = None
 
                                 ticket_title_text = f"<b>ID#{selected_id} | {title}</b>"

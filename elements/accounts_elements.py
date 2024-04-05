@@ -132,9 +132,9 @@ def new_account_contact_func(manager):
 
 def new_account_picture_path_func(manager):
 
-    account_picture_path_label_rect = pygame.Rect(15, 385, 100, 30)
+    account_picture_path_label_rect = pygame.Rect(10, 380, 150, 30)
     account_picture_path_label = pygame_gui.elements.UILabel(relative_rect=account_picture_path_label_rect,
-                                                             text="PICTURE PATH", manager=manager)
+                                                             text="PICTURE FILENAME", manager=manager)
     
     account_picture_path_tentry_rect = pygame.Rect(15, 405, 765, 30)
     account_picture_path_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=account_picture_path_tentry_rect,
