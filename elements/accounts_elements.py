@@ -10,6 +10,16 @@ def back_button_func(manager):
     return back_button
 
 
+def account_manager_image_func(manager, image_path):
+
+    account_manager_image_rect = pygame.Rect(20, 35, 340, 90)
+    account_manager_image_load = pygame.image.load(image_path)
+    account_manager_image = pygame_gui.elements.UIImage(relative_rect=account_manager_image_rect,
+                                                       image_surface=account_manager_image_load,
+                                                       manager=manager)
+    return account_manager_image
+
+
 def create_delete_button_func(manager):
 
     create_button_rect = pygame.Rect(0, 0, 45, 30)

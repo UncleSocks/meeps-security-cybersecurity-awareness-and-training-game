@@ -15,22 +15,27 @@ def accounts_management(connect, cursor):
         id_list, account_list = queries.accounts(cursor)
         ticket_list = []
 
+        image_path = "assets/images/general/account_manager.png"
+
         back_button = accounts_elements.back_button_func(manager)
         create_button, delete_button = accounts_elements.create_delete_button_func(manager)
         account_entry_title_tbox = accounts_elements.account_entry_slist_misc_func(manager)
         account_entry_slist = accounts_elements.account_entry_slist_func(manager, account_list)
         assigned_ticket_label = accounts_elements.assigned_ticket_label_func(manager)
         assigned_ticket_slist = accounts_elements.assigned_tickets(manager, ticket_list)
+        account_manager_image = accounts_elements.account_manager_image_func(manager, image_path)
 
         account_details_label, selected_account_description_tbox = accounts_elements.account_details(manager)
 
         return account_management_loop(window_surface, clock, background, manager, id_list, account_list, ticket_list,
                                        back_button, create_button, delete_button, account_entry_title_tbox, account_entry_slist, 
-                                       assigned_ticket_label, assigned_ticket_slist, account_details_label, selected_account_description_tbox)
+                                       assigned_ticket_label, assigned_ticket_slist, account_manager_image,
+                                       account_details_label, selected_account_description_tbox)
 
     def account_management_loop(window_surface, clock, background, manager, id_list, account_list, ticket_list,
                                 back_button, create_button, delete_button, account_entry_title_tbox, account_entry_slist, 
-                                assigned_ticket_label, assigned_ticket_slist, account_details_label, selected_account_description_tbox):
+                                assigned_ticket_label, assigned_ticket_slist, account_manager_image,
+                                account_details_label, selected_account_description_tbox):
         
         selected_account = None
         
