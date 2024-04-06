@@ -71,7 +71,6 @@ def accounts_management(connect, cursor):
 
                         id_index_find = account_list.index(selected_account)
                         selected_account_id = id_list[id_index_find]
-                        print(selected_account_id)
 
                         cursor.execute('SELECT name, organization, email, contact, picture FROM accounts WHERE id=?', [selected_account_id])
                         name, organization, email, contact, picture_path = cursor.fetchone()
@@ -80,7 +79,6 @@ def accounts_management(connect, cursor):
                         cursor.execute('SELECT title FROM tickets WHERE caller_id=?', [selected_account_id])
                         assigned_tickets_results = cursor.fetchall()
                         ticket_list = [assigned_tickets_result[0] for assigned_tickets_result in assigned_tickets_results]
-                        print(ticket_list)
                         assigned_ticket_slist = accounts_elements.assigned_tickets(manager, ticket_list)
 
 
@@ -105,6 +103,7 @@ def accounts_management(connect, cursor):
         account_email, account_email_tentry = accounts_elements.new_account_email_func(manager)
         account_contact, account_contact_tentry = accounts_elements.new_account_contact_func(manager)
         account_picture_path_label, account_picture_path_tentry = accounts_elements.new_account_picture_path_func(manager)
+        new_account_image_border = accounts_elements.new_account_image_border_func(manager)
 
         add_account_button = accounts_elements.add_new_account_button_func(manager)
 
@@ -137,6 +136,8 @@ def accounts_management(connect, cursor):
                 new_picture_path = account_picture_path_tentry.get_text()
 
                 if new_name is not None and new_organization is not None and new_email is not None and new_contact is not None and new_picture_path is not None:
+                    
+                    new_account_image = accounts_elements.new_account_image_func(manager, new_picture_path)
                     if event.type == pygame_gui.UI_BUTTON_PRESSED:
                         if event.ui_element == add_account_button:
 

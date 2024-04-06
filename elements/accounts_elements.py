@@ -12,7 +12,7 @@ def back_button_func(manager):
 
 def account_manager_image_func(manager, image_path):
 
-    account_manager_image_rect = pygame.Rect(20, 35, 340, 90)
+    account_manager_image_rect = pygame.Rect(20, 35, 345, 70)
     account_manager_image_load = pygame.image.load(image_path)
     account_manager_image = pygame_gui.elements.UIImage(relative_rect=account_manager_image_rect,
                                                        image_surface=account_manager_image_load,
@@ -146,11 +146,31 @@ def new_account_picture_path_func(manager):
     account_picture_path_label = pygame_gui.elements.UILabel(relative_rect=account_picture_path_label_rect,
                                                              text="PICTURE FILENAME", manager=manager)
     
-    account_picture_path_tentry_rect = pygame.Rect(15, 405, 765, 30)
+    account_picture_path_tentry_rect = pygame.Rect(15, 405, 475, 30)
     account_picture_path_tentry = pygame_gui.elements.UITextEntryBox(relative_rect=account_picture_path_tentry_rect,
                                                                      manager=manager)
     
     return account_picture_path_label, account_picture_path_tentry
+
+
+def new_account_image_border_func(manager):
+    new_account_image_border_rect = pygame.Rect(545, 405, 190, 190)
+    new_account_image_border = pygame_gui.elements.UITextEntryBox(relative_rect=new_account_image_border_rect,
+                                                                  manager=manager)
+    return new_account_image_border
+
+
+def new_account_image_func(manager, image_path):
+
+    new_account_image_rect = pygame.Rect(550, 410, 180, 180)
+    try:
+        new_account_image_load = pygame.image.load(f"assets/images/accounts/{image_path}")
+    except:
+        new_account_image_load = pygame.image.load("assets/images/accounts/guest.png")
+    new_account_profile_image = pygame_gui.elements.UIImage(relative_rect=new_account_image_rect,
+                                                       image_surface=new_account_image_load,
+                                                       manager=manager)
+    return new_account_profile_image
 
 
 def add_new_account_button_func(manager):
