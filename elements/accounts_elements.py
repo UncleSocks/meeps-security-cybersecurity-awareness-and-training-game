@@ -90,6 +90,17 @@ def assigned_tickets(manager, ticket_list):
     return assigned_ticket_slist
 
 
+def add_account_image_func(manager, image_path):
+
+    add_account_image_rect = pygame.Rect(50, 15, 375, 75)
+    add_account_image_load = pygame.image.load(image_path)
+    add_account_image = pygame_gui.elements.UIImage(relative_rect=add_account_image_rect,
+                                                       image_surface=add_account_image_load,
+                                                       manager=manager)
+    
+    return add_account_image
+
+
 def new_account_name_tentry_func(manager):
 
     account_name_label_rect = pygame.Rect(20, 100, 100, 30)

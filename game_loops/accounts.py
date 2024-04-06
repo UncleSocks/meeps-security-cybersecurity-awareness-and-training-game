@@ -96,7 +96,10 @@ def accounts_management(connect, cursor):
         window_surface, clock, background = init.pygame_init()
         manager = init.pygame_gui_init()
 
+        image_path = "assets/images/general/add_account.png"
+
         back_button = accounts_elements.back_button_func(manager)
+        add_account_image = accounts_elements.add_account_image_func(manager, image_path)
 
         account_name_label, new_account_name_tentry = accounts_elements.new_account_name_tentry_func(manager)
         organization_label, organization_tentry = accounts_elements.new_account_organization_func(manager)
