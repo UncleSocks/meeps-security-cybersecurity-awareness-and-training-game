@@ -37,6 +37,22 @@ def accounts_management(connect, cursor):
                                 assigned_ticket_label, assigned_ticket_slist, account_manager_image,
                                 account_details_label, selected_account_description_tbox):
         
+        menu_button_music_path = "assets/sounds/list_click2.mp3"
+        pygame.mixer.music.load(menu_button_music_path)
+        menu_button_music_channel = pygame.mixer.Channel(0)
+
+        delete_button_music_path = "assets/sounds/delete_button.mp3"
+        pygame.mixer.music.load(delete_button_music_path)
+        delete_button_music_channel = pygame.mixer.Channel(1)
+
+        add_button_music_path = "assets/sounds/add_button.mp3"
+        pygame.mixer.music.load(add_button_music_path)
+        add_button_music_channel = pygame.mixer.Channel(2)
+
+        back_button_music_path = "assets/sounds/back_button.mp3"
+        pygame.mixer.music.load(back_button_music_path)
+        back_button_music_channel = pygame.mixer.Channel(3)
+        
         selected_account = None
         
         running = True
@@ -49,14 +65,19 @@ def accounts_management(connect, cursor):
 
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == back_button:
+                        back_button_music_channel.play(pygame.mixer.Sound(back_button_music_path))
+                        back_button_music_channel.set_volume(0.2)
+                        pygame.mixer.music.unload()
                         running = False
 
                     elif event.ui_element == create_button:
+                        add_button_music_channel.play(pygame.mixer.Sound(add_button_music_path))
                         id_list, account_list = account_creation(connect, cursor)
                         account_entry_slist.kill()
                         account_entry_slist = accounts_elements.account_entry_slist_func(manager, account_list)
 
                     elif event.ui_element == delete_button and selected_account is not None:
+                        delete_button_music_channel.play(pygame.mixer.Sound(delete_button_music_path))
                         cursor.execute('DELETE FROM accounts WHERE id=?', [selected_account_id])
                         connect.commit()
                         id_list, account_list = queries.accounts(cursor)
@@ -66,6 +87,7 @@ def accounts_management(connect, cursor):
 
                 if event.type == pygame_gui.UI_SELECTION_LIST_NEW_SELECTION:
                     if event.ui_element == account_entry_slist:
+                        menu_button_music_channel.play(pygame.mixer.Sound(menu_button_music_path))
                         assigned_ticket_slist.kill()
                         selected_account = event.text
 
@@ -98,6 +120,15 @@ def accounts_management(connect, cursor):
 
         image_path = "assets/images/general/add_account.png"
 
+        create_button_music_path = "assets/sounds/create_button.mp3"
+        pygame.mixer.music.load(create_button_music_path)
+        create_button_music_channel = pygame.mixer.Channel(3)
+
+        back_button_music_path = "assets/sounds/back_button.mp3"
+        pygame.mixer.music.load(back_button_music_path)
+        back_button_music_channel = pygame.mixer.Channel(4)
+        back_button_music_channel.set_volume(0.2)
+
         back_button = accounts_elements.back_button_func(manager)
         add_account_image = accounts_elements.add_account_image_func(manager, image_path)
 
@@ -128,6 +159,7 @@ def accounts_management(connect, cursor):
 
                 if event.type == pygame_gui.UI_BUTTON_PRESSED:
                     if event.ui_element == back_button:
+                        back_button_music_channel.play(pygame.mixer.Sound(back_button_music_path))
                         updated_id_list, updated_account_list = queries.accounts(cursor)
                         print("back button")
                         return updated_id_list, updated_account_list
@@ -144,6 +176,7 @@ def accounts_management(connect, cursor):
                     if event.type == pygame_gui.UI_BUTTON_PRESSED:
                         if event.ui_element == add_account_button:
 
+                            create_button_music_channel.play(pygame.mixer.Sound(create_button_music_path))
                             cursor.execute('SELECT MAX(id) FROM accounts')
                             last_id = cursor.fetchone()[0]
                             new_id = last_id + 1
