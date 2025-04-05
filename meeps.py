@@ -38,7 +38,7 @@ def main_menu():
         main_title_image = main_menu_element.main_title_image_func(manager, title_image_path)
         main_title_slogan = main_menu_element.main_title_slogan_label_func(manager)
 
-        current_version = "MS v2024.0.1"
+        current_version = "v2024.0.1 BETA"
         version_label = main_menu_element.version_label_func(manager, current_version)
         github_label = main_menu_element.github_label_func(manager)
 
